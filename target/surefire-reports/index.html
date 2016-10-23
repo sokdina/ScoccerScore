@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -99,6 +99,16 @@
                       <a href="#" panel-name="suite-www.muni.cz.dao.TeamDaoTest" class="show-methods passed suite-www.muni.cz.dao.TeamDaoTest"> (show)</a> <!-- show-methods passed suite-www.muni.cz.dao.TeamDaoTest -->
                     </span>
                     <div class="method-list-content passed suite-www.muni.cz.dao.TeamDaoTest">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-www.muni.cz.dao.TeamDaoTest" title="www.muni.cz.dao.TeamDaoTest" hash-for-method="create">create</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-www.muni.cz.dao.TeamDaoTest" title="www.muni.cz.dao.TeamDaoTest" hash-for-method="delete">delete</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-www.muni.cz.dao.TeamDaoTest" title="www.muni.cz.dao.TeamDaoTest" hash-for-method="findById">findById</a> <!-- method navigator-link -->
@@ -122,6 +132,20 @@
               <span class="class-name">www.muni.cz.dao.TeamDaoTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="create">
+                  </a> <!-- create -->
+                  <span class="method-name">create</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="delete">
+                  </a> <!-- delete -->
+                  <span class="method-name">delete</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="findById">
@@ -182,16 +206,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(3);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'findById')
+data.setCell(0, 1, 'create')
 data.setCell(0, 2, 'www.muni.cz.dao.TeamDaoTest')
-data.setCell(0, 3, 6);
+data.setCell(0, 3, 10);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'delete')
+data.setCell(1, 2, 'www.muni.cz.dao.TeamDaoTest')
+data.setCell(1, 3, 4);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'findById')
+data.setCell(2, 2, 'www.muni.cz.dao.TeamDaoTest')
+data.setCell(2, 3, 1);
 window.suiteTableData['www.muni.cz.dao.TeamDaoTest']= { tableData: data, tableDiv: 'times-div-www.muni.cz.dao.TeamDaoTest'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 ms</span>
+              <span class="suite-total-time">Total running time: 15 ms</span>
               <div id="times-div-www.muni.cz.dao.TeamDaoTest">
               </div> <!-- times-div-www.muni.cz.dao.TeamDaoTest -->
             </div> <!-- times-div -->
@@ -224,27 +256,59 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">springTestContextPrepareTestInstance</span>
-                <span class="method-start">7 ms</span>
+                <span class="method-start">8 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <span class="method-name">springTestContextBeforeTestMethod(public void www.muni.cz.dao.TeamDaoTest.findById())</span>
-                <span class="method-start">8434 ms</span>
+                <span class="method-name">springTestContextBeforeTestMethod(public void www.muni.cz.dao.TeamDaoTest.create())</span>
+                <span class="method-start">5270 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
-                <span class="method-name">createUsers</span>
-                <span class="method-start">8563 ms</span>
+                <span class="method-name">createTests</span>
+                <span class="method-start">5405 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">create</span>
+                <span class="method-start">5438 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void www.muni.cz.dao.TeamDaoTest.create())</span>
+                <span class="method-start">5448 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void www.muni.cz.dao.TeamDaoTest.delete())</span>
+                <span class="method-start">5458 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">createTests</span>
+                <span class="method-start">5463 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">delete</span>
+                <span class="method-start">5465 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void www.muni.cz.dao.TeamDaoTest.delete())</span>
+                <span class="method-start">5469 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void www.muni.cz.dao.TeamDaoTest.findById())</span>
+                <span class="method-start">5481 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">createTests</span>
+                <span class="method-start">5487 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">findById</span>
-                <span class="method-start">8592 ms</span>
+                <span class="method-start">5488 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">springTestContextAfterTestMethod(public void www.muni.cz.dao.TeamDaoTest.findById())</span>
-                <span class="method-start">8598 ms</span>
+                <span class="method-start">5489 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">springTestContextAfterTestClass</span>
-                <span class="method-start">8606 ms</span>
+                <span class="method-start">5493 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

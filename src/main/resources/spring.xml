@@ -20,7 +20,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/SCORE" />
 		<property name="username" value="root" />
 		<property name="password" value="RUPP012SO" />
-	</bean>
+         </bean>
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

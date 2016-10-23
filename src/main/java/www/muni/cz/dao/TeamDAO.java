@@ -10,7 +10,7 @@ public interface TeamDAO {
 	public Team update(Team p);
 	public void delete(Team p)throws IllegalArgumentException;;
 	public Team findById(int id);
-	public List<Team> findAll();
+	public List<Team> findByAll();
 	public List<Team> findByName(String name);
               
 }

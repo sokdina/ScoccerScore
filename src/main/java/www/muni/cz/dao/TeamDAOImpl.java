@@ -39,11 +39,11 @@ public class TeamDAOImpl implements TeamDAO {
         }
 
 	@Override
-	public List<Team> findAll() {
+        public List<Team> findByAll() {
 		return entityManager.createQuery("select t from Team t", Team.class)
 				.getResultList();
 	}
-        
+       
        @Override
 	public List<Team> findByName(String name) {
 		return entityManager.createQuery("SELECT t FROM Team t WHERE t.name like :name ",
