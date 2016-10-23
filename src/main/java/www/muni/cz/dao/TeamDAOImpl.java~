@@ -1,0 +1,36 @@
+package www.muni.cz.dao;
+
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+@Service("TeamDAOImpl")
+public class TeamDAOImpl implements TeamDAO {
+	
+        @PersistenceContext
+	private EntityManager entityManager;
+    
+	@Override
+	@Transactional
+	public void create(www.muni.cz.entity.Team p) {
+            entityManager.persist(p);
+        }
+
+	@Override
+	public List<www.muni.cz.entity.Team> findAll() {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<www.muni.cz.entity.Team> cq = builder.createQuery(www.muni.cz.entity.Team.class);
+		Root<www.muni.cz.entity.Team> root = cq.from(www.muni.cz.entity.Team.class);
+		cq.select(root);
+		return entityManager.createQuery(cq).getResultList();
+        
+        }
+
+}
