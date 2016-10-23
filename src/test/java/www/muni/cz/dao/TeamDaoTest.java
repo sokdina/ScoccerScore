@@ -57,6 +57,18 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
 	}  
         
         @Test
+	public void update(){
+            Team team = new Team();
+            team.setId(1);
+            team.setName("Attatico Madrid");
+            team.setCity("Madrid");
+            team.setCountry("Spain Country"); 
+                        
+            teamdao.update(team);
+            Assert.assertEquals(teamdao.findById(team.getId()).getCountry(), "Spain Country");
+	}
+    
+        @Test
 	public void delete() {
 		Assert.assertNotNull(teamdao.findById(t1.getId()));
 		teamdao.delete(t1);
@@ -67,4 +79,18 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
 	public void findById() {
 		Assert.assertNotNull(teamdao.findById(1));
 	}
+        
+	@Test
+	public void findAll() {
+		List<Team> team = teamdao.findByAll();
+		Assert.assertEquals(team.size(), 2);
+	}
+        
+        @Test
+	public void findByName() {
+		Assert.assertEquals(teamdao.findByName("a").size(), 2);
+		Assert.assertEquals(teamdao.findByName("Real").size(), 1);
+	}
+        
+       
 }

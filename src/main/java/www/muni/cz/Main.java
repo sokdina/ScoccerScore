@@ -23,7 +23,7 @@ public class Main {
             * Create Three Teams and Insert them into table Team 
             */
             Team team_one = new Team();
-            team_one.setId(1);
+            team_one.setId(4);
             team_one.setName("FC Barcelona");
             team_one.setCity("Barcelona");
             team_one.setCountry("Spain");
@@ -31,7 +31,7 @@ public class Main {
             System.out.println("Insert FC Barcelona");
             
             Team tean_two = new Team();
-            tean_two.setId(2);
+            tean_two.setId(5);
             tean_two.setName("Real Madrid");
             tean_two.setCity("Madrid");
             tean_two.setCountry("Spain");
@@ -39,7 +39,7 @@ public class Main {
             System.out.println("Insert Real Madrid");
            
             Team team_three = new Team();
-            team_three.setId(3);
+            team_three.setId(6);
             team_three.setName("Attatico Madrid");
             team_three.setCity("Madrid");
             team_three.setCountry("England");
@@ -50,7 +50,7 @@ public class Main {
             * Update AtlÃ©tico Madrid Team by finding a particular team ID
             * Change country field from England to Spain
             */
-            Team team_update = teamManager.findById(3);
+            Team team_update = teamManager.findById(6);
             if (team_update == null){
                 System.out.println("Team deon's exit, please check your Team ID again!");
                 return;
@@ -64,7 +64,7 @@ public class Main {
             * by a specific team Team ID
             */
             
-            Team team_delete = teamManager.findById(3);
+            Team team_delete = teamManager.findById(5);
             if (team_delete == null){
                 System.out.println("Team deon's exit, please check your Team ID again!");
                 return;
