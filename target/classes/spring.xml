@@ -11,8 +11,8 @@
 
 	<tx:annotation-driven />
 
-	<context:component-scan base-package="www.muni.cz.entity" />
-        <context:component-scan base-package="www.muni.cz.dao"/>
+	<context:component-scan base-package="cz.fi.muni.pa165.entity" />
+        <context:component-scan base-package="cz.fi.muni.pa165.dao"/>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
