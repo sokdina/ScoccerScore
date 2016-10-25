@@ -3,7 +3,18 @@ import cz.fi.muni.pa165.enums.Position;
 import java.util.Set;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -13,40 +24,40 @@ import javax.persistence.GenerationType;
  * @generated
  */
  
-@javax.persistence.Entity 
+@Entity 
 public class Player
 { 
-	@javax.persistence.Id 
-        @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
-	@javax.persistence.Column(nullable = false) 
-	private Long id;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private String name;
-	 
-	@javax.persistence.Temporal(javax.persistence.TemporalType.DATE) 
-	@javax.persistence.Column(nullable = false) 
-	private Date dateOfBirth;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private int dressNumber;
-	 
-	@javax.persistence.Enumerated(javax.persistence.EnumType.STRING) 
-	@javax.persistence.Column(nullable = false) 
-	private Position position;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private String country;
- 
-	@javax.persistence.ManyToOne 
-	private Team team;
-	 
-	@javax.persistence.OneToMany(mappedBy = "player") 
-	private Set<Goal> goal;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column 
+    private Long id;
 
-	public Player(){
-		super();
-	}
+    @Column 
+    private String name;
+
+    @Temporal(TemporalType.DATE) 
+    @Column 
+    private Date dateOfBirth;
+
+    @Column 
+    private int dressNumber;
+
+    @Enumerated(EnumType.STRING) 
+    @Column 
+    private Position position;
+
+    @Column 
+    private String country;
+
+    @OneToOne 
+    private Team team;
+
+    @OneToMany
+    private Set<Goal> goal;
+
+    public Player(){
+            super();
+    }
 
     public Long getId() {
         return id;

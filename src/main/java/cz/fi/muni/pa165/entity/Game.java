@@ -2,53 +2,55 @@ package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.MatchResult;
 import java.util.Set;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-
-
-/**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
- */
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
  
-@javax.persistence.Entity 
+@Entity 
 public class Game
 {
 
-	@javax.persistence.Id
-        @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
-	@javax.persistence.Column(nullable = false) 
-	private Long id;
-	 
-	@javax.persistence.OneToOne 
-	private Team homeTeam;
-	 
-	@javax.persistence.OneToOne 
-	private Team guestTeam;
-	 
-	@javax.persistence.Temporal(javax.persistence.TemporalType.DATE) 
-	@javax.persistence.Column(nullable = false) 
-	private Date dateOfGame;
-	 
-	@javax.persistence.Enumerated(javax.persistence.EnumType.STRING) 
-	@javax.persistence.Column(nullable = false) 
-	private MatchResult result;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private int homeScore;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private int guestScore;
-	 
-	@OneToMany(mappedBy = "game") 
-	private Set<Goal> goal;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private Long id;
 
-	public Game(){
-		super();
-	}
+    @OneToOne 
+    private Team homeTeam;
+
+    @OneToOne 
+    private Team guestTeam;
+
+    @Temporal(TemporalType.DATE) 
+    @Column
+    private Date dateOfGame;
+
+    @Enumerated(EnumType.STRING) 
+    @Column
+    private MatchResult matchResult;
+
+    @Column
+    private int homeScore;
+
+    @Column
+    private int guestScore;
+
+    @OneToMany
+    private Set<Goal> goal = new HashSet<>();
+
+    public Game(){
+            super();
+    }
 
     public Long getId() {
         return id;
@@ -82,12 +84,12 @@ public class Game
         this.dateOfGame = dateOfGame;
     }
 
-    public MatchResult getResult() {
-        return result;
+    public MatchResult getMatchResult() {
+        return matchResult;
     }
 
-    public void setResult(MatchResult result) {
-        this.result = result;
+    public void setMatchResult(MatchResult matchResult) {
+        this.matchResult = matchResult;
     }
 
     public int getHomeScore() {
@@ -116,7 +118,7 @@ public class Game
 
     @Override
     public String toString() {
-        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam + ", guestTeam=" + guestTeam + ", dateOfGame=" + dateOfGame + ", result=" + result + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goal + '}';
+        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam + ", guestTeam=" + guestTeam + ", dateOfGame=" + dateOfGame + ", result=" + matchResult + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goal + '}';
     }
 
     @Override
@@ -126,7 +128,7 @@ public class Game
         hash = 97 * hash + Objects.hashCode(this.homeTeam);
         hash = 97 * hash + Objects.hashCode(this.guestTeam);
         hash = 97 * hash + Objects.hashCode(this.dateOfGame);
-        hash = 97 * hash + Objects.hashCode(this.result);
+        hash = 97 * hash + Objects.hashCode(this.matchResult);
         hash = 97 * hash + this.homeScore;
         hash = 97 * hash + this.guestScore;
         hash = 97 * hash + Objects.hashCode(this.goal);
@@ -160,7 +162,7 @@ public class Game
         if (!Objects.equals(this.dateOfGame, other.dateOfGame)) {
             return false;
         }
-        if (this.result != other.result) {
+        if (this.matchResult != other.matchResult) {
             return false;
         }
         if (!Objects.equals(this.goal, other.goal)) {

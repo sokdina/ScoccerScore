@@ -1,16 +1,49 @@
 package cz.fi.muni.pa165;
 
+import cz.fi.muni.pa165.dao.IGoalDao;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.dao.TeamDAO;
+import cz.fi.muni.pa165.entity.Goal;
+import java.util.Set;
 
 public class Main {
 	public static void main(String[] args) {
             Call_Team();
             Test_Team_HashCode();
+            goal();
+        }
+        
+        private static void goal(){
+            System.out.println("testing goal");
+            ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring.xml");
+            IGoalDao goalDao = (IGoalDao) ctx.getBean("GoalDao");
+            Goal g = new Goal();
+            g.setDescription("asdsda");
+            goalDao.create(g);
+            Goal g1 = new Goal();
+            goalDao.create(g1);
+            Goal g2 = new Goal();
+            goalDao.create(g2);
+            Goal g3 = new Goal();
+            goalDao.create(g3);
+            Goal g4 = new Goal();
+            goalDao.create(g4);
+            Goal g5 = new Goal();
+            goalDao.create(g5);
+            
+            System.out.println("goal created");
+            
+            Set<Goal> goals = goalDao.findAll();
+            System.out.println("goals found : "+goals.size());
+            for(Goal temp:goals){
+                System.out.println("goal id: "+temp.getId()+" desc: "+temp.getDescription());
+            }
+            
         }
         
         

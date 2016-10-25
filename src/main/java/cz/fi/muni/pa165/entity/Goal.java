@@ -1,30 +1,34 @@
 package cz.fi.muni.pa165.entity;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
  
-@javax.persistence.Entity 
+@Entity 
 public class Goal
 {
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
-    @javax.persistence.Column(nullable = false) 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
 
-    @javax.persistence.Temporal(javax.persistence.TemporalType.DATE) 
-    @javax.persistence.Column(nullable = false) 
-    private Date time;
+    @Temporal(TemporalType.DATE) 
+    @Column
+    private Date goalTime;
 
-
-    @javax.persistence.Column(nullable = false) 
+    @Column 
     private String description;
 
-
-    @javax.persistence.ManyToOne 
+    @ManyToOne 
     private Game game;
 
-    @javax.persistence.ManyToOne 
-    @javax.persistence.JoinColumn(nullable = false) 
+    @ManyToOne
     private Player player;
 
     public Goal(){
@@ -39,12 +43,12 @@ public class Goal
         this.id = id;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getGoalTime() {
+        return goalTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setGoalTime(Date goalTime) {
+        this.goalTime = goalTime;
     }
 
     public String getDescription() {
@@ -73,7 +77,7 @@ public class Goal
 
     @Override
     public String toString() {
-        return "Goal{" + "id=" + id + ", time=" + time + ", description=" + description + ", match=" + game + ", player=" + player + '}';
+        return "Goal{" + "id=" + id + ", time=" + goalTime + ", description=" + description + ", match=" + game + ", player=" + player + '}';
     }
 
     @Override
@@ -100,7 +104,7 @@ public class Goal
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.time, other.time)) {
+        if (!Objects.equals(this.goalTime, other.goalTime)) {
             return false;
         }
         if (!Objects.equals(this.game, other.game)) {
