@@ -1,7 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 
-import cz.fi.muni.pa165.entity.Match;
+import cz.fi.muni.pa165.entity.Game;
 import java.util.Set;
 
 
@@ -11,7 +11,7 @@ import java.util.Set;
  * @generated
  */
  
-public interface IMatchDao 
+public interface IGameDao 
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -20,39 +20,55 @@ public interface IMatchDao
 	 * @ordered
 	 */
 	 
-	public void create(Match parameter) ;
+	public void create(Game parameter);
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 * @ordered
 	 */
 	 
-	public void delete(Match parameter) ;
+	public void delete(Game parameter);
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 * @ordered
 	 */
 	 
-	public Set<Match> findAll() ;
+	public Set<Game> findAll();
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 * @ordered
 	 */
 	 
-	public Match findById(long parameter) ;
+	public Game findById(long parameter);
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 * @ordered
 	 */
 	 
-	public void update(Match parameter) ;
+	public void update(Game parameter);
 
 }
 

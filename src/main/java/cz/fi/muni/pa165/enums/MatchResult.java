@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.soccerrecords.enums;
+package cz.fi.muni.pa165.enums;
 
 /**
  * <!-- begin-user-doc -->

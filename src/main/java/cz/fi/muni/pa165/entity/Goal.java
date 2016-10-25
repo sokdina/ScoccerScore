@@ -21,7 +21,7 @@ public class Goal
 
 
     @javax.persistence.ManyToOne 
-    private Match match;
+    private Game match;
 
     @javax.persistence.ManyToOne 
     @javax.persistence.JoinColumn(nullable = false) 
@@ -55,11 +55,11 @@ public class Goal
         this.description = description;
     }
 
-    public Match getMatch() {
+    public Game getMatch() {
         return match;
     }
 
-    public void setMatch(Match match) {
+    public void setMatch(Game match) {
         this.match = match;
     }
 

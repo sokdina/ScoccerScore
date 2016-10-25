@@ -1,5 +1,5 @@
 package cz.fi.muni.pa165.entity;
-import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.enums.MatchResult;
 import java.util.Set;
 import java.util.Date;
 import javax.persistence.GenerationType;
@@ -13,38 +13,39 @@ import javax.persistence.GenerationType;
  */
  
 @javax.persistence.Entity 
-public class Player
-{ 
-	@javax.persistence.Id 
+public class Game
+{
+
+	@javax.persistence.Id
         @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
 	@javax.persistence.Column(nullable = false) 
 	private Long id;
 	 
-	@javax.persistence.Column(nullable = false) 
-	private String name;
+	@javax.persistence.OneToOne 
+	private Team homeTeam;
+	 
+	@javax.persistence.OneToOne 
+	private Team guestTeam;
 	 
 	@javax.persistence.Temporal(javax.persistence.TemporalType.DATE) 
 	@javax.persistence.Column(nullable = false) 
-	private Date dateOfBirth;
-	 
-	@javax.persistence.Column(nullable = false) 
-	private int dressNumber;
+	private Date dateOfGame;
 	 
 	@javax.persistence.Enumerated(javax.persistence.EnumType.STRING) 
 	@javax.persistence.Column(nullable = false) 
-	private Position position;
+	private MatchResult result;
 	 
 	@javax.persistence.Column(nullable = false) 
-	private String country;
- 
-	@javax.persistence.ManyToOne 
-	private Team team;
+	private int homeScore;
 	 
-	@javax.persistence.OneToMany(mappedBy = "player") 
+	@javax.persistence.Column(nullable = false) 
+	private int guestScore;
+	 
+	@javax.persistence.OneToMany(mappedBy = "match") 
 	private Set<Goal> goal;
 
-	public Player(){
+	public Game(){
 		super();
-	}
+	}	
 }
 
