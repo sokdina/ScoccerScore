@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.entity.Goal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,10 +13,10 @@ import org.springframework.stereotype.Repository;
  * @author Jaromir Sys
  */
 @Repository("GoalDao")
-public class GoalDao extends BaseDao implements IGoalDao{
+public class GoalDao implements IGoalDao{
 
-    /*@PersistenceContext
-    private EntityManager entityManager;*/
+    @PersistenceContext
+    private EntityManager entityManager;
     
     @Override
     public void create(Goal parameter) {

@@ -2,10 +2,10 @@ package cz.fi.muni.pa165.entity;
 import java.util.Set;
 import javax.persistence.GenerationType;
  
-@javax.persistence.Entity 
+//@javax.persistence.Entity 
 public class TeamTemplate
 {	 
-	@javax.persistence.Id 
+	/*@javax.persistence.Id 
         @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
 	@javax.persistence.Column(nullable = false) 
 	protected Long id;
@@ -24,5 +24,5 @@ public class TeamTemplate
 
 	public TeamTemplate(){
 		super();
-	}
+	}*/
 }

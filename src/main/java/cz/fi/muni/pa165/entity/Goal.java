@@ -21,7 +21,7 @@ public class Goal
 
 
     @javax.persistence.ManyToOne 
-    private Game match;
+    private Game game;
 
     @javax.persistence.ManyToOne 
     @javax.persistence.JoinColumn(nullable = false) 
@@ -55,12 +55,12 @@ public class Goal
         this.description = description;
     }
 
-    public Game getMatch() {
-        return match;
+    public Game getGame() {
+        return game;
     }
 
-    public void setMatch(Game match) {
-        this.match = match;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Player getPlayer() {
@@ -73,7 +73,7 @@ public class Goal
 
     @Override
     public String toString() {
-        return "Goal{" + "id=" + id + ", time=" + time + ", description=" + description + ", match=" + match + ", player=" + player + '}';
+        return "Goal{" + "id=" + id + ", time=" + time + ", description=" + description + ", match=" + game + ", player=" + player + '}';
     }
 
     @Override
@@ -103,7 +103,7 @@ public class Goal
         if (!Objects.equals(this.time, other.time)) {
             return false;
         }
-        if (!Objects.equals(this.match, other.match)) {
+        if (!Objects.equals(this.game, other.game)) {
             return false;
         }
         if (!Objects.equals(this.player, other.player)) {
