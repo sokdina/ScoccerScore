@@ -323,7 +323,7 @@ public class Player
 		}
 		
 		if (this.goal.add(newGoal))
-			newGoal.basicSetPlayer(this);
+			newGoal.setPlayer(this);
 	}
 
 	/**
@@ -411,7 +411,7 @@ public class Player
 			return;
 		
 		if (this.goal.remove(oldGoal))
-			oldGoal.unsetPlayer();
+			oldGoal.setPlayer(null);
 		
 	}
 

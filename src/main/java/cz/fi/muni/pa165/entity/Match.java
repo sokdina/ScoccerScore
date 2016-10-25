@@ -303,7 +303,7 @@ public class Match
 		}
 		
 		if (this.goal.add(newGoal))
-			newGoal.basicSetMatch(this);
+			newGoal.setMatch(this);
 	}
 
 	/**
@@ -387,7 +387,7 @@ public class Match
 			return;
 		
 		if (this.goal.remove(oldGoal))
-			oldGoal.unsetMatch();
+			oldGoal.setMatch(null);
 		
 	}
 
