@@ -1,31 +1,45 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Goal;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Jaromir Sys
  */
-public class GoalDao implements IGoalDao{
+@Repository("GoalDao")
+public class GoalDao extends BaseDao implements IGoalDao{
 
+    /*@PersistenceContext
+    private EntityManager entityManager;*/
+    
+    @Override
     public void create(Goal parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.persist(parameter);
     }
 
+    @Override
     public void delete(Goal parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.remove(parameter);
     }
 
+    @Override
     public Set<Goal> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Goal> goals = new HashSet<>();
+        goals.addAll(entityManager.createQuery("from Goal",Goal.class).getResultList());
+        return Collections.unmodifiableSet(goals);
     }
 
+    @Override
     public Goal findById(long parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entityManager.find(Goal.class, parameter);
     }
 
+    @Override
     public void update(Goal parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.merge(parameter);
     }    
 }
