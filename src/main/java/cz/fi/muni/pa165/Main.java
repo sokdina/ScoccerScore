@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165;
 
 import cz.fi.muni.pa165.dao.IGoalDao;
+import cz.fi.muni.pa165.dao.IPlayerDao;
+import cz.fi.muni.pa165.dao.PlayerDaoImpl;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,9 +10,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.dao.TeamDAO;
 import cz.fi.muni.pa165.entity.Goal;
+import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.enums.Position;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
+
+        private static ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring.xml");
+        
 	public static void main(String[] args) {
             Call_Team();
             Test_Team_HashCode();
@@ -19,9 +29,9 @@ public class Main {
         
         private static void goal(){
             System.out.println("testing goal");
-            ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"spring.xml");
+          
             IGoalDao goalDao = (IGoalDao) ctx.getBean("GoalDao");
+            IPlayerDao playerDao = (IPlayerDao) ctx.getBean("PlayerDaoImpl");
             Goal g = new Goal();
             g.setDescription("asdsda");
             goalDao.create(g);
@@ -34,6 +44,21 @@ public class Main {
             Goal g4 = new Goal();
             goalDao.create(g4);
             Goal g5 = new Goal();
+           
+            
+            
+            Player p1 = new Player();
+
+            p1.setName("John Terry");
+            p1.setPosition(Position.DEFENDER);
+            p1.setDateOfBirth(new Date());
+            p1.setDressNumber(26);
+            p1.setCountry("England");
+            Set<Goal> goalss= new HashSet<>();
+            goalss.add(g5);
+            p1.setGoal( goalss);
+            g5.setPlayer(p1);
+            playerDao.create(p1);
             goalDao.create(g5);
             
             System.out.println("goal created");
@@ -48,15 +73,13 @@ public class Main {
         
         
         private static void  Call_Team(){
-            ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"spring.xml");
             TeamDAO teamManager = (TeamDAO) ctx.getBean("TeamDAOImpl");
             
             /* 
             * Create Three Teams and Insert them into table Team 
             */
             Team team_one = new Team();
-            team_one.setId(13);
+            //team_one.setId(13);
             team_one.setName("FC Barcelona");
             team_one.setCity("Barcelona");
             team_one.setCountry("Spain");
@@ -64,7 +87,7 @@ public class Main {
             System.out.println("Insert FC Barcelona");
             
             Team tean_two = new Team();
-            tean_two.setId(14);
+           // tean_two.setId(14);
             tean_two.setName("Real Madrid");
             tean_two.setCity("Madrid");
             tean_two.setCountry("Spain");
@@ -72,7 +95,7 @@ public class Main {
             System.out.println("Insert Real Madrid");
            
             Team team_three = new Team();
-            team_three.setId(15);
+            //team_three.setId(15);
             team_three.setName("Attatico Madrid");
             team_three.setCity("Madrid");
             team_three.setCountry("England");
@@ -83,7 +106,7 @@ public class Main {
             * Update AtlÃ©tico Madrid Team by finding a particular team ID
             * Change country field from England to Spain
             */
-            Team team_update = teamManager.findById(15);
+            Team team_update = teamManager.findById(team_three.getId());
             if (team_update == null){
                 System.out.println("Team deon's exit, please check your Team ID again!");
                 return;
@@ -97,7 +120,7 @@ public class Main {
             * by a specific team Team ID
             */
             
-            Team team_delete = teamManager.findById(14);
+            Team team_delete = teamManager.findById(tean_two.getId());
             if (team_delete == null){
                 System.out.println("Team deon's exit, please check your Team ID again!");
                 return;
@@ -125,7 +148,7 @@ public class Main {
             
             for(Team t:list){
                 System.out.println("Team ID: " + t.getId() + " Name: " + t.getName() + " City: " + t.getCity() + " Country: " + t.getCountry());
-            }
+            }   
     }
         
         private static void Test_Team_HashCode() {

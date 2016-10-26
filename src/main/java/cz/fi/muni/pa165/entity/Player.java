@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,7 +27,7 @@ import javax.persistence.TemporalType;
  * @generated
  */
  
-@Entity 
+@Entity (name = "player")
 public class Player
 { 
     @Id 
@@ -51,10 +52,11 @@ public class Player
     @Column 
     private String country;
 
-    @ManyToOne 
+    @ManyToOne
+    @JoinColumn(name="team_id")
     private Team team;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "player")
     private Set<Goal> goal;
 
     public Player(){

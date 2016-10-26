@@ -1,8 +1,12 @@
 package cz.fi.muni.pa165.entity;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,7 +20,7 @@ import javax.persistence.OneToMany;
 public class Team {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", nullable = false)
     private int id;
 
@@ -29,7 +33,7 @@ public class Team {
     @Column(name="country")
     private String country;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "team")
     private Set<Player> players;
 
     public Set<Player> getPlayers() {

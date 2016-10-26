@@ -37,12 +37,12 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
 		t1 = new Team();
 		t2 = new Team();
                 
-                t1.setId(1);
+                //t1.setId(1);
 		t1.setName("FC Barcelona");
 		t1.setCity("Barcelona");
 		t1.setCountry("Spain");
 		
-		t2.setId(2);
+		//t2.setId(2);
                 t2.setName("Real Madrid");
 		t2.setCity("Madrid");
 		t2.setCountry("Spain");
@@ -54,7 +54,7 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
 	public void create(){
 		Team team = new Team();
                 
-                team.setId(3);
+               // team.setId(3);
 		team.setName("Attatico Madrid");
                 team.setCity("Madrid");
                 team.setCountry("Spain");      
@@ -65,8 +65,8 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
         
         @Test
 	public void update(){
-            Team team = new Team();
-            team.setId(1);
+            Team team = teamdao.findById(t1.getId());
+            //team.setId(1);
             team.setName("Attatico Madrid");
             team.setCity("Madrid");
             team.setCountry("Spain Country"); 
@@ -84,7 +84,7 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
         
         @Test
 	public void findById() {
-		Assert.assertNotNull(teamdao.findById(1));
+		Assert.assertNotNull(teamdao.findById(t1.getId()));
 	}
         
 	@Test
