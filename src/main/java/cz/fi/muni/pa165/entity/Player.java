@@ -3,10 +3,12 @@ import cz.fi.muni.pa165.enums.Position;
 import java.util.Set;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,10 +51,10 @@ public class Player
     @Column 
     private String country;
 
-    @OneToOne 
+    @ManyToOne 
     private Team team;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Goal> goal;
 
     public Player(){

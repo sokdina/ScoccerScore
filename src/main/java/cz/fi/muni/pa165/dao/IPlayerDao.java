@@ -3,56 +3,51 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Player;
 import java.util.Set;
-
-
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * @author Martin Kocák
  */
  
 public interface IPlayerDao 
 {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void create(Player parameter) ;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void delete(Player parameter) ;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
+	 * This method add player to db
+         * @param player 
+         * @throws IllegalArgumentException - if attribttes od Player has wrong forma
+	 */	 
+	public void create(Player player) ;
+
+        /**
+         * This method removes player from db, if player exists
+         * @param player
+	 */	 
+	public void delete(Player player) ;
+	
+        /**
+         * This method finds all players in db
+         * @return List of players
+	 */	 
 	public Set<Player> findAll() ;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public Player findById(long parameter) ;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void update(Player parameter) ;
+	
+        /**
+	 * This method finds player in db if exists by its id
+         * @param id
+         * @return Player -founded in db
+	 */	 
+	public Player findById(Long id) ;
+	
+         /**
+	 * This method edits player in db
+         * @param player 
+         * @throws IllegalArgumentException - if attribttes od Player has wrong format
+	 */	 	 
+	public void update(Player player) ;
+        
+        /**
+    	* This method finds players in db if exists by their name
+	* Result is a list about each team such as id, name, city
+	* and country corresponding to input team name condition.
+        */
+	public Set<Player> findByName(String name);
 
 }
 
