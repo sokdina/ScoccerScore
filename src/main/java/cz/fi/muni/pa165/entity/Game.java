@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.MatchResult;
 import java.util.Set;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

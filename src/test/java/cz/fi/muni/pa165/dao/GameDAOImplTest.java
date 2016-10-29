@@ -59,7 +59,6 @@ public class GameDAOImplTest extends AbstractTestNGSpringContextTests {
             g.setMatchResult(MatchResult.DRAW);
             g.setHomeScore(0);
             g.setGuestScore(0);
-            g.setGoal(new HashSet<>());
             
             gameDao.create(g);
             
