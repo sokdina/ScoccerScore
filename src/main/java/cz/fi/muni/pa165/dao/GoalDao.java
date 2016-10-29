@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
+import cz.fi.muni.pa165.entity.Player;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,4 +52,18 @@ public class GoalDao implements IGoalDao{
     public void update(Goal parameter) {
         entityManager.merge(parameter);
     }    
+
+    @Override
+    public Set<Goal> findByPlayer(Player player) {
+        Set<Goal> goals = new HashSet<>();
+        goals.addAll(entityManager.createQuery("from Goal g where g.player = :player",Goal.class).setParameter("player", player).getResultList());
+        return Collections.unmodifiableSet(goals);
+    }
+
+    @Override
+    public Set<Goal> findByGame(Game game) {
+        Set<Goal> goals = new HashSet<>();
+        goals.addAll(entityManager.createQuery("from Goal g where g.game = :game",Goal.class).setParameter("game", game).getResultList());
+        return Collections.unmodifiableSet(goals);
+    }
 }

@@ -69,6 +69,10 @@ public class Main {
                 System.out.println("goal id: "+temp.getId()+" desc: "+temp.getDescription());
             }
             
+            for(Goal temp:goalDao.findByPlayer(p1)){
+                System.out.println("Goal "+temp.getId()+" scored by "+p1.getName());
+            }
+            
         }
         
         
