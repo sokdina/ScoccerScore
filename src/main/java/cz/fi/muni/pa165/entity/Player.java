@@ -139,16 +139,10 @@ public class Player
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + Objects.hashCode(this.dateOfBirth);
-        hash = 41 * hash + this.dressNumber;
-        hash = 41 * hash + Objects.hashCode(this.position);
-        hash = 41 * hash + Objects.hashCode(this.country);
-        hash = 41 * hash + Objects.hashCode(this.team);
-        hash = 41 * hash + Objects.hashCode(this.goal);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode()) + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+        return result;
     }
 
     @Override
