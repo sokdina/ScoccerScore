@@ -46,6 +46,8 @@ public interface IPlayerDao
     	* This method finds players in db if exists by their name
 	* Result is a list about each team such as id, name, city
 	* and country corresponding to input team name condition.
+        * @param name of player
+        * @return set of players
         */
 	public Set<Player> findByName(String name);
 
