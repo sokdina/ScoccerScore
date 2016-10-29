@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.dao.TeamDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +13,8 @@ import org.testng.annotations.Test;
 
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Team;
+import java.util.Collection;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 /**
  * TeamDaoTest class is used to test functionalities of
@@ -98,6 +99,27 @@ public class TeamDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(teamdao.findByName("a").size(), 2);
 		Assert.assertEquals(teamdao.findByName("Real").size(), 1);
 	}
+        
+        @Test
+        public void findByNameNull(){
+            Collection <Team> ressult = teamdao.findByName("0");
+            Assert.assertEquals(0, ressult.size());
+        }
+        
+        /**
+         * updating detached entity should not be possible
+         * 
+         * @author Jaromir Sys
+         */
+        @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+        public void updateDetachedEntity(){
+            Team t9000 = new Team();
+            t9000.setCity("whatever");
+            teamdao.update(t9000);
+            
+            Team t9000copy = teamdao.findById(t9000.getId());
+            Assert.assertEquals(t9000copy, t9000);
+        }
         
        
 }
