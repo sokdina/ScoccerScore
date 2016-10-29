@@ -22,7 +22,7 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -44,11 +44,11 @@ public class Team {
         this.players = players;
     }
 
-    public int getId() {
+    public Long getId() {
             return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
             this.id = id;
     }
 
@@ -100,4 +100,12 @@ public class Team {
                     return false;
             return true;
     }	
+
+    @Override
+    public String toString() {
+        return "Team{" + "id=" + id + ", name=" + name + ", city=" + city + ", country=" + country + ", players=" + players + '}';
+    }
+    
+    
+    
 }

@@ -21,11 +21,24 @@
 		<property name="username" value="root" />
 		<property name="password" value="RUPP012SO" />
          </bean>
+         
+        <bean id="ds1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+             <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+             <property name="url" value="jdbc:derby:memory:testdb;create=true"/>
+        </bean>
+        
+        <bean id="ds2" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/SCORE" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+         </bean>
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="testPU" />
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="ds1" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

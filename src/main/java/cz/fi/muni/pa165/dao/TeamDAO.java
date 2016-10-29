@@ -40,7 +40,7 @@ public interface TeamDAO {
 	* and country.
     	* @param id is the team id.
         */
-	public Team findById(int id);
+	public Team findById(Long id);
 	
 	/**
     	* Returns the list of all information about each team.

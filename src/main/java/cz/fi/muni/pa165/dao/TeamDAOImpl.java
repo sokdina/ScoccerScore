@@ -40,7 +40,7 @@ public class TeamDAOImpl implements TeamDAO {
 	}
 
 	@Override
-	public Team findById(int id) {
+	public Team findById(Long id) {
 	    return entityManager.find(Team.class, id);
         }
 
