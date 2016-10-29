@@ -69,6 +69,9 @@ public class Goal
 
     public void setGame(Game game) {
         this.game = game;
+        if(!game.getGoal().contains(this)){
+            game.getGoal().add(this);
+        }
     }
 
     public Player getPlayer() {
@@ -77,6 +80,9 @@ public class Goal
 
     public void setPlayer(Player player) {
         this.player = player;
+        if(!player.getGoal().contains(this)){
+            player.getGoal().add(this);
+        }
     }
 
     @Override

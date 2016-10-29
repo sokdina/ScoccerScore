@@ -54,9 +54,9 @@ public class Main {
             p1.setDateOfBirth(new Date());
             p1.setDressNumber(26);
             p1.setCountry("England");
-            Set<Goal> goalss= new HashSet<>();
-            goalss.add(g5);
-            p1.setGoal( goalss);
+
+;
+            p1.addGoal( g5);
             g5.setPlayer(p1);
             playerDao.create(p1);
             goalDao.create(g5);

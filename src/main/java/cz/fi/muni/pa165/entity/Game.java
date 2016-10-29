@@ -114,9 +114,15 @@ public class Game
         return goal;
     }
 
-    public void setGoal(Set<Goal> goal) {
-        this.goal = goal;
+    public void addGoal(Goal goal) {
+        this.goal.add(goal);
+        if(goal.getGame() == null){
+            goal.setGame(this);
+        }
+        else if(!goal.getGame().equals(this))           
+            goal.setGame(this);
     }
+    
 
     @Override
     public String toString() {

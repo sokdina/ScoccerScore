@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,14 +35,20 @@ public class Team {
     private String country;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "team")
-    private Set<Player> players;
+    private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
+    public void addPlayer(Player player) {
+        this.players.add(player);
+        if(player.getTeam() == null){
+            player.setTeam(this);
+        }
+        else if(!player.getTeam().equals(this)){
+            player.setTeam(this);
+        }
     }
 
     public int getId() {

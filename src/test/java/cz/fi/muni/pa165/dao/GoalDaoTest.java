@@ -9,6 +9,7 @@ import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,7 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
     
     @Autowired
     private IPlayerDao playerDao;
-
+    
     //uncomment after gameDao implementation
     //@Autowired
     //private IGameDao gameDao;
@@ -141,15 +142,15 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
         p.setDateOfBirth(new Date());
         p.setPosition(Position.DEFENDER);
         playerDao.create(p);
-        
+                 
         g1.setPlayer(p);
         g2.setPlayer(p);
-        
+              
         goalDao.create(g1);
         goalDao.update(g2);
-        
-        Set<Goal> players = goalDao.findByPlayer(p);
-        Assert.assertEquals( players.size() ,2);
+       
+        Set<Goal> goals = goalDao.findByPlayer(p);
+        Assert.assertEquals( goals.size() ,2);
         
     }
     
