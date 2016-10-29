@@ -45,8 +45,8 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
     private IPlayerDao playerDao;
     
     //uncomment after gameDao implementation
-    //@Autowired
-    //private IGameDao gameDao;
+    @Autowired
+    private IGameDao gameDao;
      
     private Goal g1;
     private Goal g2;
@@ -74,9 +74,7 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
     
     @Test(expectedExceptions ={ IllegalArgumentException.class, InvalidDataAccessApiUsageException.class})
     public void createWithNull(){
-        goalDao.create(null);
-       // Assert.assertEquals(goalDao.findById(g1.getId()), g1);
-        
+        goalDao.create(null);    
     }
   
     
@@ -95,12 +93,9 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
         Game game = new Game();
         game.setDateOfGame(new Date());
         game.setGuestScore(1);
-        game.setHomeScore(2);
-        
-                
+        game.setHomeScore(2);                
         g2.setGame(game);
         
-        Game g = goalDao.findById(g2.getId()).getGame();
         Assert.assertEquals(goalDao.findById(g2.getId()).getGame(),g2.getGame());
         
     }
@@ -155,7 +150,7 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
     }
     
     //Uncomment after GameDao implementation will be in 
-    /*@Test
+    @Test
     public void findByGame(){
         Game g = new Game();
         g.setDateOfGame(new Date());
@@ -174,6 +169,6 @@ public class GoalDaoTest extends AbstractTestNGSpringContextTests{
         Set<Goal> games = goalDao.findByGame(g);
         Assert.assertEquals( games.size() ,2);
         
-    }*/
+    }
     
 }

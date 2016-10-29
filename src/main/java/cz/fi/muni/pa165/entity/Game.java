@@ -48,7 +48,7 @@ public class Game
     private int guestScore;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
-    private Set<Goal> goal;
+    private Set<Goal> goal = new HashSet<>();
 
     public Game(){
             super();
