@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dao;
 
 
 import cz.fi.muni.pa165.entity.Game;
+import java.util.List;
 import java.util.Set;
 
 
@@ -13,62 +14,17 @@ import java.util.Set;
  
 public interface IGameDao 
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void create(Game parameter);
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void delete(Game parameter);
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public Set<Game> findAll();
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public Game findById(long parameter);
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	 
-	public void update(Game parameter);
+	public void create(Game g);
+
+    public Game update(Game g);
+
+    public void delete(Game g) throws IllegalArgumentException;
+
+    public List<Game> findGamesBetweenTeams(long teamId1, long teamId2);
+    
+    public Game findById(long id);
+
+    public List<Game> findAll();
 
 }
 

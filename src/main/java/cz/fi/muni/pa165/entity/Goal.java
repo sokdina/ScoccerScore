@@ -87,7 +87,7 @@ public class Goal
 
     @Override
     public String toString() {
-        return "Goal{" + "id=" + id + ", time=" + goalTime + ", description=" + description + ", match=" + game + ", player=" + player + '}';
+        return "Goal{" + "id=" + id + ", time=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
     }
 
     @Override

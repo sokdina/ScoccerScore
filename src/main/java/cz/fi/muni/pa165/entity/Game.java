@@ -48,7 +48,7 @@ public class Game
     private int guestScore;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
-    private Set<Goal> goal = new HashSet<>();
+    private Set<Goal> goal;
 
     public Game(){
             super();
@@ -126,7 +126,7 @@ public class Game
 
     @Override
     public String toString() {
-        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam + ", guestTeam=" + guestTeam + ", dateOfGame=" + dateOfGame + ", result=" + matchResult + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goal + '}';
+        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam.toString() + ", guestTeam=" + guestTeam.toString() + ", dateOfGame=" + dateOfGame + ", result=" + matchResult + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goal + '}';
     }
 
     @Override
@@ -179,6 +179,8 @@ public class Game
         return true;
     }
         
+    
+    
         
 }
 
