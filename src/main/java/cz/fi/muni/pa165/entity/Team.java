@@ -52,60 +52,60 @@ public class Team {
     }
 
     public Long getId() {
-            return id;
+        return id;
     }
 
     public void setId(Long id) {
-            this.id = id;
+        this.id = id;
     }
 
     public String getName() {
-            return name;
+        return name;
     }
 
     public void setName(String Name) {
-            this.name = Name;
+        this.name = Name;
     }
 
     public String getCity() {
-            return city;
+        return city;
     }
 
     public void setCity(String city) {
-            this.city = city;
+        this.city = city;
     }
 
     public String getCountry() {
-            return country;
+        return country;
     }
 
     public void setCountry(String country) {
-            this.country = country;
+        this.country = country;
     }
 
     @Override
     public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ((name == null) ? 0 : name.hashCode());
-            return result;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-            if (this == obj)
-                    return true;
-            if (obj == null)
-                    return false;
-            if (!(obj instanceof Team))
-                    return false;
-            Team other = (Team) obj;
-            if (name == null) {
-                    if (other.name != null)
-                            return false;
-            } else if (!name.equals(other.getName()))
-                    return false;
-            return true;
+        if (this == obj)
+                return true;
+        if (obj == null)
+                return false;
+        if (!(obj instanceof Team))
+                return false;
+        Team other = (Team) obj;
+        if (name == null) {
+                if (other.name != null)
+                        return false;
+        } else if (!name.equals(other.getName()))
+                return false;
+        return true;
     }	
 
     @Override

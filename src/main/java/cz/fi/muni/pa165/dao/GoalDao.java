@@ -53,6 +53,9 @@ public class GoalDao implements IGoalDao{
     @Transactional
     public void update(Goal parameter) {
         this.validateNotNull(parameter);
+        if(!entityManager.contains(parameter)){
+            throw new IllegalArgumentException("update called with non managed entity");
+        }
         entityManager.merge(parameter);
     }    
 

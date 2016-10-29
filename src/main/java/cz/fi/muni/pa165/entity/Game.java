@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.MatchResult;
 import java.util.Set;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,7 +50,7 @@ public class Game
     private Set<Goal> goal = new HashSet<>();
 
     public Game(){
-            super();
+        super();
     }
 
     public Long getId() {
@@ -178,8 +177,22 @@ public class Game
         }
         return true;
     }
-        
     
+    /**
+     * sets both homescore and guest score as also sets the correct MatchResult
+     * @param homeScore
+     * @param guestScore 
+     */
+    public void setGameResult(int homeScore,int guestScore){
+        setGuestScore(guestScore);
+        setHomeScore(homeScore);
+        if(homeScore>guestScore)
+            setMatchResult(MatchResult.HOME_TEAM_WIN);
+        if(guestScore>homeScore)
+            setMatchResult(MatchResult.GUEST_TEAM_WIN);
+        else
+            setMatchResult(MatchResult.DRAW);
+    }
     
         
 }
