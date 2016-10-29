@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
+ *  rudimentary implementation of IGoalDao
  * @author Jaromir Sys
  */
 @Repository("GoalDao")
@@ -24,12 +24,14 @@ public class GoalDao implements IGoalDao{
     @Override
     @Transactional
     public void create(Goal parameter) {
+        this.validateNotNull(parameter);
         entityManager.persist(parameter);
     }
 
     @Override
     @Transactional
     public void delete(Goal parameter) {
+        this.validateNotNull(parameter);
         entityManager.remove(parameter);
     }
 
@@ -50,11 +52,13 @@ public class GoalDao implements IGoalDao{
     @Override
     @Transactional
     public void update(Goal parameter) {
+        this.validateNotNull(parameter);
         entityManager.merge(parameter);
     }    
 
     @Override
     public Set<Goal> findByPlayer(Player player) {
+        this.validateNotNull(player);
         Set<Goal> goals = new HashSet<>();
         goals.addAll(entityManager.createQuery("from Goal g where g.player = :player",Goal.class).setParameter("player", player).getResultList());
         return Collections.unmodifiableSet(goals);
@@ -62,8 +66,16 @@ public class GoalDao implements IGoalDao{
 
     @Override
     public Set<Goal> findByGame(Game game) {
+        this.validateNotNull(game);
         Set<Goal> goals = new HashSet<>();
         goals.addAll(entityManager.createQuery("from Goal g where g.game = :game",Goal.class).setParameter("game", game).getResultList());
         return Collections.unmodifiableSet(goals);
+    }
+    
+    public void validateNotNull(Object o){
+        if(o == null)
+        { 
+            throw new IllegalArgumentException("input parameter is null");
+        }
     }
 }
