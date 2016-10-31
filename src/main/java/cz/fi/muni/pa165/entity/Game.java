@@ -18,6 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
  
+/**
+ *
+ * @author Peter Lipcak
+ */
 @Entity 
 public class Game
 {

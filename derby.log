@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Sat Oct 29 19:02:02 CEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0158-1164-150c-0000041a1598 
-on database directory memory:/home/peter/NetBeansProjects/SoccerScore-20161029/ScoccerScore/testdb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Mon Oct 31 21:48:05 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0158-1c7f-c2db-000008654290 
+on database directory memory:/home/peter/NetBeansProjects/SoccerScore-20161030/ScoccerScore/testdb with class loader java.net.URLClassLoader@f2d5bac 
 Loaded from file:/home/peter/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
-user.dir=/home/peter/NetBeansProjects/SoccerScore-20161029/ScoccerScore
+user.dir=/home/peter/NetBeansProjects/SoccerScore-20161030/ScoccerScore
 os.name=Linux
 os.arch=amd64
 os.version=4.4.0-45-generic
