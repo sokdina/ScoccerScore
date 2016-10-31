@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
  * @generated
  */
  
-@Entity (name = "player")
+@Entity
 public class Player
 { 
     @Id 
