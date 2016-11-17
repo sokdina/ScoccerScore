@@ -1,9 +1,11 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
-import cz.fi.muni.pa165.entity.Game;
-import cz.fi.muni.pa165.entity.Team;
-import cz.fi.muni.pa165.enums.MatchResult;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGameDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.MatchResult;
 import java.util.Date;
 import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;

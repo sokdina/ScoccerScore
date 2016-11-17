@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
-import cz.fi.muni.pa165.entity.Game;
-import cz.fi.muni.pa165.entity.Goal;
-import cz.fi.muni.pa165.entity.Player;
-import cz.fi.muni.pa165.entity.Team;
-import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IPlayerDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGoalDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGameDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Goal;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.Position;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;

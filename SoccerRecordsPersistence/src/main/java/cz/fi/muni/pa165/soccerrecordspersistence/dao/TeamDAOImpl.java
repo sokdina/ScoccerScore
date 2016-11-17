@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 
 /**
  * TeamDAOImpl implements TeamDAO to give some basic operations such as insert, update, delete and find 

@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.enums;
+package cz.fi.muni.pa165.soccerrecordspersistence.enums;
 
 /**
  * <!-- begin-user-doc -->

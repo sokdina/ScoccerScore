@@ -1,5 +1,5 @@
-package cz.fi.muni.pa165.entity;
-import cz.fi.muni.pa165.enums.Position;
+package cz.fi.muni.pa165.soccerrecordspersistence.entity;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.Position;
 import java.util.Set;
 import java.util.Date;
 import java.util.HashSet;

@@ -1,8 +1,8 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.entity.Goal;
-import cz.fi.muni.pa165.entity.Player;
-import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Goal;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;

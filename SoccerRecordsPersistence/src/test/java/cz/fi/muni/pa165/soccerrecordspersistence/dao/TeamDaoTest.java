@@ -1,5 +1,6 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,8 +12,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
-import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 import java.util.Collection;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 

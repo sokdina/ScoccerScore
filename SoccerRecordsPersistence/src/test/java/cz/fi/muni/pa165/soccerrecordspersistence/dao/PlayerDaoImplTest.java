@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
-import cz.fi.muni.pa165.entity.Player;
-import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IPlayerDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.Position;
 import java.util.Date;
 import junit.framework.Assert;
 import org.springframework.beans.factory.annotation.Autowired;

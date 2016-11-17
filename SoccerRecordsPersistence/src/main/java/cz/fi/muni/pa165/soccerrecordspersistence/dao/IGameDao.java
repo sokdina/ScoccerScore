@@ -1,7 +1,7 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
 
-import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
 import java.util.List;
 import java.util.Set;
 

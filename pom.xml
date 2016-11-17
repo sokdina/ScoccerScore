@@ -12,6 +12,8 @@
     </properties>
     <modules>
         <module>SoccerRecordsPersistence</module>
+        <module>SoccerRecordsAPI</module>
+        <module>SoccerRecordsService</module>
     </modules>
     <name>SoccerRecords</name>
 </project>

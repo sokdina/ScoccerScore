@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165;
+package cz.fi.muni.pa165.soccerrecordspersistence;
 
 import javax.sql.DataSource;
 

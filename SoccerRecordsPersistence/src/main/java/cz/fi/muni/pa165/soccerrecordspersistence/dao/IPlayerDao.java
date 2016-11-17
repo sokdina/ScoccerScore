@@ -1,7 +1,7 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
 
-import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
 import java.util.Set;
 /**
  * @author Martin Kocák

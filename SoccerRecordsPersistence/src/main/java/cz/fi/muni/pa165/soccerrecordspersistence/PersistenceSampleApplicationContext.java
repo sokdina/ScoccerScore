@@ -1,6 +1,6 @@
-package cz.fi.muni.pa165;
+package cz.fi.muni.pa165.soccerrecordspersistence;
 
-import cz.fi.muni.pa165.dao.TeamDAO;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

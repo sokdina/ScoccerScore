@@ -1,20 +1,20 @@
-package cz.fi.muni.pa165;
+package cz.fi.muni.pa165.soccerrecordspersistence;
 
-import cz.fi.muni.pa165.dao.IGameDao;
-import cz.fi.muni.pa165.dao.IGoalDao;
-import cz.fi.muni.pa165.dao.IPlayerDao;
-import cz.fi.muni.pa165.dao.PlayerDaoImpl;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGameDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGoalDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.IPlayerDao;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.PlayerDaoImpl;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cz.fi.muni.pa165.entity.Team;
-import cz.fi.muni.pa165.dao.TeamDAO;
-import cz.fi.muni.pa165.entity.Game;
-import cz.fi.muni.pa165.entity.Goal;
-import cz.fi.muni.pa165.entity.Player;
-import cz.fi.muni.pa165.enums.MatchResult;
-import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Goal;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.MatchResult;
+import cz.fi.muni.pa165.soccerrecordspersistence.enums.Position;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;

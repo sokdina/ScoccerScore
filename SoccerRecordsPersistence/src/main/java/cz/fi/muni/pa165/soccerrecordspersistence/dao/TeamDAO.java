@@ -1,7 +1,7 @@
-package cz.fi.muni.pa165.dao;
+package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
 import java.util.List;
-import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 
 /**
  * TeamDao performs some basic operations such as insert, update, delete and find data in Team table .

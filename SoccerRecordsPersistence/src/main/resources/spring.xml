@@ -11,8 +11,8 @@
 
 	<tx:annotation-driven />
 
-	<context:component-scan base-package="cz.fi.muni.pa165.entity" />
-        <context:component-scan base-package="cz.fi.muni.pa165.dao"/>
+	<context:component-scan base-package="cz.fi.muni.pa165.soccerrecordspersistence.entity" />
+        <context:component-scan base-package="cz.fi.muni.pa165.soccerrecordspersistence.dao"/>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -26,14 +26,6 @@
              <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
              <property name="url" value="jdbc:derby:memory:testdb;create=true"/>
         </bean>
-        
-        <bean id="ds2" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/SCORE" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
-         </bean>
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
