@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class GoalDaoTest extends AbstractTestNGSpringContextTests{
+public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
     
     @Autowired 
     private IGoalDao goalDao;

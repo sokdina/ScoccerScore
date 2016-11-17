@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
-import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Goal;
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Player;
@@ -19,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.ITeamDao;
 
 public class Main {
 
@@ -35,7 +35,7 @@ public class Main {
     public static void game() {
         System.out.println("GOAL METHOD CALLED");
 
-        TeamDAO teamManager = (TeamDAO) ctx.getBean("TeamDAOImpl");
+        ITeamDao teamManager = (ITeamDao) ctx.getBean("TeamDAOImpl");
 
         /* 
             * Create Three Teams and Insert them into table Team 
@@ -130,7 +130,7 @@ public class Main {
     }
 
     private static void Call_Team() {
-        TeamDAO teamManager = (TeamDAO) ctx.getBean("TeamDAOImpl");
+        ITeamDao teamManager = (ITeamDao) ctx.getBean("TeamDAOImpl");
 
         /* 
             * Create Three Teams and Insert them into table Team 

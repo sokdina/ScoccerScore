@@ -11,7 +11,7 @@ import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 
 
 
-public interface TeamDAO {
+public interface ITeamDao {
 
 	/**
 	* create method is used for insert information such as team id,

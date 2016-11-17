@@ -92,7 +92,11 @@ public class Goal
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.goalTime);
+        hash = 89 * hash + Objects.hashCode(this.description);
+        hash = 89 * hash + Objects.hashCode(this.game);
+        hash = 89 * hash + Objects.hashCode(this.player);
         return hash;
     }
 
@@ -111,9 +115,6 @@ public class Goal
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
         if (!Objects.equals(this.goalTime, other.goalTime)) {
             return false;
         }
@@ -124,6 +125,6 @@ public class Goal
             return false;
         }
         return true;
-    }     
+    }
 }
 

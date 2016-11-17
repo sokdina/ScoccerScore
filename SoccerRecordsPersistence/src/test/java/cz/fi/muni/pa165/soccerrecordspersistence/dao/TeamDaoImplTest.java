@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,20 +15,21 @@ import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationCon
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 import java.util.Collection;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.ITeamDao;
 
 /**
- * TeamDaoTest class is used to test functionalities of
- * each team.
+ * TeamDaoImplTest class is used to test functionalities of
+ each team.
  * @author sokdina999@gamil.com
 **/
 
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class TeamDaoTest extends AbstractTestNGSpringContextTests {
+public class TeamDaoImplTest extends AbstractTestNGSpringContextTests {
     
 	@Autowired
-	private TeamDAO teamdao;
+	private ITeamDao teamdao;
         
         private Team t1;
         private Team t2;

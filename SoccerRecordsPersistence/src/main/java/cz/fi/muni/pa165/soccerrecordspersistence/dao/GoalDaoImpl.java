@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jaromir Sys
  */
 @Repository("GoalDao")
-public class GoalDao implements IGoalDao{
+public class GoalDaoImpl implements IGoalDao{
 
     @PersistenceContext
     private EntityManager entityManager;
