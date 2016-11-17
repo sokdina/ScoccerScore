@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.soccerrecordspersistence.dao;
 
-import cz.fi.muni.pa165.soccerrecordspersistence.dao.TeamDAO;
 import cz.fi.muni.pa165.soccerrecordspersistence.dao.IGameDao;
 import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Game;
@@ -18,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import cz.fi.muni.pa165.soccerrecordspersistence.dao.ITeamDao;
 
 /**
  *
@@ -27,12 +27,12 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class GameDAOImplTest extends AbstractTestNGSpringContextTests {
+public class GameDaoImplTest extends AbstractTestNGSpringContextTests {
     
 	@Autowired
 	private IGameDao gameDao;
         @Autowired
-        private TeamDAO teamDao;
+        private ITeamDao teamDao;
         
         private Team t1,t2,t3;
 	

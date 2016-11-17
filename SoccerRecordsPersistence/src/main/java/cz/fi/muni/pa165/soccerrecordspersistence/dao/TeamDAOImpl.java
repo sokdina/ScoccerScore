@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
 
 /**
- * TeamDAOImpl implements TeamDAO to give some basic operations such as insert, update, delete and find 
- * data in Team table .
+ * TeamDaoImpl implements ITeamDao to give some basic operations such as insert, update, delete and find 
+ data in Team table .
  * @author sokdina999@gamil.com
 **/
 
 @Repository("TeamDAOImpl")
-public class TeamDAOImpl implements TeamDAO {
+public class TeamDaoImpl implements ITeamDao {
 	
         @PersistenceContext
 	private EntityManager entityManager;

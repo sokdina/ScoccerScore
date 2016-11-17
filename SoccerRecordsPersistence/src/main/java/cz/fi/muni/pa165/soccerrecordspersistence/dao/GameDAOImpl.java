@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Peter Lipcak
  */
 @Repository("GameDAOImpl")
-public class GameDAOImpl implements IGameDao{
+public class GameDaoImpl implements IGameDao{
     
     @PersistenceContext
     private EntityManager entityManager;
