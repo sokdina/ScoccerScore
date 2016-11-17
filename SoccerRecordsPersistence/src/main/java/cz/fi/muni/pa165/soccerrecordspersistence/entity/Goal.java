@@ -95,8 +95,8 @@ public class Goal
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.goalTime);
         hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.game);
-        hash = 89 * hash + Objects.hashCode(this.player);
+        //hash = 89 * hash + Objects.hashCode(this.game);
+        //hash = 89 * hash + Objects.hashCode(this.player);
         return hash;
     }
 
