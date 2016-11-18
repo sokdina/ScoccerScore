@@ -1,9 +1,10 @@
 package cz.fi.muni.pa165.enums;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * This enum stores the result of a game 
+ * Wheather Home team wining or Guest team wining
+ * Or both teams are draw
+ * @author Sok Dina, Peter Lipcak, Jaromir Sys and Martin Kocák
  */ 
 public enum MatchResult
 {
