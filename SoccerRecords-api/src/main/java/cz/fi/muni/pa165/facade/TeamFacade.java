@@ -11,12 +11,11 @@ import java.util.List;
 
 
 public interface TeamFacade {
-	
-	public List<TeamDTO> getAllTeams();
+		
 	public Long createTeam(TeamCreateDTO t);
 	public void deleteTeam(Long teamId);
-	TeamDTO getTeamById(Long teamId);
+	public TeamDTO getTeamById(Long teamId);
+	public List<TeamDTO> getAllTeams();
 	//public void addPlayer(Long teamId, Long playerId);
 	//public void removePlayer(Long teamId, Long playerId);
-		
 }

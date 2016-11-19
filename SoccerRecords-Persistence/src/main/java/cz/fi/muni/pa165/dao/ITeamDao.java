@@ -18,21 +18,21 @@ public interface ITeamDao {
 	* name, city and country into table team.
 	* @param team is the Team class.
 	*/
-        public void create(Team p);
+        public void create(Team t);
 	
 	/**
 	* update method is used for update information such as 
 	* name, city and country according to team id in table team.
 	* @param team is the Team class.
 	*/
-	public Team update(Team p);
+	public Team update(Team t);
 
 	/**
 	* delete method is used for delete teams according to team id in table team
 	* @param team is the Team class.
 	* @throws IllegalArgumentException when there is null.
 	*/
-	public void delete(Team p)throws IllegalArgumentException;
+	public void delete(Team t)throws IllegalArgumentException;
 	
 	/**
     	* Returns information about a team corresponding to given team id.

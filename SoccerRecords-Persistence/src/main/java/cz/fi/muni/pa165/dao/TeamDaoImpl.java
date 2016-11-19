@@ -22,8 +22,8 @@ public class TeamDaoImpl implements ITeamDao {
     
 	@Override
 	@Transactional
-	public void create(Team p) {
-            entityManager.persist(p);
+	public void create(Team t) {
+            entityManager.persist(t);
         }
         
         @Override
