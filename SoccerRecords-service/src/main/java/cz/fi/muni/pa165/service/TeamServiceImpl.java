@@ -24,8 +24,7 @@ public class TeamServiceImpl implements TeamService {
 	public void create(Team t) {
            	teamDao.create(t);
         }
-        
-       
+               
         @Override
         public void delete(Team t){
 		teamDao.delete(t);	

@@ -5,7 +5,7 @@
   
   <parent>
     <groupId>cz.fi.muni.pa165</groupId>
-    <artifactId>SoccerRecords</artifactId>
+    <artifactId>SoccerRecords-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   
@@ -54,13 +54,13 @@
   <dependency>
 	<groupId>org.mockito</groupId>
 	<artifactId>mockito-all</artifactId>
-	<version>2.0.2-beta</version>
+	<version>1.9.5</version>
 	<scope>test</scope>
   </dependency>
   <dependency>
   	<groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-	 <version>1.1.3</version>
+	 <version>1.1.6</version>
         <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
   </dependency>
  </dependencies>

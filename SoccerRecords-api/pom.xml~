@@ -26,7 +26,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-  <dependencies>
 <!-- validation annotations for bean properties -->
      <dependency>
             <groupId>javax.validation</groupId>

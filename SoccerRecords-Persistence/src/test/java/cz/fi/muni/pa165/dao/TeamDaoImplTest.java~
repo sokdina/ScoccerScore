@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.soccerrecordspersistence.dao;
+package cz.fi.muni.pa165.dao;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.pa165.soccerrecordspersistence.PersistenceSampleApplicationContext;
-import cz.fi.muni.pa165.soccerrecordspersistence.entity.Team;
+import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.entity.Team;
 import java.util.Collection;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
-import cz.fi.muni.pa165.soccerrecordspersistence.dao.ITeamDao;
+import cz.fi.muni.pa165.dao.ITeamDao;
 
 /**
  * TeamDaoImplTest class is used to test functionalities of
