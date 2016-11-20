@@ -86,6 +86,11 @@ public class Team {
     public void setCountry(String country) {
         this.country = country;
     }
+    public Team(Long teamId) {
+	this.id = teamId;
+    }
+    public Team() {
+    }
 
     @Override
     public int hashCode() {

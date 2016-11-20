@@ -2,7 +2,11 @@ package cz.fi.muni.pa165.dto;
 
 
 /**
- * 
+ *
+ * TeamDTO provides Data Transfer Objects 
+ * (Id, Name, city and country of each team) as references 
+ * to Team facade interface
+ *
  * @author sokdina999@gamil.com
 **/
 

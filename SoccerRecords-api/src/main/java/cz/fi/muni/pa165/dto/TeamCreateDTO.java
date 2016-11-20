@@ -4,7 +4,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * 
+ *
+ * TeamCreateDTO provides Data Transfer Objects
+ * (ID and Name of each team) as references 
+ * to Team facade interface
+ *
  * @author sokdina999@gamil.com
 **/
 
@@ -14,7 +18,7 @@ public class TeamCreateDTO
     private Long id;
 
     @NotNull
-    @Size(min = 3, max = 35)
+    @Size(min = 3, max = 50)
     private String name;
 
     public Long getId() {

@@ -11,6 +11,9 @@ import cz.fi.muni.pa165.entity.Team;
 
 /**
  * 
+ * TeamService delegates some services (create and delete teams ,
+ * find a team by id, list all teams or list teams by name) to ITeamDao.
+ * 
  * @author sokdina999@gamil.com
 **/
 
@@ -24,10 +27,10 @@ public class TeamServiceImpl implements TeamService {
 	public void create(Team t) {
            	teamDao.create(t);
         }
-               
+	               
         @Override
-        public void delete(Team t){
-		teamDao.delete(t);	
+        public void delete(Long teamId){
+		teamDao.delete(new Team(teamId)); 	
 	}
 
 	@Override
