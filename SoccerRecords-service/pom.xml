@@ -5,7 +5,7 @@
   
   <parent>
     <groupId>cz.fi.muni.pa165</groupId>
-    <artifactId>SoccerRecords-parent</artifactId>
+    <artifactId>SoccerRecords-Parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   
@@ -35,6 +35,7 @@
 	<groupId>cz.fi.muni.pa165</groupId>
 	<artifactId>SoccerRecords-Persistence</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+   <type>jar</type>
   </dependency>
   <dependency>
 	<groupId>javax.inject</groupId>
@@ -62,8 +63,8 @@
         <artifactId>logback-classic</artifactId>
 	 <version>1.1.6</version>
         <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
-  </dependency>
- </dependencies>
+  </dependency>  
+  </dependencies>
 
 	<build>
         <pluginManagement>
