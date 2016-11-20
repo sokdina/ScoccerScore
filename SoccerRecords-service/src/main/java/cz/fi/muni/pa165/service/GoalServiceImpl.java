@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.service;
 
+import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.IGoalDao;
+import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
@@ -19,6 +21,10 @@ public class GoalServiceImpl implements IGoalService{
 
     @Autowired
     private IGoalDao goalDao;
+    @Autowired
+    private IPlayerDao playerDao;
+    @Autowired
+    private IGameDao gameDao;
     
     @Override
     public Goal findById(Long id) {
@@ -44,6 +50,14 @@ public class GoalServiceImpl implements IGoalService{
     public void createGoal(Goal goal) {
         try{
             goalDao.create(goal);
+            
+            Player p = goal.getPlayer();
+            p.addGoal(goal);
+            playerDao.update(p);
+            
+            Game g = goal.getGame();
+            g.addGoal(goal);
+            gameDao.update(g);
         }
         catch(Exception e){
             throw new SoccerRecordsDataAccessException(e); 
@@ -53,6 +67,14 @@ public class GoalServiceImpl implements IGoalService{
     @Override
     public void deleteGoal(Goal goal) {
         try{
+            Player p = goal.getPlayer();
+            p.removeGoal(goal);
+            playerDao.update(p);
+            
+            Game g = goal.getGame();
+            //g.removeGoal(goal);
+            gameDao.update(g);
+            
             goalDao.delete(goal);
         }
         catch(Exception e){
