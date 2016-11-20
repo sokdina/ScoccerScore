@@ -4,18 +4,17 @@ import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jaromir Sys
  */
-@Transactional
+
 public class GoalServiceImpl implements IGoalService{
 
     @Autowired
@@ -23,47 +22,88 @@ public class GoalServiceImpl implements IGoalService{
     
     @Override
     public Goal findById(Long id) {
-        return goalDao.findById(id);
+        try{
+            return goalDao.findById(id);
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public Set<Goal> findAll() {
-        return goalDao.findAll();
+        try{
+            return goalDao.findAll();
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public void createGoal(Goal goal) {
-        goalDao.create(goal);
+        try{
+            goalDao.create(goal);
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public void deleteGoal(Goal goal) {
-        goalDao.delete(goal);
+        try{
+            goalDao.delete(goal);
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public void updateGoal(Goal goal) {
-        goalDao.update(goal);
+        try{
+            goalDao.update(goal);
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public Set<Goal> findByGoalTime(Date date) {
-        return goalDao.findAll().stream().filter(g->g.getGoalTime().equals(date)).collect(Collectors.toSet());
+        try{
+            return goalDao.findAll().stream().filter(g->g.getGoalTime().equals(date)).collect(Collectors.toSet());
+        }catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public Set<Goal> findByGame(Game game) {
-        return goalDao.findByGame(game);
+        try{
+            return goalDao.findByGame(game);
+        }catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public Set<Goal> findByDescription(String description) {
-        return goalDao.findAll().stream().filter(g->g.getDescription().equals(description)).collect(Collectors.toSet());
+        try{
+            return goalDao.findAll().stream().filter(g->g.getDescription().equals(description)).collect(Collectors.toSet());
+        }catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
 
     @Override
     public Set<Goal> findByplayer(Player player) {
-        return goalDao.findByPlayer(player);
+        try{
+            return goalDao.findByPlayer(player);
+        }catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
     }
     
 }

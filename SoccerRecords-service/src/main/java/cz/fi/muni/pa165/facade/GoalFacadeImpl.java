@@ -13,11 +13,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jaromir Sys
  */
+@Transactional
 public class GoalFacadeImpl implements IGoalFacade{
 
     @Autowired
