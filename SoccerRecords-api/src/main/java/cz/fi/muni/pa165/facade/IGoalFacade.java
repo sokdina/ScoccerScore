@@ -13,7 +13,7 @@ import cz.fi.muni.pa165.dto.PlayerDTO;
 public interface IGoalFacade {
     public GoalDTO findById(Long id);
     public List<GoalDTO> findAll();
-    public Long createGoal(GoalDTO goal);
+    public void createGoal(GoalDTO goal);
     public void deleteGoal(GoalDTO goal);
     public void updateGoal(GoalDTO goal);
     
