@@ -9,10 +9,9 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
- *  rudimentary implementation of IGoalDao
+ * rudimentary implementation of IGoalDao
  * @author Jaromir Sys
  */
 @Repository("GoalDao")
@@ -22,21 +21,18 @@ public class GoalDaoImpl implements IGoalDao{
     private EntityManager entityManager;
     
     @Override
-    @Transactional
     public void create(Goal parameter) {
         this.validateNotNull(parameter);
         entityManager.persist(parameter);
     }
 
     @Override
-    @Transactional
     public void delete(Goal parameter) {
         this.validateNotNull(parameter);
         entityManager.remove(parameter);
     }
 
     @Override
-    @Transactional
     public Set<Goal> findAll() {
         Set<Goal> goals = new HashSet<>();
         goals.addAll(entityManager.createQuery("from Goal",Goal.class).getResultList());
@@ -44,13 +40,11 @@ public class GoalDaoImpl implements IGoalDao{
     }
 
     @Override
-    @Transactional
     public Goal findById(long parameter) {
         return entityManager.find(Goal.class, parameter);
     }
 
     @Override
-    @Transactional
     public void update(Goal parameter) {
         this.validateNotNull(parameter);
         if(!entityManager.contains(parameter)){
