@@ -3,7 +3,9 @@ package cz.fi.muni.pa165.service;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.entity.Player;
 
 /**
  * 
@@ -16,14 +18,15 @@ import cz.fi.muni.pa165.entity.Team;
 @Service
 public interface TeamService {
 
-	public void create(Team t);
+	public Team create(Team t);
+	public void update(Team t);
 	public void delete(Long teamId);
 	public Team findById(Long id);
 	public List<Team> findByAll();
 	public List<Team> findByName(String name);
-              
+        public void addPlayer(Team t, Player p);
+	public void deletePlayer(Team t, Player p);
 }
-
 
 
 

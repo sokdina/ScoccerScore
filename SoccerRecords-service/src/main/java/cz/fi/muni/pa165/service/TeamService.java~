@@ -6,7 +6,9 @@ import java.util.List;
 import cz.fi.muni.pa165.entity.Team;
 
 /**
- * TeamService provides some basic services access to the {@link Game and Players} entity .
+ * 
+ * A TeamService defines some services (create, delete and update team, find a team by id or list all teams) 
+ * to ITeamDao for references to a Team entity.
  *
  * @author sokdina999@gamil.com
 **/
@@ -14,14 +16,15 @@ import cz.fi.muni.pa165.entity.Team;
 @Service
 public interface TeamService {
 
-	public void create(Team t);
-	public void delete(Team t)throws IllegalArgumentException;
+	public Team create(Team t);
+	public void update(Team t);
+	public void delete(Long teamId);
 	public Team findById(Long id);
 	public List<Team> findByAll();
 	public List<Team> findByName(String name);
-              
+        public void addPlayer(Team t, Player p);
+	public void deletePlayer(Team t, Player p);
 }
-
 
 
 

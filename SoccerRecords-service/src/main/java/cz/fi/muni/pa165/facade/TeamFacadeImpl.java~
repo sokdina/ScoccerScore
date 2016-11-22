@@ -41,9 +41,8 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
     @Override
-    public void updateTeam(TeamDTO t){
+    public void updateTeam(TeamDTO t);
 	teamService.update(beanMappingService.mapTo(t, Team.class));
-    }
 	
     @Override
     public void deleteTeam(Long teamId) {
@@ -69,3 +68,11 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
 }
+
+ @Override
+    public Long createPlayer(PlayerDTO p) {
+        Player mPlayer = beanMappingService.mapTo(p, Player.class);
+        Player newPlayer = playerService.createPlayer(mPlayer);
+	return newPlayer.getId();
+        
+	}

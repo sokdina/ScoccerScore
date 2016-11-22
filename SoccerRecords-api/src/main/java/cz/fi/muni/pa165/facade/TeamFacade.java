@@ -18,10 +18,20 @@ public interface TeamFacade {
 		
 	/**
 	* createTeam method is used for insert information such as team id,
-	* and name into table team through TeamCreateDTO.
+	* name, city and country into table team through TeamCreateDTO.
 	* @param TeamCreateDTO is the TeamCreateDTO DTO class.
 	*/	
-	public Long createTeam(TeamCreateDTO t);
+	public Long createTeam(TeamDTO t);
+
+	/**
+	* updateTeam method is used to update each team information (team id,
+	* name, city, country) into table team through TeamDTO
+	* according to team id.
+	* @param TeamDTO is the TeamDTO DTO class.
+	*/
+	
+	public void updateTeam(TeamDTO t);
+
 
 	/**
 	* deleteTeam method is used for delete a team according to team id
