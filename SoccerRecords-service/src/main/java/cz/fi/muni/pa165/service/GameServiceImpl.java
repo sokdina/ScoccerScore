@@ -8,6 +8,7 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -15,41 +16,64 @@ import javax.inject.Inject;
  *
  * @author peter
  */
-public class GameServiceImpl implements IGameService{
+public class GameServiceImpl implements IGameService {
 
     @Inject
     private IGameDao gameDao;
 
     @Override
     public void create(Game g) {
-        gameDao.create(g);
+        try {
+            gameDao.create(g);
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
     }
 
     @Override
     public Game update(Game g) {
-        return gameDao.update(g);
+        try {
+            return gameDao.update(g);
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
+
     }
 
     @Override
     public void delete(Game g) throws IllegalArgumentException {
-        gameDao.delete(g);
+        try {
+            gameDao.delete(g);
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
     }
 
     @Override
     public List<Game> findGamesBetweenTeams(long teamId1, long teamId2) {
-        return gameDao.findGamesBetweenTeams(teamId1, teamId2);
+        try {
+            return gameDao.findGamesBetweenTeams(teamId1, teamId2);
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
     }
 
     @Override
     public Game findById(long id) {
-        return gameDao.findById(id);
+        try {
+            return gameDao.findById(id);
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
     }
 
     @Override
     public List<Game> findAll() {
-        return gameDao.findAll();
+        try {
+            return gameDao.findAll();
+        } catch (Exception e) {
+            throw new SoccerRecordsDataAccessException(e);
+        }
     }
-    
-    
-    
+
 }
