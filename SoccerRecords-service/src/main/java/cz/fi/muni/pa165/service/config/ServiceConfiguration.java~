@@ -8,33 +8,22 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import cz.fi.muni.pa165.service.TeamServiceImpl;
-
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.service.OrderServiceImpl;
 
 @Configuration
 @Import(PersistenceSampleApplicationContext.class)
 @ComponentScan(basePackageClasses={TeamServiceImpl.class})
 public class ServiceConfiguration {
 	
-
 	@Bean
 	public Mapper dozer(){
 		DozerBeanMapper dozer = new DozerBeanMapper();		
 		dozer.addMapping(new DozerCustomConfig());
 		return dozer;
 	}
-	
-	/**
-	 * Dozer framework for configuration
-	 * of map entity instances to DTO 
-	 */
-	/*public class DozerCustomConfig extends BeanMappingBuilder {
-	    @Override
-	    protected void configure() {
-	        mapping(Entity.class, DTO.class);
-	    }
-	}*/
-	
+		
 }
 
