@@ -3,12 +3,11 @@ package cz.fi.muni.pa165.facade;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.dto.TeamDTO;
-import cz.fi.muni.pa165.dto.TeamCreateDTO;
 import cz.fi.muni.pa165.entity.Team;
-import cz.fi.muni.pa165.facade.TeamFacade;
 
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.TeamService;
+import cz.fi.muni.pa165.service.IPlayerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,9 @@ public class TeamFacadeImpl implements TeamFacade {
 
     @Inject
     private TeamService teamService;
+
+    @Inject
+    private IPlayerService playerService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -68,4 +70,18 @@ public class TeamFacadeImpl implements TeamFacade {
 	return (teams == null) ? null : beanMappingService.mapTo(teams, TeamDTO.class);
     }
 
+    @Override
+    public void addPlayer(Long teamId, Long playerId){
+	teamService.addPlayer(teamService.findById(teamId), playerService.findById(playerId));
+    }
+
+    @Override
+    public void removePlayer(Long teamId, Long playerId){
+	teamService.deletePlayer(teamService.findById(teamId), playerService.findById(playerId));
+    }
+
 }
+
+
+
+

@@ -30,6 +30,9 @@ public class TeamFacadeImpl implements TeamFacade {
     @Inject
     private TeamService teamService;
 
+    @Inject
+    private IPlayerService playerService;
+
     @Autowired
     private BeanMappingService beanMappingService;
 
@@ -41,8 +44,9 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
     @Override
-    public void updateTeam(TeamDTO t);
+    public void updateTeam(TeamDTO t){
 	teamService.update(beanMappingService.mapTo(t, Team.class));
+    }
 	
     @Override
     public void deleteTeam(Long teamId) {
@@ -67,12 +71,13 @@ public class TeamFacadeImpl implements TeamFacade {
 	return (teams == null) ? null : beanMappingService.mapTo(teams, TeamDTO.class);
     }
 
+    @Override
+    public void addPlayer(Long teamId, Long playerId){
+	teamService.addPlayer(teamService.findById(teamId), playerService.findById(playerId));
+    }
+
 }
 
- @Override
-    public Long createPlayer(PlayerDTO p) {
-        Player mPlayer = beanMappingService.mapTo(p, Player.class);
-        Player newPlayer = playerService.createPlayer(mPlayer);
-	return newPlayer.getId();
-        
-	}
+
+
+

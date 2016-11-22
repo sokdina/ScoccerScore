@@ -61,6 +61,9 @@ public interface TeamFacade {
 	* and country corresponding to input team name condition.
         */
 	public List<TeamDTO> findByName(String name);
-	//public void addPlayer(Long teamId, Long playerId);
-	//public void removePlayer(Long teamId, Long playerId);
+
+	public void addPlayer(Long teamId, Long playerId);
+
+	public void removePlayer(Long teamId, Long playerId);
+
 }

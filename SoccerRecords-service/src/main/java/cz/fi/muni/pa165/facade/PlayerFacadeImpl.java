@@ -8,10 +8,8 @@ import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IPlayerService;
 import cz.fi.muni.pa165.service.TeamService;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import java.util.List;
-import java.util.Set;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
