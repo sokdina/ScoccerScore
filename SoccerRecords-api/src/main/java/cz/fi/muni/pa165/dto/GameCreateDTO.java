@@ -6,37 +6,36 @@
 package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.enums.MatchResult;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author peter
  */
-public class GameDTO {
+public class GameCreateDTO {
     
-    private Long id;
-
+    @NotNull
     private TeamDTO homeTeam;
 
+    @NotNull
     private TeamDTO guestTeam;
 
+    @NotNull
     private Date dateOfGame;
 
-    private MatchResult matchResult;
-
+    @NotNull
+    @Min(0)
     private int homeScore;
 
+    @NotNull
+    @Min(0)
     private int guestScore;
 
     private Set<GoalDTO> goal = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public TeamDTO getHomeTeam() {
         return homeTeam;
@@ -60,14 +59,6 @@ public class GameDTO {
 
     public void setDateOfGame(Date dateOfGame) {
         this.dateOfGame = dateOfGame;
-    }
-
-    public MatchResult getMatchResult() {
-        return matchResult;
-    }
-
-    public void setMatchResult(MatchResult matchResult) {
-        this.matchResult = matchResult;
     }
 
     public int getHomeScore() {
@@ -97,10 +88,11 @@ public class GameDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + (this.homeTeam != null ? this.homeTeam.hashCode() : 0);
-        hash = 23 * hash + (this.guestTeam != null ? this.guestTeam.hashCode() : 0);
-        hash = 23 * hash + (this.dateOfGame != null ? this.dateOfGame.hashCode() : 0);
-        hash = 23 * hash + (this.goal != null ? this.goal.hashCode() : 0);
+        hash = 67 * hash + (this.homeTeam != null ? this.homeTeam.hashCode() : 0);
+        hash = 67 * hash + (this.guestTeam != null ? this.guestTeam.hashCode() : 0);
+        hash = 67 * hash + (this.dateOfGame != null ? this.dateOfGame.hashCode() : 0);
+        hash = 67 * hash + this.homeScore;
+        hash = 67 * hash + this.guestScore;
         return hash;
     }
 
@@ -115,7 +107,7 @@ public class GameDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GameDTO other = (GameDTO) obj;
+        final GameCreateDTO other = (GameCreateDTO) obj;
         if (this.homeScore != other.homeScore) {
             return false;
         }
@@ -129,12 +121,6 @@ public class GameDTO {
             return false;
         }
         if (this.dateOfGame != other.dateOfGame && (this.dateOfGame == null || !this.dateOfGame.equals(other.dateOfGame))) {
-            return false;
-        }
-        if (this.matchResult != other.matchResult) {
-            return false;
-        }
-        if (this.goal != other.goal && (this.goal == null || !this.goal.equals(other.goal))) {
             return false;
         }
         return true;
