@@ -62,8 +62,20 @@ public interface TeamFacade {
         */
 	public List<TeamDTO> findByName(String name);
 
+	/**
+	* addPlayer method is used for insert a player 
+	* according to paramesters team id and player id
+	* @param  teamId is team id of each team.
+	* @param  playerID is player id of each player.
+	*/
 	public void addPlayer(Long teamId, Long playerId);
 
+	/**
+	* removePlayer method is used for delete a player 
+	* according to paramesters team id and player id
+	* @param  teamId is team id of each team.
+	* @param  playerID is player id of each player.
+	*/
 	public void removePlayer(Long teamId, Long playerId);
 
 }
