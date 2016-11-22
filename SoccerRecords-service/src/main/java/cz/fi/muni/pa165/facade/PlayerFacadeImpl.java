@@ -6,7 +6,6 @@ import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IPlayerService;
-import cz.fi.muni.pa165.service.TeamService;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import cz.fi.muni.pa165.service.ITeamService;
 
 /**
  *
@@ -33,7 +33,7 @@ public class PlayerFacadeImpl implements IPlayerFacade{
     //private IGoalService goalService;
     
     //@Inject
-    private TeamService teamService;
+    private ITeamService teamService;
     
     @Override
     public PlayerDTO findById(Long id) {

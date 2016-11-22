@@ -6,7 +6,6 @@ import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Team;
 
 import cz.fi.muni.pa165.service.BeanMappingService;
-import cz.fi.muni.pa165.service.TeamService;
 import cz.fi.muni.pa165.service.IPlayerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import cz.fi.muni.pa165.service.ITeamService;
 
 /**
  *
@@ -27,7 +27,7 @@ import java.util.List;
 public class TeamFacadeImpl implements TeamFacade {
 
     @Inject
-    private TeamService teamService;
+    private ITeamService teamService;
 
     @Inject
     private IPlayerService playerService;

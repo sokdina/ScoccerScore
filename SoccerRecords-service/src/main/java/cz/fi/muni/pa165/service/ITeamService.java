@@ -14,9 +14,7 @@ import cz.fi.muni.pa165.entity.Player;
  *
  * @author sokdina999@gamil.com
 **/
-
-@Service
-public interface TeamService {
+public interface ITeamService {
 
 	public Team create(Team t);
 	public void update(Team t);

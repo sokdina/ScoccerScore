@@ -11,11 +11,13 @@ import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author peter
  */
+@Service
 public class GameServiceImpl implements IGameService {
 
     @Inject

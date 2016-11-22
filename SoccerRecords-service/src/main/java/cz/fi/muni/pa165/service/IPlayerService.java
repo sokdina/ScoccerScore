@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  *
  * @author Martin Kocak
  */
-@Service
 public interface IPlayerService {
     
     public Player findById(Long id);

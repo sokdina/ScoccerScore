@@ -21,7 +21,7 @@ import cz.fi.muni.pa165.entity.Player;
 **/
 
 @Service
-public class TeamServiceImpl implements TeamService {
+public class TeamServiceImpl implements ITeamService {
 	
         @Inject
 	private ITeamDao teamDao;

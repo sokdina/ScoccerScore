@@ -7,6 +7,7 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.entity.Game;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *

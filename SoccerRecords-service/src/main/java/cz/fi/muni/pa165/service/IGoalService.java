@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.entity.Player;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import org.springframework.stereotype.Service;
 
 /**
  *
