@@ -7,6 +7,7 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.entity.Game;
 import java.util.List;
+import javafx.util.Pair;
 import org.springframework.stereotype.Service;
 
 /**
@@ -54,4 +55,10 @@ public interface IGameService {
      * @return return all games
      */
     public List<Game> findAll();
+    
+    /**
+     * generates matches for the whole season
+     * @return returns lists (all rounds) of list (one round of season) as Team pairs
+     */
+    public List<List<Pair>> generateSeasonMatches();
 }
