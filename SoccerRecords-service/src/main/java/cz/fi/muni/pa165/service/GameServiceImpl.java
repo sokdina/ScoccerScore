@@ -12,6 +12,7 @@ import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javafx.util.Pair;
 import javax.inject.Inject;
@@ -91,6 +92,7 @@ public class GameServiceImpl implements IGameService {
         List<List<Pair>> result = new ArrayList<>();
         
         List<Team> teams = teamDao.findByAll();
+        Collections.shuffle(teams);
         
         //add ghost team if odd number of teams
         if(teams.size()%2 != 0)teams.add(new Team(-1L));
@@ -108,6 +110,7 @@ public class GameServiceImpl implements IGameService {
             teams.add(1, t);
         }
         
+        Collections.shuffle(result);
         return result;
     }
 
