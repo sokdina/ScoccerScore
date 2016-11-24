@@ -118,7 +118,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
         Team t2 = teamService.findById(1L);
 
-        verify(teamDao, times(1)).findById(1L);
+        verify(teamDao).findById(1L);
 
         assertEquals(t2.getId(), t1.getId());
 
