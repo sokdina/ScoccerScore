@@ -97,6 +97,7 @@ public class Team {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+ 	result = prime * result + ((city == null) ? 0 : city.hashCode());
         return result;
     }
 
@@ -113,6 +114,11 @@ public class Team {
                 if (other.name != null)
                         return false;
         } else if (!name.equals(other.getName()))
+                return false;
+        if (city == null) {
+                if (other.city != null)
+                        return false;
+        } else if (!city.equals(other.getCity()))
                 return false;
         return true;
     }	

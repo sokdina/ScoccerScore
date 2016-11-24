@@ -163,10 +163,6 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(teamService.findByName(testTeam.getName()).get(0).getName(),team.getName());
         assertEquals(teamService.findByName(testTeam.getName()).get(1).getName(),testTeam.getName());
         
-        //Dina you have wrong implementation here
-        // If are two teams the same only by their name then don`t return Collection in findByName, 
-        //if they not same, then assertNotEqual should return true, but it return false
-        //so repair this a then remove this comment :)
         assertNotEquals(teamService.findByName(testTeam.getName()).get(0), teamService.findByName(testTeam.getName()).get(1));
         verify(teamDao,times(4)).findByName(team.getName());
     }
