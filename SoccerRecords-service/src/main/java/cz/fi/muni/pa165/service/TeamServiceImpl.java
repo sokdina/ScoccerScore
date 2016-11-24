@@ -116,6 +116,7 @@ public class TeamServiceImpl implements ITeamService {
        		}
 	}
         
+        @Override
         public List<Game> createTurnamentBrackets(Set<Team> teams){
             List<TournamentTeamDto> sortedTeams = new ArrayList<>();
             List<Game> games = new ArrayList<>();
@@ -128,11 +129,13 @@ public class TeamServiceImpl implements ITeamService {
             Collections.sort(sortedTeams);
             int partitionSize = IntMath.divide(sortedTeams.size(), 2, RoundingMode.UP);
             List<List<TournamentTeamDto>> parts = Lists.partition(sortedTeams,partitionSize);
+            int count = parts.get(1).size();
             if(parts.size() == 2){
                 for(TournamentTeamDto t1 :parts.get(0)){
                     Game g = new Game();
+                    count--;
                     if(parts.get(1).size()>0){
-                        TournamentTeamDto t2 = parts.get(1).remove(0);
+                        TournamentTeamDto t2 = parts.get(1).get(count);
                         g.setGuestTeam(t2.getTeam());
                     }
                     g.setHomeTeam(t1.getTeam());

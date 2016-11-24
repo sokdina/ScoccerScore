@@ -1,17 +1,25 @@
 package cz.fi.muni.pa165.service;
 
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,6 +45,8 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     private ITeamDao teamDao;
 
+    @Mock
+    private IGameDao gameDao;
     
     @Autowired
     @InjectMocks
@@ -134,7 +144,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
         team.setCity("London");
         team.setCountry("England");
         team.setName("Arsenal FC");
-        List<Team> teamList = new ArrayList();
+        List<Team> teamList = new ArrayList<>();
         teamList.add(team);
         teamList.add(testTeam);
         
@@ -155,7 +165,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
         team.setCity("Bratislava");
         team.setCountry("Slovakia");
         team.setName("Chelsea FC");
-        List<Team> teamList = new ArrayList();
+        List<Team> teamList = new ArrayList<>();
         teamList.add(team);
         teamList.add(testTeam);
         when(teamDao.findByName(testTeam.getName())).thenReturn(teamList);
@@ -225,10 +235,139 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
     @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
     public void testInvalidDeletePlayer() {
         System.out.println("deleteInvalidPlayer");
-        
-        
+                
         teamService.deletePlayer(testTeam, null);
     }
     
+    @Test
+    public void testCreateTurnamentBrackets() {
+        System.out.println("");
+        
+        Game gameA = new Game();
+        Game gameB = new Game();
+        Game gameC = new Game();
+        Game gameD = new Game();
+        Game gameE = new Game();
+        Game gameF = new Game();
+        Game gameG = new Game();
+        Game gameH = new Game();
+        
+        Team t1 = new Team();
+        t1.setName("Chelsea FC");
+        Team t2 = new Team();
+        t2.setName("Arsenal FC");
+        Team t3 = new Team();
+        t3.setName("Man City");
+        Team t4 = new Team();
+        t4.setName("Man Untd");
+        Team t5 = new Team();
+        t5.setName("Leicester");
+        Team t6 = new Team();
+        t6.setName("Liverpool");
+        
+                
+        gameA.setHomeScore(3);
+        gameA.setGuestScore(1);
+        gameA.setMatchResult(MatchResult.HOME_TEAM_WIN);
+        
+        gameB.setHomeScore(1);
+        gameB.setGuestScore(1);
+        gameB.setMatchResult(MatchResult.DRAW);
+        
+        gameC.setHomeScore(0);
+        gameC.setGuestScore(2);
+        gameC.setMatchResult(MatchResult.GUEST_TEAM_WIN);
+        
+        gameD.setHomeScore(4);
+        gameD.setGuestScore(0);
+        gameD.setMatchResult(MatchResult.HOME_TEAM_WIN);
+        
+        gameE.setHomeScore(1);
+        gameE.setGuestScore(0);
+        gameE.setMatchResult(MatchResult.HOME_TEAM_WIN);
+        
+        gameF.setHomeScore(0);
+        gameF.setGuestScore(3);
+        gameF.setMatchResult(MatchResult.GUEST_TEAM_WIN);
+        
+        gameG.setHomeScore(3);
+        gameG.setGuestScore(3);
+        gameG.setMatchResult(MatchResult.DRAW);
+        
+        gameH.setHomeScore(3);
+        gameH.setGuestScore(1);
+        gameH.setMatchResult(MatchResult.HOME_TEAM_WIN);
+        
+        gameA.setHomeTeam(t1);
+        gameA.setGuestTeam(t2);
+        
+        gameB.setHomeTeam(t3);
+        gameB.setGuestTeam(t4);
+        
+        gameC.setHomeTeam(t6);
+        gameC.setGuestTeam(t5);
+        
+        gameD.setHomeTeam(t1);
+        gameD.setGuestTeam(t6);
+        
+        gameE.setHomeTeam(t2);
+        gameE.setGuestTeam(t3);
+        
+        gameF.setHomeTeam(t4);
+        gameF.setGuestTeam(t5);
+        
+        gameG.setHomeTeam(t3);
+        gameG.setGuestTeam(t5);
+        
+        gameH.setHomeTeam(t4);
+        gameH.setGuestTeam(t1);       
+        
+        Set<Team> teams = new HashSet<>();
+        teams.add(t1);
+        teams.add(t2);
+        teams.add(t3);
+        teams.add(t4);
+        teams.add(t5);
+        teams.add(t6);       
+        
+        List<Game> games = new ArrayList<>();
+        games.add(gameA);
+        games.add(gameB);
+        games.add(gameC);
+        games.add(gameD);
+        games.add(gameE);
+        games.add(gameF);
+        games.add(gameG);
+        games.add(gameH);
 
+        when(gameDao.findAll()).thenReturn(games);
+        
+        List<Game> generatedGames = teamService.createTurnamentBrackets(teams);
+        
+        //It should working that time with at most point(wind and draw) play 
+        //with team with at least points
+        //our order     pts     team    
+        // Liverpool    0   -   t6
+        // Man City     2   -   t3
+        // Arsenal      3   -   t2
+        // Man Untd     4   -   t4
+        // Chelsea FC   6   -   t1
+        // Leceister    7   -   t5
+        
+        assertEquals(generatedGames.size(), 3);
+        
+        //six teams , every call findall 3 times
+        verify(gameDao, times(18)).findAll();
+        
+        //home team has lower pts 
+        assertEquals(generatedGames.get(0).getHomeTeam(), t6);
+        assertEquals(generatedGames.get(0).getGuestTeam(), t5);
+        
+        assertEquals(generatedGames.get(1).getHomeTeam(), t3);
+        assertEquals(generatedGames.get(1).getGuestTeam(), t1);
+        
+        assertEquals(generatedGames.get(2).getHomeTeam(), t2);
+        assertEquals(generatedGames.get(2).getGuestTeam(), t4);
+            
+    }
 }

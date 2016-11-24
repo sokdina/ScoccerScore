@@ -1,11 +1,13 @@
 package cz.fi.muni.pa165.service;
 
+import cz.fi.muni.pa165.entity.Game;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.entity.Player;
+import java.util.Set;
 
 /**
  * 
@@ -24,6 +26,7 @@ public interface ITeamService {
 	public List<Team> findByName(String name);
         public void addPlayer(Team t, Player p);
 	public void deletePlayer(Team t, Player p);
+        public List<Game> createTurnamentBrackets(Set<Team> teams);
 }
 
 
