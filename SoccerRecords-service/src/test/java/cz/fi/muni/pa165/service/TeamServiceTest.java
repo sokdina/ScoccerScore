@@ -37,8 +37,6 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     private ITeamDao teamDao;
 
-    @Mock
-    private IPlayerDao playerDao;
     
     @Autowired
     @InjectMocks
@@ -116,12 +114,12 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
         when(teamDao.findById(1l)).thenReturn(t1);
 
-        Team t2 = teamService.findById(1L);
-
-        verify(teamDao).findById(1L);
+        Team t2 = teamService.findById(t1.getId()); 
+        
+        verify(teamDao, times(2)).findById(1L);
 
         assertEquals(t2.getId(), t1.getId());
-
+        
        
     }
 
