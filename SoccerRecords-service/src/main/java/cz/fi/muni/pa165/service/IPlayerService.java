@@ -17,8 +17,7 @@ public interface IPlayerService {
     public Player findById(Long id);
     public List<Player> findAll();
     public Player createPlayer(Player p);
-    public void addGoal(Player player, Goal goal);
-    public void removeGoal(Player player, Goal goal);
+    public void updatePlayer(Player p);
     public void changeTeam(Player player, Team team);
     public void deletePlayer(Player player);
     public Set<Player> findPlayersByTeam(Team team);

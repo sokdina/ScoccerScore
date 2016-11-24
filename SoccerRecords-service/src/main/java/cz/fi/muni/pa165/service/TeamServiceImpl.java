@@ -62,8 +62,8 @@ public class TeamServiceImpl implements ITeamService {
       
         @Override
         public void delete(Long teamId){
-		try{
-			teamDao.delete(new Team(teamId)); 	
+		try{     
+			teamDao.delete( teamDao.findById(teamId)); 	
 		} catch(Exception ex){
             		throw new SoccerRecordsDataAccessException(ex); 
        		}

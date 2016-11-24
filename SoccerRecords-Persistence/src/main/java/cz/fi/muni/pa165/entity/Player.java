@@ -122,6 +122,11 @@ public class Player
             team.getPlayers().add(this);
         }
     }
+    public void unsetTeam() {
+        if(this.team != null)
+            this.team.removePlayer(this);
+        this.team = null;
+    }
 
     public Set<Goal> getGoal() {
         return goal;
@@ -138,6 +143,7 @@ public class Player
     }
     
     public void removeGoal(Goal goal) {
+        if(goal !=null)
         this.goal.remove(goal);
     }
 
