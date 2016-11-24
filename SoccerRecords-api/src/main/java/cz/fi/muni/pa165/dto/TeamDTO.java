@@ -1,5 +1,8 @@
 package cz.fi.muni.pa165.dto;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -55,6 +58,7 @@ public class TeamDTO
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((city == null) ? 0 : city.hashCode());
         return result;
     }
 
@@ -71,6 +75,11 @@ public class TeamDTO
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
+            return false;
+        if (city == null) {
+            if (other.city != null)
+                return false;
+        } else if (!city.equals(other.city))
             return false;
         return true;
     }

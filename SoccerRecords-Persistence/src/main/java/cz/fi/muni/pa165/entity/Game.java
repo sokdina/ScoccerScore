@@ -141,7 +141,6 @@ public class Game
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.homeTeam);
         hash = 97 * hash + Objects.hashCode(this.guestTeam);
         hash = 97 * hash + Objects.hashCode(this.dateOfGame);
@@ -165,9 +164,6 @@ public class Game
         }
         final Game other = (Game) obj;
         if (this.guestScore != other.guestScore) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.homeTeam, other.homeTeam)) {
