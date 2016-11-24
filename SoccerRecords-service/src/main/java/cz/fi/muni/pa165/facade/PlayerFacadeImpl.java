@@ -5,6 +5,7 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.service.BeanMappingService;
+import cz.fi.muni.pa165.service.IGoalService;
 import cz.fi.muni.pa165.service.IPlayerService;
 import java.util.ArrayList;
 
@@ -28,11 +29,8 @@ public class PlayerFacadeImpl implements IPlayerFacade{
     
     @Inject
     private IPlayerService playerService;
-        
-    //@Inject
-    //private IGoalService goalService;
-    
-    //@Inject
+           
+    @Inject
     private ITeamService teamService;
     
     @Override
@@ -51,16 +49,6 @@ public class PlayerFacadeImpl implements IPlayerFacade{
         Player newPlayer = playerService.createPlayer(mPlayer);
 	return newPlayer.getId();
         
-	}
-
-    @Override
-    public void addGoal(Long playerId, Long goalId) {
-       // playerService.addGoal(playerService.findById(playerId), goalService.findById(goalId));
-    }
-
-    @Override
-    public void removeGoal(Long playerId, Long goalId) {
-       //playerService.removeGoal(playerService.findById(playerId), goalService.findById(goalId));
     }
 
     @Override

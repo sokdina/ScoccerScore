@@ -24,7 +24,7 @@ import cz.fi.muni.pa165.service.ITeamService;
 
 @Service
 @Transactional
-public class TeamFacadeImpl implements TeamFacade {
+public class TeamFacadeImpl implements ITeamFacade {
 
     @Inject
     private ITeamService teamService;

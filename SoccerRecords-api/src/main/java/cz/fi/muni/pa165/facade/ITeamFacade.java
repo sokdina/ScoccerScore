@@ -13,7 +13,7 @@ import java.util.List;
 **/
 
 
-public interface TeamFacade {
+public interface ITeamFacade {
 		
 	/**
 	* createTeam method is used for insert information such as team id,

@@ -38,7 +38,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
+/**
+ *
+ * @author Martin Kocak
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
