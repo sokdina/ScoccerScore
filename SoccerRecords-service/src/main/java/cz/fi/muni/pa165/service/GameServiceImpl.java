@@ -6,11 +6,17 @@
 package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.IGameDao;
+import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import javafx.util.Pair;
 import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +26,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameServiceImpl implements IGameService {
 
+     @Autowired
+     private ITeamDao teamDao;
+    
     @Inject
     private IGameDao gameDao;
 
@@ -76,6 +85,33 @@ public class GameServiceImpl implements IGameService {
         } catch (Exception e) {
             throw new SoccerRecordsDataAccessException(e);
         }
+    }
+
+    @Override
+    public List<List<Pair>> generateSeasonMatches() {
+        List<List<Pair>> result = new ArrayList<>();
+        
+        List<Team> teams = teamDao.findByAll();
+        Collections.shuffle(teams);
+        
+        //add ghost team if odd number of teams
+        if(teams.size()%2 != 0)teams.add(new Team(-1L));
+        
+        //round robin
+        for(int i = 0; i < teams.size()-1; i++){
+            List<Pair> row = new ArrayList<>();
+            for(int j = 0; j < teams.size()/2; j++){
+                if(teams.get(j).getId() != -1L && teams.get(teams.size()-j-1).getId() != -1L)
+                    row.add(new Pair(teams.get(j), teams.get(teams.size()-j-1)));
+            }
+            result.add(row);
+            
+            Team t = teams.remove(teams.size()-1);
+            teams.add(1, t);
+        }
+        
+        Collections.shuffle(result);
+        return result;
     }
 
 }

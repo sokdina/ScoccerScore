@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.MatchResult;
+import java.util.Collections;
 import java.util.Set;
 import java.util.Date;
 import java.util.HashSet;
@@ -52,7 +53,7 @@ public class Game
     private int guestScore;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
-    private Set<Goal> goal = new HashSet<>();
+    private Set<Goal> goals = new HashSet<>();
 
     public Game(){
         super();
@@ -114,12 +115,12 @@ public class Game
         this.guestScore = guestScore;
     }
 
-    public Set<Goal> getGoal() {
-        return goal;
+    public Set<Goal> getGoals() {
+        return Collections.unmodifiableSet(goals);
     }
 
     public void addGoal(Goal goal) {
-        this.goal.add(goal);
+        this.goals.add(goal);
         if(goal.getGame() == null){
             goal.setGame(this);
         }
@@ -127,10 +128,14 @@ public class Game
             goal.setGame(this);
     }
     
+    public void deleteGoal(Goal goal){
+        goals.remove(goal);
+    }
+    
 
     @Override
     public String toString() {
-        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam.toString() + ", guestTeam=" + guestTeam.toString() + ", dateOfGame=" + dateOfGame + ", result=" + matchResult + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goal + '}';
+        return "Game{" + "id=" + id + ", homeTeam=" + homeTeam.toString() + ", guestTeam=" + guestTeam.toString() + ", dateOfGame=" + dateOfGame + ", result=" + matchResult + ", homeScore=" + homeScore + ", guestScore=" + guestScore + ", goal=" + goals + '}';
     }
 
     @Override
@@ -143,7 +148,7 @@ public class Game
         hash = 97 * hash + Objects.hashCode(this.matchResult);
         hash = 97 * hash + this.homeScore;
         hash = 97 * hash + this.guestScore;
-        hash = 97 * hash + Objects.hashCode(this.goal);
+        hash = 97 * hash + Objects.hashCode(this.goals);
         return hash;
     }
 
@@ -177,7 +182,7 @@ public class Game
         if (this.matchResult != other.matchResult) {
             return false;
         }
-        if (!Objects.equals(this.goal, other.goal)) {
+        if (!Objects.equals(this.goals, other.goals)) {
             return false;
         }
         return true;
