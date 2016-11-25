@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165;
+package cz.fi.muni.pa165.service.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +17,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
 import cz.fi.muni.pa165.dao.ITeamDao;
+import cz.fi.muni.pa165.facade.ITeamFacade;
+import cz.fi.muni.pa165.service.BeanMappingService;
+
 
 
 /**
@@ -28,7 +31,7 @@ import cz.fi.muni.pa165.dao.ITeamDao;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {ITeamDao.class})
+@ComponentScan(basePackageClasses = {ITeamDao.class,ITeamFacade.class,BeanMappingService.class})
 public class PersistenceSampleApplicationContext {
 
     /**

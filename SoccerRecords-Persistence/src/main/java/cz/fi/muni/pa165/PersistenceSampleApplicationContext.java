@@ -17,6 +17,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
 import cz.fi.muni.pa165.dao.ITeamDao;
+import cz.fi.muni.pa165.facade.ITeamFacade;
+
 
 
 /**
