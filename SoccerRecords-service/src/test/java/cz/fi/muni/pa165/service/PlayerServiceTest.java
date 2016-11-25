@@ -1,29 +1,23 @@
 package cz.fi.muni.pa165.service;
 
-
-import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
-import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.*;
@@ -33,11 +27,22 @@ import org.testng.annotations.Test;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * 
+ * @author Jaromir Sys
+ */
+
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
 
     @Mock
     private IPlayerDao playerDao;
+    
+    @Mock
+    private IGoalDao goalDao;
+    
+    @Mock
+    private ITeamDao teamDao;
   
     @Autowired
     @InjectMocks
@@ -48,167 +53,117 @@ public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
         MockitoAnnotations.initMocks(this);
     }
     
-    private Player testPlayer;
-    private Team testTeam;
+    private Player p1,p2;
+    
+    private Team t1,t2;
+    
+    private Goal g1;
 
     @BeforeMethod
     public void prepareTestPlayer() {
-       
-        testPlayer = new Player();
-        
-        
-        testPlayer.setName("Lionel Messi");
-        testPlayer.setPosition(Position.FORWARD);
-        testPlayer.setDateOfBirth(new Date(System.currentTimeMillis()));
-        testPlayer.setDressNumber(10);
-        testPlayer.setCountry("Spain");
-        
-        testTeam = new Team();
-        testTeam.setName("FC Barcelona");
-	testTeam.setCity("Barcelona");
-	testTeam.setCountry("Spain");
-    }
-    
-
-    // test create
-
-    @Test
-    public void testCreate() {
-
-        playerService.createPlayer(testPlayer);
-        verify(playerDao,times(1)).create(testPlayer);
-        
-    }
-
-    @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
-    public void testCreateInvalid() {
-        doThrow(new IllegalArgumentException()).when(playerDao).create(null);
-        
-        playerService.createPlayer(null);
-       
-    }
-
-    // update
-    
-    @Test
-    public void testUpdate(){
-        playerService.updatePlayer(testPlayer);
-
-        verify(playerDao, times(1)).update(testPlayer);
-    }
-    
-    @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
-    public void testUpdateInvalid() {
-        doThrow(new IllegalArgumentException()).when(playerDao).update(null);
-        
-        playerService.updatePlayer(null);
-       
-    }
-    
-    // delte player
-
-    @Test
-    public void testDelete() {
-        System.out.println("delete a player");
-        
-        Player player = new Player();
-        
-	player.setId(1L);	
-	player.setName("Lionel Messi");
-        player.setPosition(Position.FORWARD);
-        player.setDateOfBirth(new Date(System.currentTimeMillis()));
-        player.setDressNumber(7);
-        player.setCountry("Spain");
-
-        when(playerDao.findById(player.getId())).thenReturn(player);
-
-        playerService.deletePlayer(player);
-
-        verify(playerDao, times(1)).delete(player);
-        
-    }
-    
-    @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
-    public void testDeleteInvalid() {
-        doThrow(new IllegalArgumentException()).when(playerDao).delete(null);
       
-        playerService.deletePlayer(null);
         
+        p1 = new Player();
+        p1.setId(1L);
+        p1.setName("p123");
+        p1.setCountry("p1country");
+        p1.setPosition(Position.FORWARD);
+        p1.setDateOfBirth(new Date());
+        p1.setDressNumber(1);
+        
+        
+        p2 = new Player();
+        p2.setId(2L);
+        p2.setName("p2");
+        p2.setCountry("p2country");
+        p2.setPosition(Position.FORWARD);
+        p2.setDateOfBirth(new Date());
+        p2.setDressNumber(2);
+        
+        t1 = new Team();
+        t1.setId(3L);
+        t1.setCity("whateverville");
+        t1.setCountry("whateverstan");
+        t1.setName("mandatoryuniqueteamname");
+        t1.addPlayer(p1);
+        
+        t2 = new Team();
+        t2.setId(4L);
+        t2.setCity("whateverville2");
+        t2.setCountry("whateverstan2");
+        t2.setName("mandatoryuniqueteamname2");
+        
+        p1.setTeam(t1);
+        p2.setTeam(t2);
+        
+        g1 = new Goal();
+        g1.setDescription("asdsad");
+        g1.setGoalTime(new Date());
+        g1.setId(55L);
     }
     
-    //test find by ID
-
     @Test
     public void testFindById() {
-        Player player = new Player();
-
-	player.setId(1L);	
-	player.setName("Lionel Messi");
-        player.setPosition(Position.FORWARD);
-        player.setDateOfBirth(new Date(System.currentTimeMillis()));
-        player.setDressNumber(7);
-        player.setCountry("Spain");
-
-        when(playerDao.findById(1l)).thenReturn(player);
-
-        Player player2 = playerService.findById(player.getId()); 
-        
-        verify(playerDao, times(1)).findById(1L);
-
-        assertEquals(player2.getId(), player.getId());
-        
+        p1.setId(1L);
+        when(playerDao.findById(p1.getId())).thenReturn(p1);
+        Player p = playerService.findById(p1.getId());
+        verify(playerDao,times(1)).findById(p1.getId());
+        assertTrue(p.equals(p1));
     }
-
-    // find all
-    
     @Test
-    public void testfindAll() {
-        System.out.println("findByAll");
-        Player player = new Player();
-	
-	player.setId(2L);	
-	player.setName("Cristiano Ronaldo");
-        player.setPosition(Position.FORWARD);
-        player.setDateOfBirth(new Date(System.currentTimeMillis()));
-        player.setDressNumber(7);
-        player.setCountry("Spain");
-
-	Set<Player> playerList = new HashSet<>();
-	playerList.add(player);
-	playerList.add(testPlayer);
-      
-        when(playerDao.findAll()).thenReturn(playerList);
-        
-        assertEquals(playerService.findAll().size(), 2);
-        verify(playerDao, times(1)).findAll();
-             
-    }    
-
-    // find by team
-    
-    @Test
-    public void testfindPlayersByTeam() {
-	System.out.println("findPlayersByTeam");
-        Player player = new Player();
-	
-	player.setId(2L);	
-	player.setName("Cristiano Ronaldo");
-        player.setPosition(Position.FORWARD);
-        player.setDateOfBirth(new Date(System.currentTimeMillis()));
-        player.setDressNumber(7);
-        player.setCountry("Spain");
-
-	Set<Player> playerList = new HashSet<>();
-	playerList.add(player);
-	playerList.add(testPlayer);
-        
-	testTeam.addPlayer(player);
-	testTeam.addPlayer(testPlayer);
-	
-	when(playerDao.findPlayersByTeam(testTeam)).thenReturn(playerList);
-	assertEquals(playerService.findPlayersByTeam(testTeam).size(), 2);
-        verify(playerDao, times(1)).findPlayersByTeam(testTeam);
+    public void testFindAll() {
+        when(playerDao.findAll()).thenReturn(new HashSet<>());
+        assertEquals(playerService.findAll().size(), 0);
     }
-
+    
+    @Test(enabled = true)
+    public void testCreatePlayer() {
+        playerService.createPlayer(p1);
+        verify(playerDao,times(1)).create(p1);
+    }
+    
+    @Test(enabled = true)
+    public void testChangeTeam() {
+        playerService.changeTeam(p1, t2);
+        verify(playerDao,times(1)).update(p1);
+    }
+    
+    @Test(enabled = true)
+    public void testDeletePlayer() {
+        playerService.deletePlayer(p1);
+        
+        verify(playerDao,times(1)).delete(p1);
+    }
   
-  }
+    @Test
+    public void testFindPlayersByTeam() {
+        when(playerDao.findPlayersByTeam(t1)).thenReturn(t1.getPlayers());
+        Set<Player> players = playerService.findPlayersByTeam(t1);
+        verify(playerDao,times(1)).findPlayersByTeam(t1);
+        assertEquals(players.size(), 1);
+    }
+    
+    @Test(enabled = true)
+    public void testUpdatePlayer() {
+        playerService.updatePlayer(p1);
+        verify(playerDao,times(1)).update(p1);        
+    }
+    @Test
+    public void testAddGoal(){
+        playerService.addGoal(p1, g1);
+        verify(playerDao,times(1)).update(p1);
+        verify(goalDao,times(1)).update(g1); 
+    }
+    
+    @Test (expectedExceptions = {SoccerRecordsDataAccessException.class}) //goal was not added
+    public void testRemoveGoalNull(){
+        playerService.removeGoal(p1, g1);
+    }
+    
+    @Test(enabled=false)
+    public void testRemoveGoal(){
+        p1.addGoal(g1);
+        playerService.removeGoal(p1, g1);
+    }
+    
+}
