@@ -15,11 +15,13 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.stereotype.Service;
 /**
  *
  * @author peter
  */
+
+@Service
 @Transactional
 public class GameFacadeImpl implements IGameFacade{
 
