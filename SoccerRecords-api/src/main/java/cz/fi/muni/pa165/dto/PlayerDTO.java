@@ -8,7 +8,9 @@ import java.util.Set;
 
 
 /**
- *
+ * PlayerDTO provides Data Transfer Objects 
+ * (id, name, date Of Birth, country, dress number, position in field, team and players) as references 
+ * to Team facade interface
  * @author Martin Kocak
  */
 public class PlayerDTO {    
@@ -21,7 +23,6 @@ public class PlayerDTO {
 
 
     private Date dateOfBirth;
-
 
     private int dressNumber;
 
