@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
+import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Team;
@@ -10,11 +11,13 @@ import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javafx.util.Pair;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,6 +47,9 @@ public class GameServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     private IGameDao gameDao;
 
+    @Mock
+    private ITeamDao teamDao;
+    
     @Autowired
     @InjectMocks
     private IGameService gameService;
@@ -180,6 +186,121 @@ public class GameServiceTest extends AbstractTestNGSpringContextTests {
         verify(gameDao, times(1)).findAll();
     }
     
+    
+    @Test
+    public void testGenerateSeasonMatches() {
+        List<Team> teams = new ArrayList<>();
+     
+        Team teamThree = new Team();
+        teamThree.setId(3L);
+	teamThree.setName("Liverpool");
+	teamThree.setCity("Liverpool");
+	teamThree.setCountry("England");
+        
+        Team teamFour = new Team();
+        teamFour.setId(4L);
+	teamFour.setName("Arsenal");
+	teamFour.setCity("London");
+	teamFour.setCountry("England");
+        
+        teams.add(teamOne);
+        teams.add(teamTwo);
+        teams.add(teamThree);
+        teams.add(teamFour);
+        
+        when(teamDao.findByAll()).thenReturn(teams);
+        
+        assertEquals(gameService.generateSeasonMatches().size(), 3);
+        assertEquals(gameService.generateSeasonMatches().get(0).size(), 2);
+        
+        boolean[][] matchesBetween = new boolean[4][4];
+        for(int i = 0; i < matchesBetween.length; i++){
+            for(int j = 0; j < matchesBetween.length; j++){
+                matchesBetween[i][j] = false;
+            }
+        }
+        
+        //Test if everybody played with everybody
+        List<List<Pair>> allMatches = allMatches = gameService.generateSeasonMatches();
+        for(List<Pair> round : allMatches){
+            for(Pair match : round){
+                System.out.println(Integer.parseInt(((Team)match.getKey()).getId().toString())-1);
+                System.out.println(Integer.parseInt(((Team)match.getValue()).getId().toString())-1);
+                System.out.println("");
+                matchesBetween[Integer.parseInt(((Team)match.getKey()).getId().toString())-1][Integer.parseInt(((Team)match.getValue()).getId().toString())-1] = true;
+                matchesBetween[Integer.parseInt(((Team)match.getValue()).getId().toString())-1][Integer.parseInt(((Team)match.getKey()).getId().toString())-1] = true;
+            }
+        }
+        
+        for(int i = 0; i < matchesBetween.length; i++){
+            for(int j = 0; j < matchesBetween.length; j++){
+                if(i!=j)assertTrue(matchesBetween[i][j]);
+            }
+        }
+        
+        verify(teamDao, Mockito.atLeast(1)).findByAll();
+    }
+    
  
+    @Test
+    public void testGenerateSeasonMatchesForOddNumberOfTeams() {
+        List<Team> teams = new ArrayList<>();
+     
+        Team teamThree = new Team();
+        teamThree.setId(3L);
+	teamThree.setName("Liverpool");
+	teamThree.setCity("Liverpool");
+	teamThree.setCountry("England");
+        
+        Team teamFour = new Team();
+        teamFour.setId(4L);
+	teamFour.setName("Arsenal");
+	teamFour.setCity("London");
+	teamFour.setCountry("England");
+        
+        Team teamFive = new Team();
+        teamFive.setId(5L);
+	teamFive.setName("PSG");
+	teamFive.setCity("Paris");
+	teamFive.setCountry("France");
+        
+        teams.add(teamOne);
+        teams.add(teamTwo);
+        teams.add(teamThree);
+        teams.add(teamFour);
+        teams.add(teamFive);
+        
+        when(teamDao.findByAll()).thenReturn(teams);
+        
+        assertEquals(gameService.generateSeasonMatches().size(), 5);
+        assertEquals(gameService.generateSeasonMatches().get(0).size(), 2);
+        
+        boolean[][] matchesBetween = new boolean[5][5];
+        for(int i = 0; i < matchesBetween.length; i++){
+            for(int j = 0; j < matchesBetween.length; j++){
+                matchesBetween[i][j] = false;
+            }
+        }
+        
+        //Test if everybody played with everybody
+        List<List<Pair>> allMatches = allMatches = gameService.generateSeasonMatches();
+        for(List<Pair> round : allMatches){
+            for(Pair match : round){
+                System.out.println(Integer.parseInt(((Team)match.getKey()).getId().toString())-1);
+                System.out.println(Integer.parseInt(((Team)match.getValue()).getId().toString())-1);
+                System.out.println("");
+                matchesBetween[Integer.parseInt(((Team)match.getKey()).getId().toString())-1][Integer.parseInt(((Team)match.getValue()).getId().toString())-1] = true;
+                matchesBetween[Integer.parseInt(((Team)match.getValue()).getId().toString())-1][Integer.parseInt(((Team)match.getKey()).getId().toString())-1] = true;
+            }
+        }
+        
+        for(int i = 0; i < matchesBetween.length; i++){
+            for(int j = 0; j < matchesBetween.length; j++){
+                if(i!=j)assertTrue(matchesBetween[i][j]);
+            }
+        }
+        
+        verify(teamDao, Mockito.atLeast(1)).findByAll();
+    }
 
 }
