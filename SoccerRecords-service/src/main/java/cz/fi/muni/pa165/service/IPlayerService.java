@@ -21,5 +21,8 @@ public interface IPlayerService {
     public void changeTeam(Player player, Team team);
     public void deletePlayer(Player player);
     public Set<Player> findPlayersByTeam(Team team);
+    public void addGoal(Player player, Goal goal);
+    public void removeGoal(Player player, Goal goal);
+
     
 }

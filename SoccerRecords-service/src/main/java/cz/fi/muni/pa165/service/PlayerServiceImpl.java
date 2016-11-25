@@ -89,6 +89,7 @@ public class PlayerServiceImpl implements IPlayerService{
 
     @Override
     public void deletePlayer(Player player) {
+        
         try{
             for(Iterator<Goal> i = player.getGoal().iterator(); i.hasNext();){
                 Goal g = i.next();
@@ -117,12 +118,48 @@ public class PlayerServiceImpl implements IPlayerService{
 
     @Override
     public void updatePlayer(Player p) {
-         try{
+        try{
             playerdao.update(p);
         }
         catch(Exception e){
             throw new SoccerRecordsDataAccessException(e); 
         }
     }
+    
+    @Override
+    public void addGoal(Player player, Goal goal) {
+        if(goal == null || player == null) 
+             throw new SoccerRecordsDataAccessException("Player or Goal cannot be null");
+        
+        if(player.getGoal().contains(goal)){
+            throw new SoccerServiceException(
+                    "Player already contais this goal. Player: "
+                            + player.getId() + ", goal: "
+                            + goal.getId());
+        }
+        try{
+            player.addGoal(goal);
+            playerdao.update(player);
+            goalDao.update(goal);
+        }
+        catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
+        
+    }
+    
+    @Override
+    public void removeGoal(Player player, Goal goal) {
+        if(goal == null || player == null) 
+             throw new SoccerRecordsDataAccessException("Player or Goal cannot be null");
+        
+        try{
+            player.removeGoal(goal);
+            goalService.deleteGoal(goal);
+        }catch(Exception e){
+            throw new SoccerRecordsDataAccessException(e); 
+        }
+    }
+
     
 }

@@ -18,4 +18,7 @@ public interface IPlayerFacade {
     public void changeTeam(Long playerId, Long teamId);
     public void deletePlayer(Long playerId);
     public List<PlayerDTO> findPlayersByTeam(Long teamId);
+    public void addGoal(Long playerId, Long goalId);
+    public void removeGoal(Long playerId, Long goalId);
+
 }
