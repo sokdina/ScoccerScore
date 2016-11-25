@@ -201,15 +201,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
         
     }
     
-    @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
-    public void testInvalidAddPlayer() {
-        System.out.println("addInvalidPlayer");
-                  
-        teamService.addPlayer(testTeam, null);              
-        
-    }
-
-    /**
+        /**
      * Test of deletePlayer method, of class TeamServiceImpl.
      */
     @Test
@@ -228,16 +220,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
         assertFalse(testTeam.getPlayers().contains(p1));
     }
     
-    /**
-     * Test of deletePlayer method, of class TeamServiceImpl.
-     */
-    @Test(expectedExceptions ={ SoccerRecordsDataAccessException.class,})
-    public void testInvalidDeletePlayer() {
-        System.out.println("deleteInvalidPlayer");
-                
-        teamService.deletePlayer(testTeam, null);
-    }
-    
+        
     @Test
     public void testCreateTurnamentBrackets() {
         System.out.println("");
