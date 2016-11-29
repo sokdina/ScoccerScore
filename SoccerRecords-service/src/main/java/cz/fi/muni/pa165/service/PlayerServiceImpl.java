@@ -14,8 +14,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.inject.Inject;
-import jdk.nashorn.internal.objects.NativeArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,16 +24,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlayerServiceImpl implements IPlayerService{
 
-    @Inject
+    @Autowired
     private IPlayerDao playerdao;
     
-    @Inject
+    @Autowired
     private ITeamDao teamdao;
     
-    @Inject 
+    @Autowired 
     private IGoalDao goalDao;
     
-    @Inject
+    @Autowired
     private IGoalService goalService;
     
     @Override

@@ -1,6 +1,8 @@
 
 package cz.fi.muni.pa165.dto;
 
+import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Player;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,9 +17,9 @@ public class GoalDTO{
 
     private String description;
 
-    private GameDTO game;
+    private Game game;
 
-    private PlayerDTO player;
+    private Player player;
 
     public Long getId() {
         return id;
@@ -43,19 +45,19 @@ public class GoalDTO{
         this.description = description;
     }
 
-    public GameDTO getGame() {
+    public Game getGame() {
         return game;
     }
 
-    public void setGame(GameDTO game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 
-    public PlayerDTO getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(PlayerDTO player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 

@@ -7,7 +7,6 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
-import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javafx.util.Pair;
-import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +27,7 @@ public class GameServiceImpl implements IGameService {
      @Autowired
      private ITeamDao teamDao;
     
-    @Inject
+    @Autowired
     private IGameDao gameDao;
 
     @Override

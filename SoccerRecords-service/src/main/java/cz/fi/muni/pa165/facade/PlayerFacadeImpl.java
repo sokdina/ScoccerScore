@@ -5,13 +5,11 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.service.BeanMappingService;
-import cz.fi.muni.pa165.service.GoalServiceImpl;
 import cz.fi.muni.pa165.service.IGoalService;
 import cz.fi.muni.pa165.service.IPlayerService;
 import java.util.ArrayList;
 
 import java.util.List;
-import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,13 +26,13 @@ public class PlayerFacadeImpl implements IPlayerFacade{
     @Autowired
     private BeanMappingService beanMappingService;
     
-    @Inject
+    @Autowired
     private IPlayerService playerService;
            
-    @Inject
+    @Autowired
     private ITeamService teamService;
     
-    @Inject
+    @Autowired
     private IGoalService goalService;
     
     @Override

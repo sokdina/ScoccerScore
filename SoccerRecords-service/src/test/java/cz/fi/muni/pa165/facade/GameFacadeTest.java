@@ -7,6 +7,8 @@ package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
 import java.util.Date;
@@ -37,18 +39,18 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
     @Autowired
     private IGameFacade gameFacade;
        
-    private TeamDTO teamDTOOne, teamDTOTwo;
+    private Team teamDTOOne, teamDTOTwo;
     private GameDTO gameDTO;
         
     @BeforeMethod
     public void setUpMethod(){
-        teamDTOOne = new TeamDTO();
+        teamDTOOne = new Team();
         teamDTOOne.setId(1L);
         teamDTOOne.setName("Real Madrid C.F.");
         teamDTOOne.setCity("Madrid");
         teamDTOOne.setCountry("Spain");
         
-        teamDTOTwo = new TeamDTO();
+        teamDTOTwo = new Team();
         teamDTOTwo.setId(2L);
         teamDTOTwo.setName("FC Barcelona");
         teamDTOTwo.setCity("Barcelona");

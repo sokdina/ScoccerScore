@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
+import cz.fi.muni.pa165.entity.Goal;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,9 +34,9 @@ public class PlayerDTO {
     private String country;
 
 
-    private TeamDTO team;
+    private Team team;
 
-    private Set<GoalDTO> goal = new HashSet<>();
+    private Set<Goal> goal = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -84,19 +86,19 @@ public class PlayerDTO {
         this.country = country;
     }
 
-    public TeamDTO getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(TeamDTO team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 
-    public Set<GoalDTO> getGoal() {
+    public Set<Goal> getGoal() {
         return goal;
     }
 
-    public void setGoal(Set<GoalDTO> goal) {
+    public void setGoal(Set<Goal> goal) {
         this.goal = goal;
     }
     

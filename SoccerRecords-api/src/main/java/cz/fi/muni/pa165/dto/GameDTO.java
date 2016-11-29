@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.dto;
 
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
 import java.util.*;
 
@@ -16,9 +17,9 @@ public class GameDTO {
     
     private Long id;
 
-    private TeamDTO homeTeam;
+    private Team homeTeam;
 
-    private TeamDTO guestTeam;
+    private Team guestTeam;
 
     private Date dateOfGame;
 
@@ -38,19 +39,19 @@ public class GameDTO {
         this.id = id;
     }
 
-    public TeamDTO getHomeTeam() {
+    public Team getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(TeamDTO homeTeam) {
+    public void setHomeTeam(Team homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public TeamDTO getGuestTeam() {
+    public Team getGuestTeam() {
         return guestTeam;
     }
 
-    public void setGuestTeam(TeamDTO guestTeam) {
+    public void setGuestTeam(Team guestTeam) {
         this.guestTeam = guestTeam;
     }
 

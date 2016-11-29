@@ -5,7 +5,6 @@ import com.google.common.math.IntMath;
 import cz.fi.muni.pa165.dao.IGameDao;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.inject.Inject;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ import java.util.stream.Collectors;
 @Service
 public class TeamServiceImpl implements ITeamService {
 	
-        @Inject
+        @Autowired
 	private ITeamDao teamDao;
         
         @Autowired

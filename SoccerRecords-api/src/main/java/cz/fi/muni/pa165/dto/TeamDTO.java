@@ -1,9 +1,5 @@
 package cz.fi.muni.pa165.dto;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 /**
  *
  * TeamDTO provides Data Transfer Objects 

@@ -6,11 +6,11 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameCreateDTO;
-import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.GoalDTO;
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
-import cz.fi.muni.pa165.enums.MatchResult;
+import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
 import java.util.Date;
@@ -19,8 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -45,42 +43,42 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
     private ITeamFacade teamFacade;
 
     private GoalDTO goalDto;
-    private PlayerDTO playerDto;
+    private Player playerDto;
     private GameCreateDTO gameDTO;
-    private TeamDTO teamDTOOne;
-    private TeamDTO teamDTOTwo;
+    private Team teamDTOOne;
+    private Team teamDTOTwo;
 
     @BeforeMethod
     public void setUpMethod() {
-        teamDTOOne = new TeamDTO();
+        teamDTOOne = new Team();
 //        teamDTOOne.setId(1L);
         teamDTOOne.setName("Real Madrid C.F.");
         teamDTOOne.setCity("Madrid");
         teamDTOOne.setCountry("Spain");
 
-        teamDTOTwo = new TeamDTO();
+        teamDTOTwo = new Team();
 //        teamDTOTwo.setId(2L);
         teamDTOTwo.setName("FC Barcelona");
         teamDTOTwo.setCity("Barcelona");
         teamDTOTwo.setCountry("Spain");
 
-        teamFacade.createTeam(teamDTOOne);
-        teamFacade.createTeam(teamDTOTwo);
+        //teamFacade.createTeam(teamDTOOne);
+        //teamFacade.createTeam(teamDTOTwo);
         
         gameDTO = new GameCreateDTO();
         // please help to check
 //        gameDTO.setId(1L);	
-        gameDTO.setHomeTeam(teamDTOOne);
-        gameDTO.setGuestTeam(teamDTOTwo);
-        gameDTO.setMatchResult(MatchResult.DRAW);
+        //gameDTO.setHomeTeam(teamDTOOne);
+        //gameDTO.setGuestTeam(teamDTOTwo);
+        //gameDTO.setMatchResult(MatchResult.DRAW);
         gameDTO.setDateOfGame(new Date());
         gameDTO.setHomeScore(1);
         gameDTO.setGuestScore(1);
         
-        gameFacade.create(gameDTO);
+        //gameFacade.create(gameDTO);
         
         
-        playerDto = new PlayerDTO();
+        playerDto = new Player();
         playerDto.setCountry("Argentina");
         playerDto.setDateOfBirth(new Date(System.currentTimeMillis()));
         playerDto.setDressNumber(5);
@@ -89,7 +87,7 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
 //        playerDto.setTeam(teamDTOOne);
 //        playerDto.setId(5L);
 
-        playerFacade.createPlayer(playerDto);
+        //playerFacade.createPlayer(playerDto);
         
         playerDto.setTeam(teamDTOOne);
         

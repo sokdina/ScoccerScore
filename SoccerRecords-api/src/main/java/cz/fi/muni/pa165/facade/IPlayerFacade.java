@@ -4,7 +4,6 @@ package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
