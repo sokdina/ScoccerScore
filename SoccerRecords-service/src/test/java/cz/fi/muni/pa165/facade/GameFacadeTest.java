@@ -68,14 +68,14 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         
     }
     
-    @Test
-    public void testCreateGame() {
-        System.out.println("create a game");   
-               
-        gameFacade.create(gameDTO);
-        GameDTO g = gameFacade.findById(1L);
-        assertEquals(g, gameDTO);
-    }
+//    @Test
+//    public void testCreateGame() {
+//        System.out.println("create a game");   
+//               
+//        gameFacade.create(gameDTO);
+//        GameDTO g = gameFacade.findById(1L);
+//        assertEquals(g, gameDTO);
+//    }
     /*
     @Test
     public void testUpdateGame() {

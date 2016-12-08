@@ -96,7 +96,6 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
         goalDto.setGoalTime(new Date(System.currentTimeMillis()));
         goalDto.setDescription("GOOOL");
         //goalDto.setGame(gameDTO);
-        goalDto.setPlayer(playerDto);
     }
 
     /**

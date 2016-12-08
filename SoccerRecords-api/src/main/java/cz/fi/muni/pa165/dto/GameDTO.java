@@ -29,7 +29,7 @@ public class GameDTO {
 
     private int guestScore;
 
-    private Set<GoalDTO> goal = new HashSet<>();
+    private Set<GoalDTO> goals = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -87,12 +87,12 @@ public class GameDTO {
         this.guestScore = guestScore;
     }
 
-    public Set<GoalDTO> getGoal() {
-        return goal;
+    public Set<GoalDTO> getGoals() {
+        return goals;
     }
 
-    public void setGoal(Set<GoalDTO> goal) {
-        this.goal = goal;
+    public void setGoals(Set<GoalDTO> goal) {
+        this.goals = goal;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class GameDTO {
         hash = 23 * hash + (this.homeTeam != null ? this.homeTeam.hashCode() : 0);
         hash = 23 * hash + (this.guestTeam != null ? this.guestTeam.hashCode() : 0);
         hash = 23 * hash + (this.dateOfGame != null ? this.dateOfGame.hashCode() : 0);
-        hash = 23 * hash + (this.goal != null ? this.goal.hashCode() : 0);
+        hash = 23 * hash + (this.goals != null ? this.goals.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +135,7 @@ public class GameDTO {
         if (this.matchResult != other.matchResult) {
             return false;
         }
-        if (this.goal != other.goal && (this.goal == null || !this.goal.equals(other.goal))) {
+        if (this.goals != other.goals && (this.goals == null || !this.goals.equals(other.goals))) {
             return false;
         }
         return true;

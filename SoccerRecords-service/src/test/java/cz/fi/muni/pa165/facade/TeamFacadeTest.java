@@ -145,7 +145,7 @@ public class TeamFacadeTest extends AbstractTestNGSpringContextTests{
     /**
      * Test of addPlayer method, of class TeamFacadeImpl.
      */
-   /* @Test
+    @Test
     public void testAddandRemovePlayer() {
         System.out.println("addPlayer");
         
@@ -159,18 +159,20 @@ public class TeamFacadeTest extends AbstractTestNGSpringContextTests{
         
         TeamDTO nTeam2 = new TeamDTO();       
         nTeam2.setName("Chelsea");
+        nTeam2.setCity("London");
+        nTeam2.setCountry("England");
         Long tId = teamFacade.createTeam(nTeam2);
         
         
         teamFacade.addPlayer(tId, pId);
         
-        assertEquals(playerFacade.findById(pId).getTeam(),nTeam2);
+        assertEquals(playerFacade.findById(pId).getTeam().getName(),nTeam2.getName());
         
         //teamFacade.removePlayer(tId, pId);
         
         //(teamFacade.getTeamById(tId).getGoal().contains(p));
         
-    }*/
+    }
 
     
     

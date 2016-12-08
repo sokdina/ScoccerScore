@@ -36,7 +36,7 @@ public class PlayerDTO {
 
     private Team team;
 
-    private Set<Goal> goal = new HashSet<>();
+    private Set<Goal> goals = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -95,11 +95,11 @@ public class PlayerDTO {
     }
 
     public Set<Goal> getGoal() {
-        return goal;
+        return goals;
     }
 
-    public void setGoal(Set<Goal> goal) {
-        this.goal = goal;
+    public void setGoal(Set<Goal> goals) {
+        this.goals = goals;
     }
     
     @Override
@@ -132,6 +132,7 @@ public class PlayerDTO {
     
     @Override
     public String toString() {
-        return "PlayerDTO{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + ", team=" + team + ", goal=" + goal + '}';
+        return "PlayerDTO " + name;
+        //return "PlayerDTO{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + ", team=" + team + ", goal=" + goals + '}';
     }
 }

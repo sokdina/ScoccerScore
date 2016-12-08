@@ -17,10 +17,6 @@ public class GoalDTO{
 
     private String description;
 
-    private Game game;
-
-    private Player player;
-
     public Long getId() {
         return id;
     }
@@ -44,23 +40,7 @@ public class GoalDTO{
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -87,14 +67,12 @@ public class GoalDTO{
         if (!Objects.equals(this.goalTime, other.goalTime)) {
             return false;
         }
-        if (!Objects.equals(this.game, other.game)) {
-            return false;
-        }
-        return Objects.equals(this.player, other.player);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
+        return "GoalDTO " + id;
+        //return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
     }
 }

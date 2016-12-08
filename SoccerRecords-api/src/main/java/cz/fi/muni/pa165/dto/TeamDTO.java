@@ -1,5 +1,8 @@
 package cz.fi.muni.pa165.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * TeamDTO provides Data Transfer Objects 
@@ -16,6 +19,15 @@ public class TeamDTO
     private String name;
     private String city;
     private String country;
+    private Set<PlayerDTO> players = new HashSet<PlayerDTO>();
+
+    public Set<PlayerDTO> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<PlayerDTO> players) {
+        this.players = players;
+    }
 
     public Long getId() {
         return id;
