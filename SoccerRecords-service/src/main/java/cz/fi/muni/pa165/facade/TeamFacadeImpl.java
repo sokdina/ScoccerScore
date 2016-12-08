@@ -1,8 +1,10 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.PlayerDTO;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 
 import cz.fi.muni.pa165.service.BeanMappingService;
@@ -20,8 +22,6 @@ import cz.fi.muni.pa165.service.ITeamService;
  * @author sokdina999@gamil.com
 **/
 
-
-
 @Service
 @Transactional
 public class TeamFacadeImpl implements ITeamFacade {
@@ -36,10 +36,8 @@ public class TeamFacadeImpl implements ITeamFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long createTeam(TeamDTO teamDTO) {
-        Team team = beanMappingService.mapTo(teamDTO, Team.class);
-	Team newTeam = teamService.create(team);
-	return newTeam.getId();
+    public void createTeam(TeamDTO teamDTO) {
+	teamService.create(beanMappingService.mapTo(teamDTO, Team.class));
     }
 
     @Override
@@ -55,8 +53,8 @@ public class TeamFacadeImpl implements ITeamFacade {
 
     @Override
     public TeamDTO getTeamById(Long teamId) {
-        Team team = teamService.findById(teamId);
-        return (team == null) ? null : beanMappingService.mapTo(team, TeamDTO.class);
+        return beanMappingService.mapTo( teamService.findById(teamId), TeamDTO.class);
+
     }
 
     @Override
@@ -66,19 +64,20 @@ public class TeamFacadeImpl implements ITeamFacade {
 
     @Override
     public List<TeamDTO> findByName(String name){
-	List<Team> teams = teamService.findByName(name);
-	return (teams == null) ? null : beanMappingService.mapTo(teams, TeamDTO.class);
+	return beanMappingService.mapTo(teamService.findByName(name), TeamDTO.class);
     }
 
     @Override
-    public void addPlayer(Long teamId, Long playerId){
-	teamService.addPlayer(teamService.findById(teamId), playerService.findById(playerId));
+    public void addPlayerFacade(TeamDTO t, PlayerDTO p){
+        teamService.addPlayer(beanMappingService.mapTo(t, Team.class), beanMappingService.mapTo(p, Player.class));
     }
 
     @Override
-    public void removePlayer(Long teamId, Long playerId){
-	teamService.deletePlayer(teamService.findById(teamId), playerService.findById(playerId));
+    public void removePlayer(TeamDTO t, PlayerDTO p){
+	teamService.deletePlayer(beanMappingService.mapTo(t, Team.class), beanMappingService.mapTo(p, Player.class));
     }
+
+
 
 }
 

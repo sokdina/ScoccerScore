@@ -18,6 +18,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import javax.sql.DataSource;
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.facade.ITeamFacade;
+import cz.fi.muni.pa165.dao.IGameDao;
+import cz.fi.muni.pa165.facade.IGameFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
 
 
@@ -31,7 +33,7 @@ import cz.fi.muni.pa165.service.BeanMappingService;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {ITeamDao.class,ITeamFacade.class,BeanMappingService.class})
+@ComponentScan(basePackageClasses = {ITeamDao.class,ITeamFacade.class,IGameDao.class, IGameFacade.class, BeanMappingService.class})
 public class PersistenceSampleApplicationContext {
 
     /**

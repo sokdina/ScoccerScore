@@ -6,6 +6,7 @@
     <class>cz.fi.muni.pa165.soccerrecordspersistence.entity.Player</class>
     <class>cz.fi.muni.pa165.soccerrecordspersistence.entity.Team</class>
     <class>cz.fi.muni.pa165.soccerrecordspersistence.entity.Goal</class>
+    <class>cz.fi.muni.pa165.soccerrecordspersistence.entity.User</class>
     <properties>
       <property name="hibernate.connection.url" value="jdbc:derby:memory:testdb"/>
       <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>

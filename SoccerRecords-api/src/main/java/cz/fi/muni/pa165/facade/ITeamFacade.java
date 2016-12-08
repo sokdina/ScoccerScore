@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface ITeamFacade {
 	* name, city and country into table team through TeamCreateDTO.
 	* @param TeamCreateDTO is the TeamCreateDTO DTO class.
 	*/	
-	public Long createTeam(TeamDTO t);
+	 void createTeam(TeamDTO t);
 
 	/**
 	* updateTeam method is used to update each team information (team id,
@@ -29,7 +30,7 @@ public interface ITeamFacade {
 	* @param TeamDTO is the TeamDTO DTO class.
 	*/
 	
-	public void updateTeam(TeamDTO t);
+        void updateTeam(TeamDTO t);
 
 
 	/**
@@ -45,21 +46,21 @@ public interface ITeamFacade {
 	* and country.
     	* @param id is the team id.
         */
-	public TeamDTO getTeamById(Long teamId);
+	TeamDTO getTeamById(Long teamId);
 	
 	/**
     	* Returns the list of all information about each team.
 	* Result is a list about each team such as id, name, city
 	* and country.
         */
-	public List<TeamDTO> getAllTeams();
+	List<TeamDTO> getAllTeams();
 	
 	/**
     	* Returns the list of all information about each team.
 	* Result is a list about each team such as id, name, city
 	* and country corresponding to input team name condition.
         */
-	public List<TeamDTO> findByName(String name);
+	List<TeamDTO> findByName(String name);
 
 	/**
 	* addPlayer method is used for insert a player 
@@ -67,7 +68,7 @@ public interface ITeamFacade {
 	* @param  teamId is team id of each team.
 	* @param  playerID is player id of each player.
 	*/
-	public void addPlayer(Long teamId, Long playerId);
+	void addPlayerFacade(TeamDTO t, PlayerDTO p);
 
 	/**
 	* removePlayer method is used for delete a player 
@@ -75,6 +76,6 @@ public interface ITeamFacade {
 	* @param  teamId is team id of each team.
 	* @param  playerID is player id of each player.
 	*/
-	public void removePlayer(Long teamId, Long playerId);
+	void removePlayer(TeamDTO t, PlayerDTO p);
 
 }

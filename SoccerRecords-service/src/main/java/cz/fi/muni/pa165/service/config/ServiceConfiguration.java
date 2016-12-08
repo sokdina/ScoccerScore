@@ -12,18 +12,28 @@ import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.service.TeamServiceImpl;
+import cz.fi.muni.pa165.service.GameServiceImpl;
 
 @Configuration
 @Import(PersistenceSampleApplicationContext.class)
-@ComponentScan(basePackageClasses={TeamServiceImpl.class})
+@ComponentScan(basePackageClasses={TeamServiceImpl.class, GameServiceImpl.class})
 public class ServiceConfiguration {
 	
 	@Bean
 	public Mapper dozer(){
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		//dozer.addMapping(new DozerCustomConfig());
+		dozer.addMapping(new DozerCustomConfig());
 		return dozer;
+	}
+
+	public class DozerCustomConfig extends BeanMappingBuilder {
+	    @Override
+	    protected void configure() {
+	        mapping(Team.class, TeamDTO.class);
+	    }
 	}
 		
 }
+
+
 

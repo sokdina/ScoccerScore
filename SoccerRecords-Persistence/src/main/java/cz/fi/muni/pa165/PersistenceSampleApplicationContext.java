@@ -16,9 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
+
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.facade.ITeamFacade;
-
+import cz.fi.muni.pa165.dao.IGameDao;
+import cz.fi.muni.pa165.dao.UserDao;
+import cz.fi.muni.pa165.facade.IGameFacade;
 
 
 /**
@@ -30,7 +33,7 @@ import cz.fi.muni.pa165.facade.ITeamFacade;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {ITeamDao.class})
+@ComponentScan(basePackageClasses = {IGameDao.class, ITeamDao.class,UserDao.class})
 public class PersistenceSampleApplicationContext {
 
     /**

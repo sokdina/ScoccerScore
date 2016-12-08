@@ -33,9 +33,10 @@ public class GameServiceImpl implements IGameService {
     private IGameDao gameDao;
 
     @Override
-    public void create(Game g) {
+    public Game create(Game g) {
         try {
             gameDao.create(g);
+            return g;
         } catch (Exception e) {
             throw new SoccerRecordsDataAccessException(e);
         }

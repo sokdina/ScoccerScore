@@ -18,15 +18,15 @@ import java.util.Set;
 **/
 public interface ITeamService {
 
-	public Team create(Team t);
-	public void update(Team t);
-	public void delete(Long teamId);
-	public Team findById(Long id);
-	public List<Team> findByAll();
-	public List<Team> findByName(String name);
-        public void addPlayer(Team t, Player p);
-	public void deletePlayer(Team t, Player p);
-        public List<Game> createTurnamentBrackets(Set<Team> teams);
+	 Team create(Team t);
+	 void update(Team t);
+	 void delete(Long teamId);
+	 Team findById(Long id);
+	 List<Team> findByAll();
+	 List<Team> findByName(String name);
+         void addPlayer(Team t, Player p);
+	 void deletePlayer(Team t, Player p);
+         List<Game> createTurnamentBrackets(Set<Team> teams);
 }
 
 

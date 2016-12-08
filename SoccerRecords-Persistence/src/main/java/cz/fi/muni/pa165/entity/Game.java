@@ -28,7 +28,7 @@ public class Game
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column
     private Long id;
 
@@ -52,7 +52,7 @@ public class Game
     @Column
     private int guestScore;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
+    @OneToMany(mappedBy = "game")
     private Set<Goal> goals = new HashSet<>();
 
     public Game(){
