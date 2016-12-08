@@ -1,3 +1,4 @@
 SoccerRecords-service/target/
 SoccerRecords-api/target/
 *~
+/SoccerRecords-sample-data/target/

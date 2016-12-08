@@ -16,10 +16,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   </properties>
   
   <modules>
-	<module>SoccerRecords-Persistence</module>
 	<module>SoccerRecords-api</module>
-	<module>SoccerRecords-service</module>
-
+        <module>SoccerRecords-Persistence</module>
+        <module>SoccerRecords-service</module>
+        <module>SoccerRecords-sample-data</module>
+        <module>SoccerRecords-spring-mvc</module>
   </modules>
 
 </project>
