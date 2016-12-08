@@ -142,4 +142,11 @@ public class GameDTO {
     }
     
     
+    @Override
+    public String toString(){
+        if(homeTeam == null)return "homeTeam is NULL";
+        if(guestTeam == null)return "guestTeam is NULL";
+        return "Match [homeTeam=" + homeTeam.getName() + ", guestTeam=" + guestTeam.getName() + ",score=" + homeScore + ":" + guestScore + "]";
+    }
+    
 }

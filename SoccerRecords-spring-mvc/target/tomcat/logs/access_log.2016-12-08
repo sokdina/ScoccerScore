@@ -1,0 +1,9 @@
+127.0.0.1 - - [08/Dec/2016:23:58:14 +0100] "GET /pa165/game/list HTTP/1.1" 200 6723 http-bio-8080-exec-1 2056
+127.0.0.1 - - [08/Dec/2016:23:58:17 +0100] "GET /pa165/game/view/5 HTTP/1.1" 200 4012 http-bio-8080-exec-2 247
+127.0.0.1 - - [08/Dec/2016:23:58:30 +0100] "POST /pa165/game/delete/5 HTTP/1.1" 302 - http-bio-8080-exec-3 94
+127.0.0.1 - - [08/Dec/2016:23:58:30 +0100] "GET /pa165/game/list HTTP/1.1" 200 6334 http-bio-8080-exec-4 46
+127.0.0.1 - - [08/Dec/2016:23:58:31 +0100] "POST /pa165/game/delete/6 HTTP/1.1" 302 - http-bio-8080-exec-5 25
+127.0.0.1 - - [08/Dec/2016:23:58:31 +0100] "GET /pa165/game/list HTTP/1.1" 200 5799 http-bio-8080-exec-6 28
+127.0.0.1 - - [08/Dec/2016:23:58:33 +0100] "POST /pa165/game/delete/7 HTTP/1.1" 302 - http-bio-8080-exec-7 24
+127.0.0.1 - - [08/Dec/2016:23:58:33 +0100] "GET /pa165/game/list HTTP/1.1" 200 5264 http-bio-8080-exec-8 22
+127.0.0.1 - - [08/Dec/2016:23:58:35 +0100] "GET /pa165/game/new HTTP/1.1" 404 979 http-bio-8080-exec-9 8

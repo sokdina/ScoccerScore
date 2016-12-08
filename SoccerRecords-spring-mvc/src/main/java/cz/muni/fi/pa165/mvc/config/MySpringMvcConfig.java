@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.mvc.config;
 
 //import cz.muni.fi.pa165.sampledata.EshopWithSampleDataConfiguration;
+import cz.muni.fi.pa165.sampledata.SoccerRecordsWithSampleDataConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -27,7 +28,7 @@ import javax.validation.Validator;
 
 @EnableWebMvc
 @Configuration
-//@Import({EshopWithSampleDataConfiguration.class})
+@Import({SoccerRecordsWithSampleDataConfiguration.class})
 @ComponentScan(basePackages = "cz.muni.fi.pa165.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
@@ -42,6 +43,7 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         log.debug("mapping URL / to home view");
         registry.addViewController("/").setViewName("home");
+        registry.addViewController("/game").setViewName("game");
     }
 
 
