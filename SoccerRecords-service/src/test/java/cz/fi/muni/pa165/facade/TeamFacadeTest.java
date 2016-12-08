@@ -166,11 +166,11 @@ public class TeamFacadeTest extends AbstractTestNGSpringContextTests{
         
         teamFacade.addPlayer(tId, pId);
         
-        assertEquals(playerFacade.findById(pId).getTeam().getName(),nTeam2.getName());
+        assertEquals(playerFacade.findById(pId).getName(),p.getName());
         
-        //teamFacade.removePlayer(tId, pId);
+        teamFacade.removePlayer(tId, pId);
         
-        //(teamFacade.getTeamById(tId).getGoal().contains(p));
+        teamFacade.getTeamById(tId).getPlayers().contains(p);
         
     }
 
