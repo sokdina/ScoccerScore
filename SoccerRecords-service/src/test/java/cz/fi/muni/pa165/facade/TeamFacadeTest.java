@@ -7,8 +7,10 @@ package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
-import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
+
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,155 +25,253 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import cz.fi.muni.pa165.facade.IGameFacade;
+import cz.fi.muni.pa165.service.BeanMappingService;
+import cz.fi.muni.pa165.service.ITeamService;
+import cz.fi.muni.pa165.service.config.ServiceConfiguration;
+import java.util.Collections;
+import javax.inject.Inject;
+import org.aspectj.lang.annotation.Before;
+import org.mockito.Spy;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 /**
  *
  * @author Martin Kocak
  */
-@ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
+@ContextConfiguration(classes = ServiceConfiguration.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class TeamFacadeTest extends AbstractTestNGSpringContextTests{
-    
+
+    @Spy
+    @Inject
+    protected BeanMappingService beanMappingService;
+
+    @Mock
+    private ITeamService teamService;
+
     @Autowired
+    @InjectMocks
     private ITeamFacade teamFacade;
 
-    @Autowired
-    private IPlayerFacade playerFacade;
-    
+    private Team team;
+
     private TeamDTO teamDTO;
-    
-    @BeforeMethod
-    public void setUpMethod(){
+
+    private Player player;
+
+    private PlayerDTO playerDTO;
+
+   
+    private Long id = 1L;
+    private String name = "FC Barcelona";
+    private String city = "Barcelona";
+    private String country ="Spain";
+
+
+    @BeforeClass
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
+        teamFacade = (ITeamFacade) unwrapProxy(teamFacade);
+        ReflectionTestUtils.setField(teamFacade, "teamService", teamService);
+        ReflectionTestUtils.setField(teamFacade, "beanMappingService", beanMappingService);
+
+        team = new Team();
+        team.setId(id);
+        team.setName(name);
+        team.setCity(city);
+        team.setCountry(country);
+
         teamDTO = new TeamDTO();
-        teamDTO.setName("TeamName");
-    }
+        teamDTO.setId(id);
+        teamDTO.setName(name);
+        teamDTO.setCity(city);
+        teamDTO.setCountry(country);
+        
+        player = new Player();	
+        player.setId(1L);
+	player.setName("Ronaldo");
+        player.setPosition(Position.FORWARD);
+        player.setDateOfBirth(new Date());
+        player.setDressNumber(7);
+        player.setCountry("Portugal");
 
-
-    /**
-     * Test of createTeam method, of class TeamFacadeImpl.
-     */
-    @Test
-    public void testCreateTeamAndFinbById() {
-        System.out.println("createTeam");   
-        
-        Long id = teamFacade.createTeam(teamDTO);
-        
-        TeamDTO f = teamFacade.getTeamById(id);
-        assertEquals(f, teamDTO);
-        
-    }
-
-    /**
-     * Test of updateTeam method, of class TeamFacadeImpl.
-     */
-    @Test
-    public void testUpdateTeam() {
-        System.out.println("updateTeam");
-        
-        TeamDTO nTeam = new TeamDTO();
-        nTeam.setName("Chelsea");
-        Long id = teamFacade.createTeam(nTeam);
-        
-        nTeam.setCity("London");
-        
-        teamFacade.updateTeam(teamDTO);
-        
-        assertEquals(teamFacade.getTeamById(id).getCity(), teamDTO.getCity());
+	playerDTO = new PlayerDTO();
+        playerDTO.setId(1L);
+	playerDTO.setName("Ronaldo");
+        playerDTO.setPosition(Position.FORWARD);
+        playerDTO.setDateOfBirth(new Date());
+        playerDTO.setDressNumber(7);
+        playerDTO.setCountry("Portugal");
 
     }
 
-    /**
-     * Test of deleteTeam method, of class TeamFacadeImpl.
-     */
     @Test
-    public void testDeleteTeam() {
-        System.out.println("deleteTeam");
-        TeamDTO nTeam = new TeamDTO();
-        nTeam.setName("Arsenal");
+    public void testCreateTeam() {
+        teamFacade.createTeam(teamDTO);
+
+        verify(teamService).create(team);
+        verify(beanMappingService).mapTo(teamDTO, Team.class);
+    }
+    
+    @Test
+    public void testupdateTeam() {
+              
+        TeamDTO teamDTO1 = new TeamDTO();
+        teamDTO1.setId(2L);
+        teamDTO1.setName("Real Madrid C.F.");
+        teamDTO1.setCity("Madrid");
+        teamDTO1.setCountry("Spain");
+               
+        teamFacade.updateTeam(teamDTO1);
         
-        Long id =teamFacade.createTeam(nTeam);
-        
-        assertNotNull(teamFacade.getTeamById(id));
-        
+        Team team1 = new Team();
+        team1.setId(2L);
+        team1.setName("Real Madrid C.F.");
+        team1.setCity("Madrid");
+        team1.setCountry("Spain");
+       
+        verify(teamService).update(team1);
+        verify(beanMappingService).mapTo(teamDTO1, Team.class);
+    }
+    
+    @Test
+    public void testdeleteTeam() {
         teamFacade.deleteTeam(id);
-        
-        assertNull(teamFacade.getTeamById(id));
-        
-    } 
 
-
-    /**
-     * Test of getAllTeams method, of class TeamFacadeImpl.
-     */
+        verify(teamService).delete(id);
+        verify(beanMappingService).mapTo(teamDTO, Team.class);
+    }
+    
+    
     @Test
-    public void testGetAllTeams() {
-        System.out.println("getAllTeams");
-        
-        TeamDTO nTeam1 = new TeamDTO();
-        nTeam1.setName("Arsenal");
-        
-        TeamDTO nTeam2 = new TeamDTO();       
-        nTeam2.setName("Chelsea");
-        
-        TeamDTO nTeam3 = new TeamDTO();       
-        nTeam3.setName("Spurs");
-        
-        TeamDTO nTeam4 = new TeamDTO();
-        nTeam4.setName("Lpool");
-      
-        teamFacade.createTeam(nTeam4);
-        teamFacade.createTeam(nTeam3);
-        teamFacade.createTeam(nTeam2);
-        teamFacade.createTeam(nTeam1);
-        
-        assertEquals( teamFacade.getAllTeams().size(), 4);
+    public void testgetTeamById() {
+        when(teamService.findById(id)).thenReturn(team);
+
+        TeamDTO teamDTO = teamFacade.getTeamById(id);
+
+        assertNotNull(teamDTO);
+        assertEquals(team.getName(), teamDTO.getName());
+        verify(teamService).findById(id);
+        verify(beanMappingService).mapTo(team, TeamDTO.class);
     }
 
-    /**
-     * Test of findByName method, of class TeamFacadeImpl.
-     */
     @Test
-    public void testFindByName() {
-        System.out.println("findByName");
-        TeamDTO nTeam1 = new TeamDTO();
-        nTeam1.setName("Arsenal");
-        
-        teamFacade.createTeam(nTeam1);
-        
-        assertTrue(teamFacade.findByName(nTeam1.getName()).contains(nTeam1) );
-    }
+    public void testgetAllTeams() {
+        when(teamService.findByAll()).thenReturn(Collections.singletonList(team));
 
-    /**
-     * Test of addPlayer method, of class TeamFacadeImpl.
-     */
-   /* @Test
-    public void testAddandRemovePlayer() {
-        System.out.println("addPlayer");
+        List<TeamDTO> teamDTOs = teamFacade.getAllTeams();
+
+        assertEquals(team.getName(), teamDTOs.get(0).getName());
+        verify(teamService).findByAll();
+        verify(beanMappingService).mapTo(Collections.singletonList(team), TeamDTO.class);
+    }
+    
+    
+    public void testgetAllTeamsWithNull() {
         
-        PlayerDTO p = new PlayerDTO();
-        p.setCountry("England");
-        p.setDateOfBirth(new Date());
-        p.setDressNumber(28);
-        p.setName("John Terry");
-        p.setPosition(Position.DEFENDER);
-        Long pId = playerFacade.createPlayer(p);
-        
-        TeamDTO nTeam2 = new TeamDTO();       
-        nTeam2.setName("Chelsea");
-        Long tId = teamFacade.createTeam(nTeam2);
-        
-        
-        teamFacade.addPlayer(tId, pId);
-        
-        assertEquals(playerFacade.findById(pId).getTeam(),nTeam2);
-        
-        //teamFacade.removePlayer(tId, pId);
-        
-        //(teamFacade.getTeamById(tId).getGoal().contains(p));
-        
-    }*/
+ 	when(teamService.findByAll()).thenReturn(null);
+        List<TeamDTO> teamDTOs = teamFacade.getAllTeams();
+
+        assertNull(teamDTOs);
+        verify(teamService).findByAll();
+        verify(beanMappingService, never()).mapTo(any(), any());
+    }
 
     
+    @Test
+    public void testaddPlayer() {   
+        
+        TeamDTO teamDTO1 = new TeamDTO();
+        teamDTO1.setId(3L);
+        teamDTO1.setName("name3");
+        teamDTO1.setCity("city");
+        teamDTO1.setCountry("country");
+        
+        Team team1 = new Team();
+        team1.setId(3L);
+        team1.setName("name3");
+        team1.setCity("city");
+        team1.setCountry("country");
+        
+       
+        
+	teamFacade.addPlayerFacade(teamDTO1, playerDTO);
+
+        verify(teamService).addPlayer(team1, player);
+       
+        verify(beanMappingService).mapTo(teamDTO1, Team.class);
+        verify(beanMappingService).mapTo(playerDTO, Player.class);
+    }
+
+
+    @Test
+    public void testDeletePlayer() {   
+        
+        TeamDTO teamDTOTest = new TeamDTO();
+        teamDTOTest.setId(1L);
+        teamDTOTest.setName("Arsenal");
+        teamDTOTest.setCity("England");
+        teamDTOTest.setCountry("England");
+        
+        Team teamTest = new Team();
+        teamTest.setId(1L);
+        teamTest.setName("Arsenal");
+        teamTest.setCity("England");
+        teamTest.setCountry("England");
+        
+        Player playerTest = new Player();	
+        playerTest.setId(1L);
+	playerTest.setName("Theo Walcott");
+        playerTest.setPosition(Position.FORWARD);
+        playerTest.setDateOfBirth(new Date());
+        playerTest.setDressNumber(5);
+        playerTest.setCountry("England");
+
+	PlayerDTO playerDTOTest = new PlayerDTO();
+        playerDTOTest.setId(1L);
+	playerDTOTest.setName("Theo Walcott");
+        playerDTOTest.setPosition(Position.FORWARD);
+        playerDTOTest.setDateOfBirth(new Date());
+        playerDTOTest.setDressNumber(5);
+        playerDTOTest.setCountry("England");
+                
+	teamFacade.removePlayer(teamDTOTest, playerDTOTest);
+
+        verify(teamService).deletePlayer(teamTest, playerTest);
+       
+        verify(beanMappingService).mapTo(teamDTOTest, Team.class);
+        verify(beanMappingService).mapTo(playerDTOTest, Player.class);
+    }
+   
+
+    public static final Object unwrapProxy(Object bean) throws Exception {
+    
+        if (AopUtils.isAopProxy(bean) && bean instanceof Advised) {
+            Advised advised = (Advised) bean;
+            bean = advised.getTargetSource().getTarget();
+        }
+        return bean;
+    }
     
 }
+
+   

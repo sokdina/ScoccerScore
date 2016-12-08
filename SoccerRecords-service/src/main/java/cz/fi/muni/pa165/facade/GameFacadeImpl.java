@@ -6,13 +6,16 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameDTO;
+import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IGameService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author peter
  */
+
+@Service
 @Transactional
 public class GameFacadeImpl implements IGameFacade{
 
@@ -32,20 +37,17 @@ public class GameFacadeImpl implements IGameFacade{
     
     @Override
     public void create(GameDTO g) {
-        Game game = beanMappingService.mapTo(g, Game.class);
-	gameService.create(game);
+         gameService.create(beanMappingService.mapTo(g, Game.class));
     }
 
     @Override
-    public GameDTO update(GameDTO g) {
-        Game game = beanMappingService.mapTo(g, Game.class);
-	return beanMappingService.mapTo(gameService.update(game), GameDTO.class);
+    public void update(GameDTO g) {
+      gameService.update(beanMappingService.mapTo(g, Game.class));
     }
 
     @Override
     public void delete(GameDTO g) throws IllegalArgumentException {
-        Game game = beanMappingService.mapTo(g, Game.class);
-	gameService.delete(game);
+	gameService.delete(beanMappingService.mapTo(g, Game.class));
     }
 
     @Override
@@ -64,11 +66,8 @@ public class GameFacadeImpl implements IGameFacade{
 
     @Override
     public List<GameDTO> findAll() {
-        List<GameDTO> games = new ArrayList<>();
-        gameService.findAll().stream().forEach((g) ->{
-            games.add(beanMappingService.mapTo(g, GameDTO.class));
-        });
-        return Collections.unmodifiableList(games);
+        return beanMappingService.mapTo(gameService.findAll(),GameDTO.class);
     }
+
     
 }

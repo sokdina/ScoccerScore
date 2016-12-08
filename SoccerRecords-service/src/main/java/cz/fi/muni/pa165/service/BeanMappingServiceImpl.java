@@ -8,15 +8,10 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * 
- * @author Sok Dina, Peter Lipcak, Jaromir Sys and Martin Kocák
- */ 
-
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
 	
-    @Autowired
+	@Autowired
     private Mapper dozer;
 
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {

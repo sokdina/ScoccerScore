@@ -21,11 +21,11 @@ import javax.persistence.OneToMany;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name="id")
     private Long id;
 
-    @Column(name="name", nullable = false)
+    @Column(name="name")
     private String name;
 
     @Column(name="city")
@@ -34,7 +34,7 @@ public class Team {
     @Column(name="country")
     private String country;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "team")
+    @OneToMany(mappedBy = "team")
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {

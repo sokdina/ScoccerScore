@@ -8,13 +8,13 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import cz.fi.muni.pa165.dao.UserDao;
+
 /**
  * InMemoryDatabaseSpring class provides In Memory Database 
  * for Testing Test Cases.
  * @author sokdina999@gamil.com
 **/
-
-
 
 @Configuration
 public class InMemoryDatabaseSpring {

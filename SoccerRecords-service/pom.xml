@@ -10,81 +10,68 @@
   </parent>
   
   <artifactId>SoccerRecords-service</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-
   <name>SoccerRecords service</name>
    
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
 	<groupId>org.testng</groupId>
 	<artifactId>testng</artifactId>
-	<version>6.9.10</version>
 	<scope>test</scope>
    </dependency>
-   <dependency>
-	<groupId>cz.fi.muni.pa165</groupId>
-	<artifactId>SoccerRecords-api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-  </dependency>
+
   <dependency>
 	<groupId>cz.fi.muni.pa165</groupId>
 	<artifactId>SoccerRecords-Persistence</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-   <type>jar</type>
+	<version>${project.parent.version}</version>
+        <exclusions>
+    	  	 <exclusion>
+     			<groupId>javax.el</groupId>
+    		 	<artifactId>el-api</artifactId>
+    		</exclusion>
+    	 </exclusions>
   </dependency>
   <dependency>
 	<groupId>javax.inject</groupId>
 	<artifactId>javax.inject</artifactId>
-	<version>1</version>
+	
  </dependency>
  <dependency>
 	<groupId>javax.enterprise</groupId>
 	<artifactId>cdi-api</artifactId>
- 	<version>1.2</version>
+ 	
   </dependency>
   <dependency>
 	<groupId>net.sf.dozer</groupId>
 	<artifactId>dozer</artifactId>
-	<version>5.5.1</version>
+	
   </dependency>
   <dependency>
 	<groupId>org.mockito</groupId>
 	<artifactId>mockito-all</artifactId>
-	<version>1.9.5</version>
+	
 	<scope>test</scope>
   </dependency>
   <dependency>
   	<groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-	 <version>1.1.6</version>
+	
         <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
   </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>20.0</version>
+      
+    </dependency>
+    <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            
+            <scope>test</scope>
     </dependency>
   </dependencies>
 
-	<build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>8</source>
-                        <target>8</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+
 
 </project>
 

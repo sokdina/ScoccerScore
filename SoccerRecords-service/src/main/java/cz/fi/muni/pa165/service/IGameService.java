@@ -19,7 +19,7 @@ public interface IGameService {
      * inserts game record into database
      * @param g game to be inserted
      */
-    public void create(Game g);
+    public Game create(Game g);
 
     /**
      * updates game record in database
@@ -33,7 +33,7 @@ public interface IGameService {
      * @param g game record to be deleted
      * @throws IllegalArgumentException when no such record in database exists
      */
-    public void delete(Game g) throws IllegalArgumentException;
+    public void delete(Game g); //throws IllegalArgumentException;
 
     /**
      * finds games between two teams

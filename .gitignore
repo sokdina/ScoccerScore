@@ -1,3 +1,7 @@
 SoccerRecords-service/target/
 SoccerRecords-api/target/
 *~
+/target/
+/SoccerRecords-spring-mvc-test/target/
+/eshop-sample-data/target/
+/SoccerRecords-sample-data/target/
