@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.sampledata;
 
 import cz.fi.muni.pa165.entity.*;
+import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.facade.ITeamFacade;
 import cz.fi.muni.pa165.service.IGameService;
+import cz.fi.muni.pa165.service.IPlayerService;
 import cz.fi.muni.pa165.service.ITeamService;
 import cz.fi.muni.pa165.service.UserService;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
@@ -27,6 +29,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private UserService userService;
     
     @Autowired
+    private IPlayerService playerService;
+     
+    @Autowired
     private ITeamService teamService;
     
     @Autowired
@@ -46,6 +51,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Game g3 = game(new Date(System.currentTimeMillis()),2,0,t1,t4);
         Game g4 = game(new Date(System.currentTimeMillis()),0,3,t3,t1);
         Game g5 = game(new Date(System.currentTimeMillis()),1,1,t2,t4);
+        
+        
+        Player p1 = player("John Terry",23,new Date(),"England",Position.DEFENDER,t1);
+        Player p2 = player("Lionel Messi",23,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        Player p3 = player("Alexis Sanchez",23,new Date(),"Spain",Position.GOAL_KEEPER,t3);
+        Player p4 = player("Fili Sebo",23,new Date(),"Slovakia",Position.FORWARD,t4);
+        
+        
         
         User admin = user("123", "Dina", "Sok", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
         log.info("Loaded eShop users.");
@@ -94,4 +107,20 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         return team;
     }
+    
+    private Player player(String name, int number, Date dateOfBirth, String country, Position position , Team t){
+        Player player = new Player();
+        player.setName(name);
+        player.setDressNumber(number);
+        player.setDateOfBirth(dateOfBirth);
+        player.setCountry(country);
+        player.setPosition(position);
+        player.setTeam(t);
+  
+        playerService.createPlayer(player);
+        
+        return player;
+    }
+    
+    
 }

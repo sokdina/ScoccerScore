@@ -34,7 +34,7 @@ public class PlayerDTO {
     private String country;
 
 
-    private Team team;
+    private TeamDTO team;
 
     private Set<Goal> goals = new HashSet<>();
     
@@ -86,11 +86,11 @@ public class PlayerDTO {
         this.country = country;
     }
 
-    public Team getTeam() {
+    public TeamDTO getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(TeamDTO team) {
         this.team = team;
     }
 

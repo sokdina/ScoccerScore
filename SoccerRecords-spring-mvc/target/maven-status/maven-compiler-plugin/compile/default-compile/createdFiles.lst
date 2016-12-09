@@ -1,5 +1,7 @@
-cz/muni/fi/pa165/mvc/controllers/HomeController.class
-cz/muni/fi/pa165/mvc/controllers/GameController.class
-cz/muni/fi/pa165/mvc/config/MySpringMvcConfig.class
-cz/muni/fi/pa165/mvc/security/ProtectFilter.class
-cz/muni/fi/pa165/mvc/config/MyStartInitializer.class
+cz\muni\fi\pa165\mvc\config\MyStartInitializer.class
+cz\muni\fi\pa165\mvc\controllers\GameController.class
+cz\muni\fi\pa165\mvc\security\ProtectFilter.class
+cz\muni\fi\pa165\mvc\validator\PlayerCreateDTOValidator.class
+cz\muni\fi\pa165\mvc\controllers\PlayerController.class
+cz\muni\fi\pa165\mvc\config\MySpringMvcConfig.class
+cz\muni\fi\pa165\mvc\controllers\HomeController.class
