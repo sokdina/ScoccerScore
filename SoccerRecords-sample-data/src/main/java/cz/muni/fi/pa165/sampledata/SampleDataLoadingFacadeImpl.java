@@ -41,26 +41,30 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @SuppressWarnings("unused")
     public void loadData() throws IOException {
 
-        Team t1 = team("Barcelona","Barcelona","Spain");
-        Team t2 = team("Real Madrid","Madrid","Spain");
-        Team t3 = team("Liverpool","Liverpool","England");
-        Team t4 = team("Arsenal","London","England");
+        Team t1 = team("Real Madrid C.F.","Madrid", "Spain");
+	Team t2 = team("FC Barcelona","Barcelona", "Spain");
+        Team t3 = team("Atletico Madrid","Madrid", "Spain");
+	Team t4 = team("Sevilla FC","Seville", "Spain");
+	Team t5 = team("Villarreal CF","Villar Real", "Spain");
+	Team t6 = team("Real Sociedad","San Sebastian", "Spain");
+        Team t7 = team("Celta Vigo","Vigo", "Spain");
+	Team t8 = team("Sporting Gijon","Gijon", "Spain");
+	Team t9 = team("Deportivo La Coruna","A Coruna", "Spain");
+	Team t10 = team("Las Palmas","Las Palmas", "Spain");
         
         Game g1 = game(new Date(System.currentTimeMillis()),5,3,t1,t2);
         Game g2 = game(new Date(System.currentTimeMillis()),1,3,t2,t3);
         Game g3 = game(new Date(System.currentTimeMillis()),2,0,t1,t4);
         Game g4 = game(new Date(System.currentTimeMillis()),0,3,t3,t1);
         Game g5 = game(new Date(System.currentTimeMillis()),1,1,t2,t4);
-        
-        
+               
         Player p1 = player("John Terry",23,new Date(),"England",Position.DEFENDER,t1);
         Player p2 = player("Lionel Messi",23,new Date(),"Argentina",Position.MIDFIELDER,t2);
         Player p3 = player("Alexis Sanchez",23,new Date(),"Spain",Position.GOAL_KEEPER,t3);
         Player p4 = player("Fili Sebo",23,new Date(),"Slovakia",Position.FORWARD,t4);
-        
-        
-        
-        User admin = user("123", "Dina", "Sok", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
+
+        User admin = user("admin", "Dina", "Sok (464103)", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
+
         log.info("Loaded eShop users.");
 
     }
@@ -97,16 +101,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return game;
     }
     
-    private Team team(String name, String city, String country){
-        Team team = new Team();
-        team.setName(name);
-        team.setCity(city);
-        team.setCountry(country);
-        
-        teamService.create(team);
-        
-        return team;
+   private Team team(String name, String city, String country) {
+	Team t = new Team();
+	t.setName(name);
+	t.setCity(city);
+	t.setCountry(country);
+	teamService.create(t);
+        return t;
     }
+
     
     private Player player(String name, int number, Date dateOfBirth, String country, Position position , Team t){
         Player player = new Player();

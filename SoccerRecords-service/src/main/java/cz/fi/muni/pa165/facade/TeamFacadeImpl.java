@@ -20,8 +20,6 @@ import cz.fi.muni.pa165.service.ITeamService;
  * @author sokdina999@gamil.com
 **/
 
-
-
 @Service
 @Transactional
 public class TeamFacadeImpl implements ITeamFacade {

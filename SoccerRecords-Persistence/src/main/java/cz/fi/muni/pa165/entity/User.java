@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
-//In Derby, its forbiden to 'USER' is reserved keyword, we need to rename table 
 @Table(name="Users")
 public class User {
 	

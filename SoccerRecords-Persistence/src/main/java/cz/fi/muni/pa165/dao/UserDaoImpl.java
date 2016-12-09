@@ -10,14 +10,16 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+@Repository("UserDaoImpl")
 public class UserDaoImpl implements UserDao {
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
+	@Transactional
 	public void create(User u) {
 		em.persist(u);
 	}

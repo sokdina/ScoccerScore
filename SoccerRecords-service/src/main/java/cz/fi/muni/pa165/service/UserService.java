@@ -8,10 +8,6 @@ import org.springframework.stereotype.Service;
 import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.entity.User;
 
-/**
- * An interface that defines a service access to the {@link User} entity.
- */
-@Service
 public interface UserService {
 
 	/**
