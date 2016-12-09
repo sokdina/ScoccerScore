@@ -9,11 +9,16 @@ import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.facade.ITeamFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +49,37 @@ public class TeamController {
         model.addAttribute("teams", teams);
         return "team/list";
     }
-    
-    
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String view(@PathVariable long id, Model model) {
+        log.debug("view({})", id);
+        model.addAttribute("team", teamFacade.getTeamById(id));
+        return "team/view";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+	try {        
+		TeamDTO team = teamFacade.getTeamById(id);		
+		teamFacade.deleteTeam(id);
+        	redirectAttributes.addFlashAttribute("alert_success", "Team: "+ team.toString() +" was deleted. ");
+	 } catch(Exception ex){
+          	log.warn("cannot delete team {}",id);
+            	redirectAttributes.addFlashAttribute("alert_danger", "Team cannot delete because this team is being matched with another team in La Liga");
+        }
+	return "redirect:" + uriBuilder.path("/team/list").toUriString();
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newTeam(Model model) {
+        log.debug("new()");
+        model.addAttribute("teamCreate", new TeamDTO());
+        return "team/new";
+    }
+
 }
+
+
+
+
+

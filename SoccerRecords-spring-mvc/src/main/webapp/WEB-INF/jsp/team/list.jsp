@@ -9,7 +9,6 @@
 <jsp:attribute name="body">
 
     <my:a href="/team/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         New Team
     </my:a>
     </br>

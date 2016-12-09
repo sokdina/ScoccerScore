@@ -65,7 +65,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         User admin = user("admin", "Dina", "Sok (464103)", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
 
-        log.info("Loaded eShop users.");
+        log.info("Loaded SoccerRecords users.");
 
     }
 

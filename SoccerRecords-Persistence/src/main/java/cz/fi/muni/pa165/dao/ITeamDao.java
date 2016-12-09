@@ -32,7 +32,7 @@ public interface ITeamDao {
 	* @param team is the Team class.
 	* @throws IllegalArgumentException when there is null.
 	*/
-	public void delete(Team t)throws IllegalArgumentException;
+	public void delete(Team t);
 	
 	/**
     	* Returns information about a team corresponding to given team id.

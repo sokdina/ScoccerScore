@@ -5,8 +5,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.TypedQuery;
 
 import cz.fi.muni.pa165.entity.Team;
+
+
 
 /**
  * TeamDaoImpl implements ITeamDao to give some basic operations such as insert, update, delete and find 
@@ -36,7 +39,7 @@ public class TeamDaoImpl implements ITeamDao {
         @Transactional
 	public void delete(Team t){// throws IllegalArgumentException {
 		
-		entityManager.remove(findById(t.getId()));
+		entityManager.remove(entityManager.contains(t) ? t : entityManager.merge(t));
 	}
 
 	@Override

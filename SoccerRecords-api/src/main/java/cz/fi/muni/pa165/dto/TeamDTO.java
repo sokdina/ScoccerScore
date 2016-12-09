@@ -94,12 +94,7 @@ public class TeamDTO
 
     @Override
     public String toString() {
-        return "TeamDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                ", country=" + country +
-                '}';
+        return name;
     }
 
 }
