@@ -31,9 +31,9 @@
                 <form:errors path="country" cssClass="help-block"/>
             </div>
         </div>
-
+         <center>
          <button style="text-align: center;" class="btn btn-primary" type="submit">Create team</button>
-
+        </center>
 	</br>
 	</br>
     </form:form>

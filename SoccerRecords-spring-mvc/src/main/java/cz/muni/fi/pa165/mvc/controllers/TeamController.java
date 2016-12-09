@@ -62,10 +62,10 @@ public class TeamController {
 	try {        
 		TeamDTO team = teamFacade.getTeamById(id);		
 		teamFacade.deleteTeam(id);
-        	redirectAttributes.addFlashAttribute("alert_success", "Team: "+ team.toString() +" was deleted. ");
+        	redirectAttributes.addFlashAttribute("alert_success", "Team: "+ team.toString() +" was deleted.");
 	 } catch(Exception ex){
           	log.warn("cannot delete team {}",id);
-            	redirectAttributes.addFlashAttribute("alert_danger", "Team cannot delete because this team is being matched with another team in La Liga");
+            	redirectAttributes.addFlashAttribute("alert_danger", "This team cannot be deleted because it is being matched with another team in La Liga now.");
         }
 	return "redirect:" + uriBuilder.path("/team/list").toUriString();
     }
@@ -77,9 +77,27 @@ public class TeamController {
         return "team/new";
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("teamCreate") TeamDTO formBean, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("create(teamCreate={})", formBean);
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "team/new";
+        }
+        Long id = teamFacade.createTeam(formBean);
+        redirectAttributes.addFlashAttribute("alert_success", "Team: " + teamFacade.getTeamById(id) + " was created");
+        return "redirect:" + uriBuilder.path("/team/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+
 }
-
-
 
 
 
