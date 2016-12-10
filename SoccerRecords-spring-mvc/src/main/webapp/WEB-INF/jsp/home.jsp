@@ -19,8 +19,8 @@
 		<li>The report about team statistics in the specific league in particular session</li>
 		<li>The report about a player in the particular team in a session</li>
                 <li>To system you can assign with attributes:</li>
-                <li>Email: <b>admin@pa165.com</b></li>
-                <li>Password: <b>password</b></li>
+                <li>Email: <b>sokdina999@gmail.com</b></li>
+                <li>Password: <b>admin</b></li>
                 
 	</ul>
                 
