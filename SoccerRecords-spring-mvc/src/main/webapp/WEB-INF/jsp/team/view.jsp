@@ -8,8 +8,8 @@
 <my:pagetemplate title="La Liga Division">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/team/update/${team.id}">
-        <button type="submit" class="btn btn-primary">Update ${team.name}</button>
+    <form method="post" action="${pageContext.request.contextPath}/team/delete/${team.id}">
+        <button type="submit" class="btn btn-primary">Delete ${team.name}</button>
     </form>
     </br>
 

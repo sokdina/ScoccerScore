@@ -93,10 +93,41 @@ public class TeamController {
         }
         Long id = teamFacade.createTeam(formBean);
         redirectAttributes.addFlashAttribute("alert_success", "Team: " + teamFacade.getTeamById(id) + " was created");
-        return "redirect:" + uriBuilder.path("/team/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/team/list").buildAndExpand(id).encode().toUriString();
     }
 
-
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editTeam(@PathVariable long id, Model model) {
+        log.debug("editTeam()");
+        TeamDTO t = teamFacade.getTeamById(id);
+        model.addAttribute("teamEdit", t);
+        return "team/edit";
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("teamEdit") TeamDTO formBean, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("edit(teamEdit={})", formBean);
+        if (bindingResult.hasErrors()) {
+            log.debug("some errror");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+                
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "team/edit";
+            
+        }
+        teamFacade.updateTeam(formBean);
+        
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Team was edited");
+        return "redirect:" + uriBuilder.path("/team/list").toUriString();
+        
+    }
 }
 
 

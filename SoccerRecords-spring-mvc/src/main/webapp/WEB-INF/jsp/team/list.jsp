@@ -9,7 +9,8 @@
 <jsp:attribute name="body">
 
     <my:a href="/team/new" class="btn btn-primary">
-        New Team
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Add Team
     </my:a>
     </br>
     </br>
@@ -31,10 +32,9 @@
                 <td><c:out value="${team.city}"/></td>
                 <td><c:out value="${team.country}"/></td>
                 <td>
-                    <my:a href="/team/view/${team.id}" class="btn btn-primary">View</my:a>
-                </td>
-                <td>
-                    <form method="post" action="${pageContext.request.contextPath}/team/delete/${team.id}">
+                    <my:a href="/team/view/${team.id}" class="btn btn-primary">View</my:a>               
+                    <my:a href="/team/edit/${team.id}" class="btn btn-primary">Edit</my:a>                
+      		    <form method="post" action="${pageContext.request.contextPath}/team/delete/${team.id}" style="display: inline-block;">
                         <button type="submit" class="btn btn-primary">Delete</button>
                     </form>
                 </td>
@@ -46,3 +46,5 @@
 
 </jsp:attribute>
 </my:pagetemplate>
+
+
