@@ -18,12 +18,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+import cz.muni.fi.pa165.mvc.validator.TeamValidator;
 
 /**
  *
@@ -39,6 +42,13 @@ public class TeamController {
     @Autowired
     private ITeamFacade teamFacade;
     
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof TeamDTO) {
+            binder.addValidators(new TeamValidator());
+        }
+    }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         List<TeamDTO> teams = teamFacade.getAllTeams();
