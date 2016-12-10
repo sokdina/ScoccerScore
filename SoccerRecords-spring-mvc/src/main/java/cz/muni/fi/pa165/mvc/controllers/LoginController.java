@@ -82,7 +82,7 @@ public class LoginController {
         }
         log.trace("user",matchingUser);
         request.getSession().setAttribute("authenticatedUser",matchingUser);
-        return "home";
+        return "redirect:" + uriBuilder.path("/").toUriString();
         
     }
     
