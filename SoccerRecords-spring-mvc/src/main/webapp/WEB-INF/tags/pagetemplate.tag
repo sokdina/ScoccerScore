@@ -47,15 +47,15 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.docs"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Javadocs</li>
-                        <li><a href="http://docs.oracle.com/javase/8/docs/api/">BSRS of SoccerRecords System</a></li>
+                        <li class="dropdown-header">BSRS of SoccerRecords System</li>
+                        <li><a href="https://github.com/sokdina/SoccerRecords">Github Repository</a></li>
+			<li><a href="https://github.com/sokdina/SoccerRecords/wiki">Project Wiki</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.about"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="https://is.muni.cz/predmet/fi/podzim2015/PA165">PA165</a></li>
-                        <li><a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Group Two</a></li>
                     </ul>
                 </li>
             </ul>
