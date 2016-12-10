@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
  */
 public class PlayerCreateDTO {
     
+    private Long id;
+    
     @NotNull
     private String name;
 
@@ -30,11 +32,19 @@ public class PlayerCreateDTO {
     
     @NotNull
     private Long teamId;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }

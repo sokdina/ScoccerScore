@@ -9,7 +9,7 @@
 <jsp:attribute name="body">
 
     <form method="post" action="${pageContext.request.contextPath}/player/delete/${player.id}">
-        <button type="submit" class="btn btn-primary">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
 

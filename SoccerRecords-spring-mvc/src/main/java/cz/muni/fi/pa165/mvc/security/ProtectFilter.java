@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {"/team/*", "/goal/*"})
 public class ProtectFilter implements Filter {
@@ -24,13 +25,16 @@ public class ProtectFilter implements Filter {
     public void doFilter(ServletRequest r, ServletResponse s, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) r;
         HttpServletResponse response = (HttpServletResponse) s;
-
-        String auth = request.getHeader("Authorization");
-        if (auth == null) {
-            response401(response);
+        HttpSession session = request.getSession(false);
+        boolean loggedIn = session != null && session.getAttribute("authenticatedUser") != null;
+        // String auth = request.getHeader("Authorization");
+        if (!loggedIn) {
+            //response401(response);
+            response.sendRedirect(request.getContextPath() + "/user/login");
             return;
         }
-        String[] creds = parseAuthHeader(auth);
+        
+        /*String[] creds = parseAuthHeader(auth);
         String logname = creds[0];
         String password = creds[1];
 
@@ -54,8 +58,8 @@ public class ProtectFilter implements Filter {
             //log.warn("wrong credentials: user={} password={}", creds[0], creds[1]);
             response401(response);
             return;
-        }
-        request.setAttribute("authenticatedUser", matchingUser);
+        }*/
+        //request.setAttribute("authenticatedUser", matchingUser);
         chain.doFilter(request, response);
     }
 

@@ -38,16 +38,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
- * @author peter
+ * @author Martin
  */
 @Controller
 @RequestMapping("/player")
 public class PlayerController {
     
     final static Logger log = LoggerFactory.getLogger(PlayerController.class);
-
-
-    
+  
     @Autowired
     private IPlayerFacade playerFacade;
     
@@ -79,6 +77,14 @@ public class PlayerController {
         return "player/new";
     }
     
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editPlayer(@PathVariable long id, Model model) {
+        log.debug("edit()");
+        PlayerDTO p = playerFacade.findById(id);
+        model.addAttribute("playerEdit", convertPlayerDTO(p));
+        return "player/edit";
+    }
+    
     @ModelAttribute("teams")
     public List<TeamDTO> teams() {
         log.debug("categories()");
@@ -107,6 +113,8 @@ public class PlayerController {
         log.debug("view({})", playerFacade.findById(id));
         return "player/view";
     }
+    
+    
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         if (binder.getTarget() instanceof PlayerCreateDTO) {
@@ -115,7 +123,7 @@ public class PlayerController {
             sdf.setLenient(true);
             binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
         }
-    }
+    }  
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("playerCreate") PlayerCreateDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
@@ -135,19 +143,63 @@ public class PlayerController {
             
         }
        
-        //create product
-        PlayerDTO p= new PlayerDTO();
-        p.setCountry(formBean.getCountry());
-        p.setDateOfBirth(formBean.getDateOfBirth());
-        p.setDressNumber(formBean.getDressNumber());
-        p.setName(formBean.getName());
-        p.setPosition(formBean.getPosition());
-        p.setTeam(teamFacade.getTeamById(formBean.getTeamId()));
-        Long id = playerFacade.createPlayer(p);
+        //create player
+
+        Long id = playerFacade.createPlayer(convertPlayerCreateDTO(formBean));
 
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Player " + id + " was created");
         return "redirect:" + uriBuilder.path("/player/list").buildAndExpand(id).encode().toUriString();
     }
     
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("playerEdit") PlayerCreateDTO formBean, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("edit(playerEdit={})", formBean);
+        //in case of validation error forward back to the the form
+        if (bindingResult.hasErrors()) {
+            log.debug("some errror");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+                
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "player/edit";
+            
+        }
+        playerFacade.updatePlayer(convertPlayerCreateDTO(formBean));
+        
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Player was edited");
+        return "redirect:" + uriBuilder.path("/player/list").toUriString();
+        
+    }
+    
+    private PlayerCreateDTO convertPlayerDTO(PlayerDTO player){
+        PlayerCreateDTO p= new PlayerCreateDTO();
+        p.setCountry(player.getCountry());
+        p.setDateOfBirth(player.getDateOfBirth());
+        p.setDressNumber(player.getDressNumber());
+        p.setName(player.getName());
+        p.setPosition(player.getPosition());
+        p.setTeamId(player.getTeam().getId());  
+        p.setId(player.getId());
+        return p;
+    }
+    
+    private PlayerDTO convertPlayerCreateDTO(PlayerCreateDTO player){
+        PlayerDTO p= new PlayerDTO();
+        p.setCountry(player.getCountry());
+        p.setDateOfBirth(player.getDateOfBirth());
+        p.setDressNumber(player.getDressNumber());
+        p.setName(player.getName());
+        p.setPosition(player.getPosition());
+        p.setTeam(teamFacade.getTeamById(player.getTeamId()));
+        
+        p.setId(player.getId());
+        return p;
+    }
 }

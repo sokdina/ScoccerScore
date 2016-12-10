@@ -65,4 +65,5 @@ public interface IPlayerFacade {
      */
     public void removeGoal(Long playerId, Long goalId);
 
+    public void updatePlayer(PlayerDTO p);
 }

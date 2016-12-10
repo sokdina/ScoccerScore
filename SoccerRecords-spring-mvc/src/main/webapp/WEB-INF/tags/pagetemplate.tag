@@ -16,7 +16,7 @@
     <!-- bootstrap loaded from content delivery network -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">    
     <jsp:invoke fragment="head"/>
 </head>
 <body>
@@ -35,6 +35,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><my:a href="/pa165/SoccerRecords"><f:message key="navigation.SoccerRecords"/></my:a></li>
+                <c:if test="${not empty pageContext.request.getSession(false).getAttribute('authenticatedUser')}">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -44,20 +45,28 @@
                         <li><my:a href="/goal/list"><f:message key="navigation.admin.goal"/></my:a></li>
                     </ul>
                 </li>
+                </c:if>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.docs"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Javadocs</li>
-                        <li><a href="http://docs.oracle.com/javase/8/docs/api/">BSRS of SoccerRecords System</a></li>
+                        <li><a target="_blank" href="http://docs.oracle.com/javase/8/docs/api/">BSRS of SoccerRecords System</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.about"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="https://is.muni.cz/predmet/fi/podzim2015/PA165">PA165</a></li>
-                        <li><a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Group Two</a></li>
+                        <li><a target="_blank" href="https://is.muni.cz/predmet/fi/podzim2015/PA165">PA165</a></li>
+                        <li><a target="_blank" href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Group Two</a></li>
                     </ul>
                 </li>
+                                  
+                <c:choose>
+                    <c:when test="${not empty pageContext.request.getSession(false).getAttribute('authenticatedUser')}">
+                        <li class="dropdown"> <a style="cursor: pointer;" onclick="document.getElementById('myform').submit();" class="dropdown-toggle">Logout (<c:out value="${pageContext.request.getSession(false).getAttribute('authenticatedUser').givenName}"/>)</a> </li>                  
+                    </c:when> 
+                    <c:otherwise><li><my:a href="/user/login">Login</my:a></li></c:otherwise>    
+                </c:choose>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -71,20 +80,12 @@
             <h1><c:out value="${title}"/></h1>
         </div>
     </c:if>
-
-    <!-- authenticated user info -->
-    <c:if test="${not empty authenticatedUser}">
-    <div class="row">
-        <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
-                </div>
-            </div>
-        </div>
+    
+    <div style="display: none;">
+        <form id="myform" method="post" action="${pageContext.request.contextPath}/user/logout">
+            <input type="hidden" name="logout" value="value" /> 
+        </form>
     </div>
-    </c:if>
 
     <!-- alerts -->
     <c:if test="${not empty alert_danger}">

@@ -5,13 +5,15 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Add new Player">
+<my:pagetemplate title="Edit Player">
 <jsp:attribute name="body">
     
-    <form:form method="post" action="${pageContext.request.contextPath}/player/create"
-               modelAttribute="playerCreate" cssClass="form-horizontal">
-            <%@include file="form.jsp"%>       
-    <button class="btn btn-success" style="float: right;" type="submit">Create player</button>
+    <form:form method="post" action="${pageContext.request.contextPath}/player/edit"
+               modelAttribute="playerEdit" cssClass="form-horizontal">
+            <form:hidden path="id" />
+            <%@include file="form.jsp"%>    
+
+    <button class="btn btn-success" style="float: right;" type="submit">Edit player</button>
     </form:form>
 
 

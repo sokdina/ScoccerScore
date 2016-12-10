@@ -59,12 +59,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Game g5 = game(new Date(System.currentTimeMillis()),1,1,t2,t4);
                
         Player p1 = player("John Terry",23,new Date(),"England",Position.DEFENDER,t1);
-        Player p2 = player("Lionel Messi",23,new Date(),"Argentina",Position.MIDFIELDER,t2);
-        Player p3 = player("Alexis Sanchez",23,new Date(),"Spain",Position.GOAL_KEEPER,t3);
-        Player p4 = player("Fili Sebo",23,new Date(),"Slovakia",Position.FORWARD,t4);
+        Player p2 = player("Lionel Messi",18,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        Player p3 = player("Alexis Sanchez",4,new Date(),"Spain",Position.GOAL_KEEPER,t3);
+        Player p4 = player("Fili Sebo",9,new Date(),"Slovakia",Position.FORWARD,t4);
 
         User admin = user("admin", "Dina", "Sok (464103)", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
-
+        User admin2 = user("password", "Admin", "Adminer", "admin@pa165.com", "123456789", toDate(2016, 12, 12), "Brno");
         log.info("Loaded SoccerRecords users.");
 
     }

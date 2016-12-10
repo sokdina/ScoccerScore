@@ -18,7 +18,12 @@
   		<li>The result of the match</li>
 		<li>The report about team statistics in the specific league in particular session</li>
 		<li>The report about a player in the particular team in a session</li>
-	</ul>  
+                <li>To system you can assign with attributes:</li>
+                <li>Email: <b>admin@pa165.com</b></li>
+                <li>Password: <b>password</b></li>
+                
+	</ul>
+                
     </div>
 
 </jsp:attribute>
