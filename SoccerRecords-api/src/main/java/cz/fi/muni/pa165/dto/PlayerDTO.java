@@ -36,7 +36,7 @@ public class PlayerDTO {
 
     private TeamDTO team;
 
-    private Set<Goal> goals = new HashSet<>();
+    private Set<GoalDTO> goals = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -94,11 +94,11 @@ public class PlayerDTO {
         this.team = team;
     }
 
-    public Set<Goal> getGoal() {
+    public Set<GoalDTO> getGoals() {
         return goals;
     }
 
-    public void setGoal(Set<Goal> goals) {
+    public void setGoals(Set<GoalDTO> goals) {
         this.goals = goals;
     }
     

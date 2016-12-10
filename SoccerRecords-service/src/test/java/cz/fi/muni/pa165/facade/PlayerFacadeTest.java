@@ -76,7 +76,7 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         
         g1 = new Goal();
         g1.setDescription("asdasd");
-        g1.setGoalTime(new Date());
+        g1.setGoalTime(10);
         goalFacade.create(g1);
         
         p9 = new Player();

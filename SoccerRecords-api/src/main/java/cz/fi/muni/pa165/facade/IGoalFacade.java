@@ -17,7 +17,7 @@ public interface IGoalFacade {
     public void deleteGoal(GoalDTO goal);
     public void updateGoal(GoalDTO goal);
     
-    public List<GoalDTO> findByGoalTime(Date date);
+    public List<GoalDTO> findByGoalTime(Integer date);
     
     public List<GoalDTO> findByGame(GameDTO game);
     

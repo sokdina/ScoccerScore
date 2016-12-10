@@ -98,7 +98,7 @@ public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
         
         g1 = new Goal();
         g1.setDescription("asdsad");
-        g1.setGoalTime(new Date());
+        g1.setGoalTime(10);
         g1.setId(55L);
     }
     

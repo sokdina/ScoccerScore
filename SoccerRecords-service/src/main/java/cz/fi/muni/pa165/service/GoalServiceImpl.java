@@ -94,7 +94,7 @@ public class GoalServiceImpl implements IGoalService{
     }
 
     @Override
-    public Set<Goal> findByGoalTime(Date date) {
+    public Set<Goal> findByGoalTime(Integer date) {
         try{
             return goalDao.findAll().stream().filter(g->g.getGoalTime().equals(date)).collect(Collectors.toSet());
         }catch(Exception e){

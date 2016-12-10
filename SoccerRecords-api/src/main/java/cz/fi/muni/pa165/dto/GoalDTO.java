@@ -13,9 +13,11 @@ import java.util.Objects;
 public class GoalDTO{
      private Long id;
 
-    private Date goalTime;
+    private int goalTime;
 
     private String description;
+    
+    private GameDTO game;
 
     public Long getId() {
         return id;
@@ -25,11 +27,19 @@ public class GoalDTO{
         this.id = id;
     }
 
-    public Date getGoalTime() {
+    public GameDTO getGame() {
+        return game;
+    }
+
+    public void setGame(GameDTO game) {
+        this.game = game;
+    }
+    
+    public int getGoalTime() {
         return goalTime;
     }
 
-    public void setGoalTime(Date goalTime) {
+    public void setGoalTime(int goalTime) {
         this.goalTime = goalTime;
     }
 

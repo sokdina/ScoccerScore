@@ -160,7 +160,7 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void testFindByGoalTime(){
-        Date goalTime = new Date(System.currentTimeMillis());
+        Integer goalTime = 15;
         goal.setGoalTime(goalTime);
         
         Set<Goal> goals = new HashSet<>();

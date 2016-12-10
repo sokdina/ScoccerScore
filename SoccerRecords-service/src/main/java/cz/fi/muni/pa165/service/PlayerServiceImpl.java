@@ -90,7 +90,7 @@ public class PlayerServiceImpl implements IPlayerService{
     public void deletePlayer(Player player) {
         
         try{
-            for(Iterator<Goal> i = player.getGoal().iterator(); i.hasNext();){
+            for(Iterator<Goal> i = player.getGoals().iterator(); i.hasNext();){
                 Goal g = i.next();
                 goalService.deleteGoal(g);
             }
@@ -130,7 +130,7 @@ public class PlayerServiceImpl implements IPlayerService{
         if(goal == null || player == null) 
              throw new SoccerRecordsDataAccessException("Player or Goal cannot be null");
         
-        if(player.getGoal().contains(goal)){
+        if(player.getGoals().contains(goal)){
             throw new SoccerServiceException(
                     "Player already contais this goal. Player: "
                             + player.getId() + ", goal: "

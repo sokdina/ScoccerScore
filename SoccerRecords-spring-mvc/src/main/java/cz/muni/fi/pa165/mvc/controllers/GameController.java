@@ -6,8 +6,9 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.fi.muni.pa165.dto.GameDTO;
+import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.facade.IGameFacade;
-import java.util.ArrayList;
+import cz.fi.muni.pa165.facade.IPlayerFacade;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,8 @@ public class GameController {
     @Autowired
     private IGameFacade gameFacade;
     
+    @Autowired
+    private IPlayerFacade playerFacade;
     
     /**
      * Shows a list of products with the ability to add, delete or edit.
@@ -47,6 +50,12 @@ public class GameController {
             log.info(games.get(i).toString());
         }
         
+        List<PlayerDTO> players = playerFacade.findAll();
+        for(int i = 0; i < players.size(); i++){
+            log.info(players.get(i).toString());
+        }
+        
+        model.addAttribute("players", players);
         model.addAttribute("games", games);
         return "game/list";
     }

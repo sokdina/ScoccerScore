@@ -6,33 +6,53 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <my:pagetemplate title="Match results">
+    
 <jsp:attribute name="body">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/game.css" type="text/css">
     <my:a href="/game/new" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         New match
     </my:a>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Date of match</th>
-            <th>Home team</th>
-            <th>Result</th>
-            <th>Guest team</th>
-        </tr>
-        </thead>
+    <table class="table" align="center">
+        <thead><tr><th/></tr></thead>
         <tbody>
         <c:forEach items="${games}" var="game">
             <tr>
                 <td><fmt:formatDate value="${game.dateOfGame}" pattern="yyyy-MM-dd"/></td>
-                <td><c:out value="${game.homeTeam.name}"/></td>
-                <td><c:out value="${game.homeScore}:${game.guestScore}"/></td>
-                <td><c:out value="${game.guestTeam.name}"/></td>
-                <td>
+                <td class="team" align="center">
+                    <c:out value="${game.homeTeam.name}"/>
+                    <ul class="goals">
+                        <c:forEach items="${game.goals}" var="goal">
+                            <c:forEach items="${players}" var="player">
+                                <c:forEach items="${player.goals}" var="playerGoal">
+                                    <c:if test="${goal.id == playerGoal.id and game.homeTeam.id == player.team.id}">
+                                        <li>${player.name} ${goal.goalTime}'</li>
+                                    </c:if>
+                                </c:forEach>                                        
+                            </c:forEach>
+                        </c:forEach>
+                    </ul>
+                </td>
+                <td class="team" align="center"><c:out value="${game.homeScore}:${game.guestScore}"/></td>
+                <td class="team" align="center">
+                    <c:out value="${game.guestTeam.name}"/>
+                    <ul class="goals">
+                        <c:forEach items="${game.goals}" var="goal">
+                            <c:forEach items="${players}" var="player">
+                                <c:forEach items="${player.goals}" var="playerGoal">
+                                    <c:if test="${goal.id == playerGoal.id and game.guestTeam.id == player.team.id}">
+                                        <li>${player.name} ${goal.goalTime}'</li>
+                                    </c:if>
+                                </c:forEach>                                        
+                            </c:forEach>
+                        </c:forEach>
+                    </ul>
+                </td>
+                <td align="center">
                     <my:a href="/game/view/${game.id}" class="btn btn-primary">View</my:a>
                 </td>
-                <td>
+                <td align="center">
                     <form method="post" action="${pageContext.request.contextPath}/game/delete/${game.id}">
                         <button type="submit" class="btn btn-primary">Delete</button>
                     </form>

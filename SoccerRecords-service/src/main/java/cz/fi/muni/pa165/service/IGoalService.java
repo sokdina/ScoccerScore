@@ -19,7 +19,7 @@ public interface IGoalService {
     public void deleteGoal(Goal goal);
     public void updateGoal(Goal goal);
     
-    public Set<Goal> findByGoalTime(Date date);
+    public Set<Goal> findByGoalTime(Integer date);
     
     public Set<Goal> findByGame(Game game);
     

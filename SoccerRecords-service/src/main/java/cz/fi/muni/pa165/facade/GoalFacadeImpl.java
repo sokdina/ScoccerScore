@@ -60,7 +60,7 @@ public class GoalFacadeImpl implements IGoalFacade{
     }
 
     @Override
-    public List<GoalDTO> findByGoalTime(Date date) {
+    public List<GoalDTO> findByGoalTime(Integer date) {
         List<GoalDTO> dtos = new ArrayList<>();
         goalService.findByGoalTime(date).stream().forEach((g) -> {
             dtos.add(beanMappingService.mapTo(g, GoalDTO.class));
