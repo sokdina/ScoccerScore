@@ -16,6 +16,7 @@ import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -28,22 +29,25 @@ public class TeamsController {
     private ITeamFacade teamFacade;
 
     /**
-     * get all the categories
-     * @return list of CategoryDTOs
+     * Get list of Teams curl -i -X GET
+     * http://localhost:8080/SoccerRecords-rest/teams
+     *
+     * @return TeamDTO
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TeamDTO> getCategories() {
+    public final List<TeamDTO> getTeams() {
 
-        logger.debug("rest getCategories()");
+        logger.debug("rest getTeams()");
         return teamFacade.getAllTeams();
     }
 
+
     /**
      * 
-     * Get one category specified by id
+     * Get one team specified by id
      * 
-     * @param id identifier for the category
-     * @return CategoryDTO
+     * @param id identifier for the team
+     * @return TeamDTO
      * @throws Exception ResourceNotFoundException
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,4 +62,31 @@ public class TeamsController {
 
         return teamDTO;
     }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    public final TeamDTO createTeam(@RequestBody TeamDTO team) throws Exception {
+
+        logger.debug("rest createTeam()");
+
+        try {
+            Long id = teamFacade.createTeam(team);
+            return teamFacade.getTeamById(id);
+        } catch (Exception ex) {
+            throw new Exception();
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final void deleteTeam(@PathVariable("id") long id) throws Exception {
+        logger.debug("rest deleteTeam({})", id);
+        try {
+            TeamDTO teamDTO = teamFacade.getTeamById(id);
+            teamFacade.createTeam(teamDTO);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+    }
+
+
 }

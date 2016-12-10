@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /**
@@ -34,7 +35,8 @@ public class Team {
     @Column(name="country")
     private String country;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name="team_id")
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {
