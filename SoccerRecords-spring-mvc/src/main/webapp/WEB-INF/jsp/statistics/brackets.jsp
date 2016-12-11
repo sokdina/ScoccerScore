@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Select team to generate">
+<my:pagetemplate title="Select team to generate tournament brackets">
 <jsp:attribute name="body">
 
     <form method="post" action="${pageContext.request.contextPath}/statistics/generated">

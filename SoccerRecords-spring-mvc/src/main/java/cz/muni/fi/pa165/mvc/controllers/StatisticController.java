@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.mvc.controllers;
 import com.google.common.collect.Lists;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.PlayerDTO;
-import cz.fi.muni.pa165.dto.TeamCreateDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.entity.Team;
