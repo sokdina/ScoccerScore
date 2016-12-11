@@ -4,20 +4,27 @@ package cz.fi.muni.pa165.dto;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Player;
 import java.util.Objects;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Jaromir Sys
  */
-public class GoalDTO{
-     private Long id;
+public class GoalCreateDTO{
 
+    @Min(0)
+    @Max(120)
     private int goalTime;
 
+    @NotNull
     private String description;
     
+    @NotNull
     private Game game;
     
+    //@NotNull
     private Player player;
 
     public Player getPlayer() {
@@ -26,14 +33,6 @@ public class GoalDTO{
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Game getGame() {
@@ -79,19 +78,21 @@ public class GoalDTO{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GoalDTO other = (GoalDTO) obj;
+        final GoalCreateDTO other = (GoalCreateDTO) obj;
+        if (this.goalTime != other.goalTime) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.goalTime, other.goalTime)) {
-            return false;
-        }
-        return Objects.equals(this.id, other.id);
+        return true;
     }
+
+
 
     @Override
     public String toString() {
-        return "GoalDTO " + id;
+        return "GoalCreateDTO " + description + "goal time" + goalTime;
         //return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
     }
 }
