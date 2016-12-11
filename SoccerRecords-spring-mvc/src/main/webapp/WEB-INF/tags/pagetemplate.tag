@@ -34,7 +34,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><my:a href="/pa165/SoccerRecords"><f:message key="navigation.SoccerRecords"/></my:a></li>
+                <li clas="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.SoccerRecords"/><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><my:a href="/statistics/list">Top Scorers</my:a></li>
+                    </ul>
                 <c:if test="${not empty pageContext.request.getSession(false).getAttribute('authenticatedUser')}">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>

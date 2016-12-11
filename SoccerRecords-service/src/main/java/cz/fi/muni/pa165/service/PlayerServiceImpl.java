@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.service;
 
 
+import cz.fi.muni.pa165.comparator.SortByGoals;
 import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
@@ -158,6 +159,13 @@ public class PlayerServiceImpl implements IPlayerService{
         }catch(Exception e){
             throw new SoccerRecordsDataAccessException(e); 
         }
+    }
+    
+    public List<Player> getsortedPlayerByCountGoals(){
+        List<Player> players = new ArrayList<>();
+        players.addAll(playerdao.findAll());
+        Collections.sort(players, new SortByGoals());
+        return players;
     }
 
     

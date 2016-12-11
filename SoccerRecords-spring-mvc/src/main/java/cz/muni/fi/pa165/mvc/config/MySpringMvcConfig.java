@@ -46,6 +46,7 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/game").setViewName("game");
         registry.addViewController("/player").setViewName("player");
         registry.addViewController("/user").setViewName("user");
+        registry.addViewController("/statistics").setViewName("statistics");
     }
 
 

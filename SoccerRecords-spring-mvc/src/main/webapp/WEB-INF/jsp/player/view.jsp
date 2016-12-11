@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Match result">
+<my:pagetemplate title="Player Detail">
 <jsp:attribute name="body">
 
     <form method="post" action="${pageContext.request.contextPath}/player/delete/${player.id}">

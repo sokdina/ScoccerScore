@@ -86,5 +86,12 @@ public class PlayerFacadeImpl implements IPlayerFacade{
 	playerService.updatePlayer(beanMappingService.mapTo(p, Player.class));
     }
 
+    @Override
+    public List<PlayerDTO> getsortedPlayerByCountGoals() {
+       List<Player> pls = new ArrayList<>();
+       pls.addAll(playerService.getsortedPlayerByCountGoals());
+       return beanMappingService.mapTo(pls, PlayerDTO.class);
+    }
+
     
 }
