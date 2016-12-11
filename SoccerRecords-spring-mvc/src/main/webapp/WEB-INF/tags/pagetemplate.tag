@@ -38,6 +38,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.SoccerRecords"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/statistics/list">Top Scorers</my:a></li>
+                        <li><my:a href="/statistics/brackets">Generate Brackets</my:a></li>
                     </ul>
                 <c:if test="${not empty pageContext.request.getSession(false).getAttribute('authenticatedUser')}">
                 <li class="dropdown">
