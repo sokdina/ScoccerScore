@@ -5,13 +5,15 @@
  */
 package cz.fi.muni.pa165.facade;
 
-import cz.fi.muni.pa165.dto.GameCreateDTO;
-import cz.fi.muni.pa165.dto.GoalDTO;
-import cz.fi.muni.pa165.dto.PlayerDTO;
-import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.dto.GoalCreateDTO;
+import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.service.IGameService;
+import cz.fi.muni.pa165.service.IPlayerService;
+import cz.fi.muni.pa165.service.ITeamService;
 import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,82 +34,75 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private IGoalFacade goalFacade;
-
+    
+    @Autowired
+    private ITeamService teamService;
+    @Autowired
+    private IGameService gameService;
+    @Autowired
+    private IPlayerService playerService;
+    
+    @Autowired
+    private IPlayerFacade playerFacade;
+    
     @Autowired
     private IGameFacade gameFacade;
 
-    @Autowired
-    private IPlayerFacade playerFacade;
-
-    @Autowired
-    private ITeamFacade teamFacade;
-
-    private GoalDTO goalDto;
-    private Player playerDto;
-    private GameCreateDTO gameDTO;
-    private Team teamDTOOne;
-    private Team teamDTOTwo;
+    private GoalCreateDTO goalCreateDto;
+    private Player player;
+    private Game game;
+    private Team teamOne;
+    private Team teamTwo;
 
     @BeforeMethod
     public void setUpMethod() {
-        teamDTOOne = new Team();
-//        teamDTOOne.setId(1L);
-        teamDTOOne.setName("Real Madrid C.F.");
-        teamDTOOne.setCity("Madrid");
-        teamDTOOne.setCountry("Spain");
+        teamOne = new Team();
+        teamOne.setName("Real Madrid C.F.");
+        teamOne.setCity("Madrid");
+        teamOne.setCountry("Spain");
+        teamService.create(teamOne);
 
-        teamDTOTwo = new Team();
-//        teamDTOTwo.setId(2L);
-        teamDTOTwo.setName("FC Barcelona");
-        teamDTOTwo.setCity("Barcelona");
-        teamDTOTwo.setCountry("Spain");
+        teamTwo = new Team();
+        teamTwo.setName("FC Barcelona");
+        teamTwo.setCity("Barcelona");
+        teamTwo.setCountry("Spain");
+        teamService.create(teamTwo);
 
-        //teamFacade.createTeam(teamDTOOne);
-        //teamFacade.createTeam(teamDTOTwo);
         
-        gameDTO = new GameCreateDTO();
-        // please help to check
-//        gameDTO.setId(1L);	
-        //gameDTO.setHomeTeam(teamDTOOne);
-        //gameDTO.setGuestTeam(teamDTOTwo);
-        //gameDTO.setMatchResult(MatchResult.DRAW);
-        gameDTO.setDateOfGame(new Date());
-        gameDTO.setHomeScore(1);
-        gameDTO.setGuestScore(1);
-        
-        //gameFacade.create(gameDTO);
+        game = new Game();
+        // please help to check	
+        game.setHomeTeam(teamOne);
+        game.setGuestTeam(teamTwo);
+        game.setMatchResult(MatchResult.DRAW);
+        game.setDateOfGame(new Date());
+        game.setHomeScore(1);
+        game.setGuestScore(1);
+        gameService.create(game);
         
         
-        playerDto = new Player();
-        playerDto.setCountry("Argentina");
-        playerDto.setDateOfBirth(new Date(System.currentTimeMillis()));
-        playerDto.setDressNumber(5);
-        playerDto.setName("Messi");
-        playerDto.setPosition(Position.FORWARD);
-//        playerDto.setTeam(teamDTOOne);
-//        playerDto.setId(5L);
-
-        //playerFacade.createPlayer(playerDto);
         
-        playerDto.setTeam(teamDTOOne);
+        player = new Player();
+        player.setCountry("Argentina");
+        player.setDateOfBirth(new Date(System.currentTimeMillis()));
+        player.setDressNumber(5);
+        player.setName("Messi");
+        player.setPosition(Position.FORWARD);
+        player.setTeam(teamOne);
+        playerService.createPlayer(player);
         
-        goalDto = new GoalDTO();
-//        goalDto.setId(5L);
-        goalDto.setGoalTime(new Date(System.currentTimeMillis()));
-        goalDto.setDescription("GOOOL");
-        //goalDto.setGame(gameDTO);
+        
+        goalCreateDto = new GoalCreateDTO();
+        goalCreateDto.setGame(gameFacade.findById(game.getId()));
+        goalCreateDto.setPlayer(playerFacade.findById(player.getId()));
+        goalCreateDto.setGoalTime(10);
+        goalCreateDto.setDescription("GOOOL");
     }
 
     /**
      * Test of createTeam method, of class TeamFacadeImpl.
      */
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void testCreateTeamAndFinbById() {
-//        System.out.println("createTeam  -- " + goalDto.getPlayer().toString());   
-
-        goalFacade.createGoal(goalDto);
-        Long id = goalDto.getId();
-
+        goalFacade.createGoal(goalCreateDto);
     }
-
 }

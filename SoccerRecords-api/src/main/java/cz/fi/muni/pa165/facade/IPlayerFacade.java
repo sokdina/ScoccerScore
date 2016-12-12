@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.facade;
 
 
 import cz.fi.muni.pa165.dto.PlayerDTO;
+import cz.fi.muni.pa165.entity.Player;
 import java.util.List;
 
 /**
@@ -65,4 +66,7 @@ public interface IPlayerFacade {
      */
     public void removeGoal(Long playerId, Long goalId);
 
+    public void updatePlayer(PlayerDTO p);
+       
+    public List<PlayerDTO> getsortedPlayerByCountGoals();
 }

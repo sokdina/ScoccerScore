@@ -1,3 +1,7 @@
 SoccerRecords-service/target/
 SoccerRecords-api/target/
 *~
+/SoccerRecords-sample-data/target/
+/SoccerRecords-spring-mvc/target/
+/SoccerRecords-rest/target/
+SoccerRecords-spring-mvc/src/main/webapp/META-INF/context.xml

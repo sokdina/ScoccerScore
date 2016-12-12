@@ -58,7 +58,7 @@ public class Player
     private Team team;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "player")
-    private Set<Goal> goal = new HashSet<>();
+    private Set<Goal> goals = new HashSet<>();
 
     public Player(){
             super();
@@ -128,12 +128,12 @@ public class Player
         this.team = null;
     }
 
-    public Set<Goal> getGoal() {
-        return goal;
+    public Set<Goal> getGoals() {
+        return goals;
     }
 
     public void addGoal(Goal goal) {
-        this.goal.add(goal);
+        this.goals.add(goal);
         if(goal.getPlayer()== null){
             goal.setPlayer(this);
         }
@@ -144,7 +144,7 @@ public class Player
     
     public void removeGoal(Goal goal) {
         if(goal !=null)
-        this.goal.remove(goal);
+        this.goals.remove(goal);
     }
 
     @Override
@@ -180,9 +180,8 @@ public class Player
 
     @Override
     public String toString() {
-        return "Player{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + ", team=" + team + ", goal=" + goal + '}';
+        return "Player{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + ", team=" + team + ", goal=" + goals + '}';
     }
         
         
 }
-

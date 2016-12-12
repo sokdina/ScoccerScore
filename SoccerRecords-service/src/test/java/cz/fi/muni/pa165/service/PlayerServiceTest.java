@@ -26,6 +26,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Set;
 import java.util.HashSet;
+import org.mockito.Mockito;
 
 /**
  * 
@@ -61,7 +62,8 @@ public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void prepareTestPlayer() {
-      
+        Mockito.reset(playerDao);
+        Mockito.reset(goalDao);
         
         p1 = new Player();
         p1.setId(1L);
@@ -98,7 +100,7 @@ public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
         
         g1 = new Goal();
         g1.setDescription("asdsad");
-        g1.setGoalTime(new Date());
+        g1.setGoalTime(10);
         g1.setId(55L);
     }
     

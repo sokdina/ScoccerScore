@@ -34,9 +34,9 @@ public class PlayerDTO {
     private String country;
 
 
-    private Team team;
+    private TeamDTO team;
 
-    private Set<Goal> goals = new HashSet<>();
+    private Set<GoalDTO> goals = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -86,19 +86,19 @@ public class PlayerDTO {
         this.country = country;
     }
 
-    public Team getTeam() {
+    public TeamDTO getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(TeamDTO team) {
         this.team = team;
     }
 
-    public Set<Goal> getGoal() {
+    public Set<GoalDTO> getGoals() {
         return goals;
     }
 
-    public void setGoal(Set<Goal> goals) {
+    public void setGoals(Set<GoalDTO> goals) {
         this.goals = goals;
     }
     

@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.GameDTO;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.dto.TeamDTO;
@@ -13,14 +14,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 import cz.fi.muni.pa165.service.ITeamService;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
  * @author sokdina999@gamil.com
 **/
-
-
 
 @Service
 @Transactional
@@ -77,7 +79,16 @@ public class TeamFacadeImpl implements ITeamFacade {
 
     @Override
     public void removePlayer(Long teamId, Long playerId){
-	teamService.deletePlayer(teamService.findById(teamId), playerService.findById(playerId));
+	teamService.deletePlayer(teamService.findById(teamId), playerService.findById(playerId));    
+    }
+
+    @Override
+    public List<GameDTO> createTurnamentBrackets(Set<TeamDTO> teamsDTO){
+        List<GameDTO> brackets = new ArrayList<>();
+        Set<Team> teams = new HashSet<>();
+        teams.addAll( beanMappingService.mapTo(teamsDTO, Team.class));
+        brackets.addAll(beanMappingService.mapTo(teamService.createTurnamentBrackets(teams), GameDTO.class));
+        return brackets;
     }
 
 }

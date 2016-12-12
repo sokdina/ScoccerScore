@@ -1,7 +1,10 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
+import cz.fi.muni.pa165.entity.Team;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -77,4 +80,5 @@ public interface ITeamFacade {
 	*/
 	public void removePlayer(Long teamId, Long playerId);
 
+        public List<GameDTO> createTurnamentBrackets(Set<TeamDTO> teams);
 }

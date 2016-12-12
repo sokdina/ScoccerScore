@@ -73,6 +73,8 @@ public interface IPlayerService {
      * @param goal
      */
     public void removeGoal(Player player, Goal goal);
+    
+    public List<Player> getsortedPlayerByCountGoals();
 
     
 }

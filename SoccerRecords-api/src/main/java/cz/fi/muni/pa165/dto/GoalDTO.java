@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Player;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,9 +12,21 @@ import java.util.Objects;
 public class GoalDTO{
      private Long id;
 
-    private Date goalTime;
+    private int goalTime;
 
     private String description;
+    
+    private Game game;
+    
+    private Player player;
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
     public Long getId() {
         return id;
@@ -25,11 +36,19 @@ public class GoalDTO{
         this.id = id;
     }
 
-    public Date getGoalTime() {
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+    
+    public int getGoalTime() {
         return goalTime;
     }
 
-    public void setGoalTime(Date goalTime) {
+    public void setGoalTime(int goalTime) {
         this.goalTime = goalTime;
     }
 
@@ -68,11 +87,10 @@ public class GoalDTO{
             return false;
         }
         return Objects.equals(this.id, other.id);
-    }
+    }    
 
     @Override
     public String toString() {
-        return "GoalDTO " + id;
-        //return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
+        return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + '}';
     }
 }

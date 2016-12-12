@@ -20,9 +20,8 @@ public class Goal
     @Column
     private Long id;
 
-    @Temporal(TemporalType.DATE) 
     @Column
-    private Date goalTime;
+    private Integer goalTime;
 
     @Column 
     private String description;
@@ -47,11 +46,11 @@ public class Goal
         this.id = id;
     }
 
-    public Date getGoalTime() {
+    public Integer getGoalTime() {
         return goalTime;
     }
 
-    public void setGoalTime(Date goalTime) {
+    public void setGoalTime(Integer goalTime) {
         this.goalTime = goalTime;
     }
 
@@ -80,14 +79,14 @@ public class Goal
 
     public void setPlayer(Player player) {
         this.player = player;
-        if(!player.getGoal().contains(this)){
+        if(!player.getGoals().contains(this)){
             player.addGoal(this);
         }
     }
 
     @Override
     public String toString() {
-        return "Goal{" + "id=" + id + ", time=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
+        return "Goal{" + "id=" + id + ", time=" + goalTime + ", description=" + description + ", game=" + ", player=" + '}';
     }
 
     @Override
@@ -127,4 +126,3 @@ public class Goal
         return true;
     }
 }
-

@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 public interface IGoalService {
     public Goal findById(Long id);
     public Set<Goal> findAll();
-    public void createGoal(Goal goal);
+    public Long createGoal(Goal goal);
     public void deleteGoal(Goal goal);
     public void updateGoal(Goal goal);
     
-    public Set<Goal> findByGoalTime(Date date);
+    public Set<Goal> findByGoalTime(Integer date);
     
     public Set<Goal> findByGame(Game game);
     

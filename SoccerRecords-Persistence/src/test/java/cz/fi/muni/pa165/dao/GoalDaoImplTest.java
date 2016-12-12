@@ -60,10 +60,10 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
             g2 = new Goal();
 
           
-            g1.setGoalTime(new Date());
+            g1.setGoalTime(8);
             g1.setDescription("fantastic goal");
          
-            g2.setGoalTime(new Date());         
+            g2.setGoalTime(15);         
             g2.setDescription("goal after corner");  
             goalDao.create(g2);
   }
