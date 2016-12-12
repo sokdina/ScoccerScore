@@ -5,11 +5,7 @@
  */
 package cz.fi.muni.pa165.facade;
 
-import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GoalCreateDTO;
-import cz.fi.muni.pa165.dto.GoalDTO;
-import cz.fi.muni.pa165.dto.PlayerDTO;
-import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
@@ -20,13 +16,11 @@ import cz.fi.muni.pa165.service.IPlayerService;
 import cz.fi.muni.pa165.service.ITeamService;
 import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
 import java.util.Date;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -47,6 +41,12 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
     private IGameService gameService;
     @Autowired
     private IPlayerService playerService;
+    
+    @Autowired
+    private IPlayerFacade playerFacade;
+    
+    @Autowired
+    private IGameFacade gameFacade;
 
     private GoalCreateDTO goalCreateDto;
     private Player player;
@@ -92,8 +92,8 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
         
         
         goalCreateDto = new GoalCreateDTO();
-        goalCreateDto.setGame(game);
-        goalCreateDto.setPlayer(player);
+        goalCreateDto.setGame(gameFacade.findById(game.getId()));
+        goalCreateDto.setPlayer(playerFacade.findById(player.getId()));
         goalCreateDto.setGoalTime(10);
         goalCreateDto.setDescription("GOOOL");
     }
@@ -104,12 +104,5 @@ public class GoalFacadeTest extends AbstractTestNGSpringContextTests {
     @Test(enabled = true)
     public void testCreateTeamAndFinbById() {
         goalFacade.createGoal(goalCreateDto);
-        
-        for(GoalDTO goal: goalFacade.findAll()){
-            System.out.println("fuckfuck"+goal.toString());
-        }
-        //Long id = goalDto.getId();
-
     }
-
 }

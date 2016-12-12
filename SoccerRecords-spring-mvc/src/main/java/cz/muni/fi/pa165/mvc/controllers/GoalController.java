@@ -1,11 +1,12 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
+import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.GoalCreateDTO;
 import cz.fi.muni.pa165.dto.GoalDTO;
-import cz.fi.muni.pa165.dto.PlayerCreateDTO;
+import cz.fi.muni.pa165.dto.PlayerDTO;
+import cz.fi.muni.pa165.facade.IGameFacade;
 import cz.fi.muni.pa165.facade.IGoalFacade;
 import cz.fi.muni.pa165.facade.IPlayerFacade;
-import static cz.muni.fi.pa165.mvc.controllers.PlayerController.log;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -35,6 +36,9 @@ public class GoalController {
     
     @Autowired
     private IGoalFacade goalFacade;
+    
+    @Autowired
+    private IGameFacade gameFacade;
     
     @Autowired
     private IPlayerFacade playerFacade;
@@ -75,13 +79,18 @@ public class GoalController {
     
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newPlayer(Model model) {
+        List<PlayerDTO> players = playerFacade.findAll();
+        List<GameDTO> games = gameFacade.findAll();
+        
         log.debug("new()");
-        model.addAttribute("goalCreate", new GoalCreateDTO());
+        model.addAttribute("goalCreateDTO", new GoalCreateDTO());
+        model.addAttribute("games",games);
+        model.addAttribute("players", players);
         return "goal/new";
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("goalCreate") GoalCreateDTO formBean, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("goalCreateDTO") GoalCreateDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(goalCreate={})", formBean);
         //in case of validation error forward back to the the form
@@ -98,12 +107,20 @@ public class GoalController {
             return "goal/new";
             
         }
-
+        
+        convertIdsToDtos(formBean);
+        
+        
         Long id = goalFacade.createGoal(formBean);
 
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Goal " + id + " was created");
         return "redirect:" + uriBuilder.path("/goal/list").buildAndExpand(id).encode().toUriString();
+    }
+    
+    private void convertIdsToDtos(GoalCreateDTO dto){
+        dto.setGame(gameFacade.findById(dto.getGameId()));
+        dto.setPlayer(playerFacade.findById(dto.getPlayerId()));
     }
     
 }

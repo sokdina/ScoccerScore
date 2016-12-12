@@ -1,8 +1,6 @@
 
 package cz.fi.muni.pa165.dto;
 
-import cz.fi.muni.pa165.entity.Game;
-import cz.fi.muni.pa165.entity.Player;
 import java.util.Objects;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -21,25 +19,45 @@ public class GoalCreateDTO{
     @NotNull
     private String description;
     
-    @NotNull
-    private Game game;
+    //@NotNull
+    private GameDTO game;
     
     //@NotNull
-    private Player player;
+    private PlayerDTO player;
+    
+    private Long gameId;
+    
+    private Long playerId;
 
-    public Player getPlayer() {
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
+    }
+
+    public PlayerDTO getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(PlayerDTO player) {
         this.player = player;
     }
 
-    public Game getGame() {
+    public GameDTO getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(GameDTO game) {
         this.game = game;
     }
     
