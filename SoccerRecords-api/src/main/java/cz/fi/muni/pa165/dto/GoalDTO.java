@@ -87,11 +87,10 @@ public class GoalDTO{
             return false;
         }
         return Objects.equals(this.id, other.id);
-    }
+    }    
 
     @Override
     public String toString() {
-        return "GoalDTO " + id;
-        //return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
+        return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + '}';
     }
 }

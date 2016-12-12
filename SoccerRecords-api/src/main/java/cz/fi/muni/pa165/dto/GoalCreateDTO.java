@@ -88,11 +88,8 @@ public class GoalCreateDTO{
         return true;
     }
 
-
-
     @Override
     public String toString() {
-        return "GoalCreateDTO " + description + "goal time" + goalTime;
-        //return "GoalDTO{" + "id=" + id + ", goalTime=" + goalTime + ", description=" + description + ", game=" + game + ", player=" + player + '}';
+        return "GoalCreateDTO{" + "goalTime=" + goalTime + ", description=" + description + '}';
     }
 }

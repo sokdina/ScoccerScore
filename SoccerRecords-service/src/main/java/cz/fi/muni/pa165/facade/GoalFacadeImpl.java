@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameDTO;
+import cz.fi.muni.pa165.dto.GoalCreateDTO;
 import cz.fi.muni.pa165.dto.GoalDTO;
 import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.entity.Game;
@@ -45,8 +46,8 @@ public class GoalFacadeImpl implements IGoalFacade{
     }
 
     @Override
-    public void createGoal(GoalDTO goal) {
-        goalService.createGoal(beanMappingService.mapTo(goal, Goal.class));
+    public Long createGoal(GoalCreateDTO goal) {
+        return goalService.createGoal(beanMappingService.mapTo(goal, Goal.class));
     }
 
     @Override

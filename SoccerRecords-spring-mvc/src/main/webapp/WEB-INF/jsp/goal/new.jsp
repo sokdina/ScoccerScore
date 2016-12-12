@@ -5,47 +5,25 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Create new goal">
+<my:pagetemplate title="Add new Player">
 <jsp:attribute name="body">
-
-    <form:form method="post" action="${pageContext.request.contextPath}/goal/create"
-               modelAttribute="goalCreate" cssClass="form-horizontal">
-        <div class="form-group ${name_error?'has-error':''}">
-            <form:label path="name" cssClass="col-sm-2 control-label">Description</form:label>
-            <div class="col-sm-10">
-                <form:input path="name" cssClass="form-control"/>
-                <form:errors path="name" cssClass="help-block"/>
-            </div>
-        </div>
-        <div class="form-group ${city_error?'has-error':''}">
-            <form:label path="city" cssClass="col-sm-2 control-label">Time</form:label>
-            <div class="col-sm-10">
-                <form:input path="city" cssClass="form-control"/>
-                <form:errors path="city" cssClass="help-block"/>
-            </div>
-        </div>
-        <div class="form-group ${country_error?'has-error':''}">
-            <form:label path="country" cssClass="col-sm-2 control-label">Game</form:label>
-            <div class="col-sm-10">
-                <form:input path="country" cssClass="form-control"/>
-                <form:errors path="country" cssClass="help-block"/>
-            </div>
-        </div>
-        <div class="form-group ${country_error?'has-error':''}">
-            <form:label path="country" cssClass="col-sm-2 control-label">Player</form:label>
-            <div class="col-sm-10">
-                <form:input path="country" cssClass="form-control"/>
-                <form:errors path="country" cssClass="help-block"/>
-            </div>
-        </div>
-            
-         <center>
-         <button style="float: right;" class="btn btn-primary" type="submit">Create New Team</button>
-        </center>
-	</br>
-	</br>
+    
+    <form:form method="post" action="${pageContext.request.contextPath}/player/create"
+               modelAttribute="playerCreate" cssClass="form-horizontal">
+            <%@include file="form.jsp"%>       
+    <button class="btn btn-success" style="float: right;" type="submit">Create player</button>
     </form:form>
+
+
 
 </jsp:attribute>
 </my:pagetemplate>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
+<script>
+  $( function() {
+    $( "#dateOfBirth" ).datepicker();
+  } );
+</script>

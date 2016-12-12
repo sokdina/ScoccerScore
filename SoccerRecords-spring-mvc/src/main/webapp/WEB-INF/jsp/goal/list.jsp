@@ -25,8 +25,8 @@
         <tbody>
         <c:forEach items="${goals}" var="goal">
             <tr>
-                <td><c:out value="${gaol.id}"/></td>
-                <td><c:out value="${gaol.description}"/></td>
+                <td><c:out value="${goal.id}"/></td>
+                <td><c:out value="${goal.description}"/></td>
                 <td><c:out value="${goal.goalTime}"/></td>
                 
                 <td><c:out value="${goal.game.homeTeam.name}"/>-<c:out value="${goal.game.guestTeam.name}"/></td>

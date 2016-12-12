@@ -48,7 +48,7 @@ public class GoalServiceImpl implements IGoalService{
     }
 
     @Override
-    public void createGoal(Goal goal) {
+    public Long createGoal(Goal goal) {
         try{
             goalDao.create(goal);
             
@@ -59,6 +59,8 @@ public class GoalServiceImpl implements IGoalService{
             Game g = goal.getGame();
             g.addGoal(goal);
             gameDao.update(g);
+            
+            return goal.getId();
         }
         catch(Exception e){
             throw new SoccerRecordsDataAccessException(e); 
