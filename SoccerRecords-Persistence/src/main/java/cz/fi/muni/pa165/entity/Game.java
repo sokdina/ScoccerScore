@@ -52,7 +52,7 @@ public class Game
     @Column
     private int guestScore;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "game")
     private Set<Goal> goals = new HashSet<>();
 
     public Game(){

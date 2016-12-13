@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public interface IGameFacade {
     
     
-    public void create(GameDTO g);
+    public Long create(GameCreateDTO g);
 
     public GameDTO update(GameDTO g);
 

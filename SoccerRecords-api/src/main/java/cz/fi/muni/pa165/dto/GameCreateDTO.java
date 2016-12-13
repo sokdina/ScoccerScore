@@ -19,37 +19,27 @@ import javax.validation.constraints.NotNull;
 public class GameCreateDTO {
     
     @NotNull
-    private TeamDTO homeTeam;
+    private Long homeTeam;
 
     @NotNull
-    private TeamDTO guestTeam;
+    private Long guestTeam;
 
     @NotNull
     private Date dateOfGame;
 
-    @NotNull
-    @Min(0)
-    private int homeScore;
-
-    @NotNull
-    @Min(0)
-    private int guestScore;
-
-    private Set<GoalDTO> goal = new HashSet<>();
-
-    public TeamDTO getHomeTeam() {
+    public Long getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(TeamDTO homeTeam) {
+    public void setHomeTeam(Long homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public TeamDTO getGuestTeam() {
+    public Long getGuestTeam() {
         return guestTeam;
     }
 
-    public void setGuestTeam(TeamDTO guestTeam) {
+    public void setGuestTeam(Long guestTeam) {
         this.guestTeam = guestTeam;
     }
 
@@ -61,38 +51,12 @@ public class GameCreateDTO {
         this.dateOfGame = dateOfGame;
     }
 
-    public int getHomeScore() {
-        return homeScore;
-    }
-
-    public void setHomeScore(int homeScore) {
-        this.homeScore = homeScore;
-    }
-
-    public int getGuestScore() {
-        return guestScore;
-    }
-
-    public void setGuestScore(int guestScore) {
-        this.guestScore = guestScore;
-    }
-
-    public Set<GoalDTO> getGoal() {
-        return goal;
-    }
-
-    public void setGoal(Set<GoalDTO> goal) {
-        this.goal = goal;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + (this.homeTeam != null ? this.homeTeam.hashCode() : 0);
         hash = 67 * hash + (this.guestTeam != null ? this.guestTeam.hashCode() : 0);
         hash = 67 * hash + (this.dateOfGame != null ? this.dateOfGame.hashCode() : 0);
-        hash = 67 * hash + this.homeScore;
-        hash = 67 * hash + this.guestScore;
         return hash;
     }
 
@@ -108,12 +72,6 @@ public class GameCreateDTO {
             return false;
         }
         final GameCreateDTO other = (GameCreateDTO) obj;
-        if (this.homeScore != other.homeScore) {
-            return false;
-        }
-        if (this.guestScore != other.guestScore) {
-            return false;
-        }
         if (this.homeTeam != other.homeTeam && (this.homeTeam == null || !this.homeTeam.equals(other.homeTeam))) {
             return false;
         }
