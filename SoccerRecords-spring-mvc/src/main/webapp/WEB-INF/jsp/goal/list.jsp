@@ -18,6 +18,7 @@
             <th>Id</th>
             <th>Description</th>
             <th>Time</th>
+            <th>Player</th>
             <th>Game</th>
             <th class="col-md-3">Action</th>
         </tr>
@@ -28,8 +29,9 @@
                 <td><c:out value="${goal.id}"/></td>
                 <td><c:out value="${goal.description}"/></td>
                 <td><c:out value="${goal.goalTime}"/></td>
+                <td><c:out value="${goal.player.name}"/></td>
                 
-                <td><c:out value="${goal.game.homeTeam.name}"/>-<c:out value="${goal.game.guestTeam.name}"/></td>
+                <td><c:out value="${goal.game.dateOfGame}"/> <c:out value="${goal.game.homeTeam.name}"/>-<c:out value="${goal.game.guestTeam.name}"/></td>
                 <td>
                     <my:a href="/goal/view/${goal.id}" class="btn btn-info">View</my:a>               
                     <my:a href="/goal/edit/${goal.id}" class="btn btn-warning">Edit</my:a>                
