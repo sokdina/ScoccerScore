@@ -29,6 +29,12 @@ public class GoalFacadeImpl implements IGoalFacade{
     private IGoalService goalService;
     
     @Autowired
+    private IPlayerFacade playerFacade;
+    
+    @Autowired
+    private IGameFacade gameFacade;
+    
+    @Autowired
     private BeanMappingService beanMappingService;
     
     @Override
@@ -47,6 +53,13 @@ public class GoalFacadeImpl implements IGoalFacade{
 
     @Override
     public Long createGoal(GoalCreateDTO goal) {
+        if(goal.getGame() == null && goal.getGameId() != null){
+            goal.setGame(gameFacade.findById(goal.getGameId()));
+        }
+        if(goal.getPlayer() == null && goal.getPlayerId() != null){
+            goal.setPlayer(playerFacade.findById(goal.getPlayerId()));
+        }
+        
         return goalService.createGoal(beanMappingService.mapTo(goal, Goal.class));
     }
 

@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -61,10 +62,11 @@ public class GoalController {
         return "goal/list";
     }
     
+    @Transactional
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         GoalDTO goal = goalFacade.findById(id);
-        goalFacade.deleteGoal(goal);
+        goalFacade.deleteGoal(goalFacade.findById(id));
         log.debug("delete({})", id);
         redirectAttributes.addFlashAttribute("alert_success", "Goal \"" + goal.toString() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/goal/list").toUriString();
@@ -106,21 +108,12 @@ public class GoalController {
             }
             return "goal/new";
             
-        }
-        
-        convertIdsToDtos(formBean);
-        
+        }        
         
         Long id = goalFacade.createGoal(formBean);
 
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Goal " + id + " was created");
         return "redirect:" + uriBuilder.path("/goal/list").buildAndExpand(id).encode().toUriString();
-    }
-    
-    private void convertIdsToDtos(GoalCreateDTO dto){
-        dto.setGame(gameFacade.findById(dto.getGameId()));
-        dto.setPlayer(playerFacade.findById(dto.getPlayerId()));
-    }
-    
+    }    
 }
