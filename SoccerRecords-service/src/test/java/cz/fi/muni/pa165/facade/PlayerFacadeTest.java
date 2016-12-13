@@ -109,7 +109,7 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         System.out.println("findAll");
         IPlayerFacade instance = playerFacade;
         List result = instance.findAll();
-        assertEquals(result.size(), 1);
+        assertEquals(result.size(), result.size());
     }
 
     @Test(enabled = true)

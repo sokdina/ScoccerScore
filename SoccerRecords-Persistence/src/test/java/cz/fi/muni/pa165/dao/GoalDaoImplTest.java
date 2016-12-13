@@ -5,18 +5,14 @@
  */
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.dao.IPlayerDao;
-import cz.fi.muni.pa165.dao.IGoalDao;
-import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
@@ -141,7 +137,7 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
     
     @Test
     public void findAll(){
-        Set<Goal> goals = goalDao.findAll();
+        Collection<Goal> goals = goalDao.findAll();
         Assert.assertEquals( goals.size() ,1);
     }
     
@@ -166,7 +162,7 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
         goalDao.create(g1);
         goalDao.update(g2);
        
-        Set<Goal> goals = goalDao.findByPlayer(p);
+        Collection<Goal> goals = goalDao.findByPlayer(p);
         Assert.assertEquals( goals.size() ,2);
         
     }
@@ -189,7 +185,7 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
         
         
         
-        Set<Goal> games = goalDao.findByGame(g);
+        Collection<Goal> games = goalDao.findByGame(g);
         Assert.assertEquals( games.size() ,2);
         
     }

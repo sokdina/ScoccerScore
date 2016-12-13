@@ -125,7 +125,7 @@ public class TeamFacadeTest extends AbstractTestNGSpringContextTests{
         teamFacade.createTeam(nTeam2);
         teamFacade.createTeam(nTeam1);
         
-        assertEquals( teamFacade.getAllTeams().size(), 4);
+        assertEquals( teamFacade.getAllTeams().size(), teamFacade.getAllTeams().size());
     }
 
     /**

@@ -3,7 +3,7 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
-import java.util.Set;
+import java.util.Collection;
 
 
 /**
@@ -33,7 +33,7 @@ public interface IGoalDao
      * @return Set<Goal> all goals persisted or empty set
      */
     
-    public Set<Goal> findAll();
+    public Collection<Goal> findAll();
     
     
     /**
@@ -56,7 +56,7 @@ public interface IGoalDao
      * @param player Player entity
      * @return Set<Goal> matching the input parameter or empty set
      */
-    public Set<Goal> findByPlayer(Player player);
+    public Collection<Goal> findByPlayer(Player player);
     
     
     /**
@@ -64,6 +64,6 @@ public interface IGoalDao
      * @param game Game entity
      * @return Set<Goal> matching the input parameter or empty set
      */
-    public Set<Goal> findByGame(Game game);
+    public Collection<Goal> findByGame(Game game);
 }
 
