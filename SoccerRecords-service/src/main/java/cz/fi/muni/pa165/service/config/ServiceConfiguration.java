@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
+import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.GoalDTO;
 import cz.fi.muni.pa165.dto.PlayerDTO;
