@@ -8,9 +8,11 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
+import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
@@ -52,6 +54,9 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     
     @Mock
     private IPlayerDao playerDao;
+    
+    @Mock
+    private ITeamDao teamDao;
 
     @Autowired
     @InjectMocks
@@ -60,6 +65,7 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     private Player player;
     private Game game;
     private Goal goal;
+    private Team t1;
 
     @BeforeClass
     public void setup() throws ServiceException {
@@ -70,16 +76,24 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     public void cleanupMocks(){
         Mockito.reset(gameDao);
         Mockito.reset(goalDao);
+        Mockito.reset(teamDao);
     }
 
     @BeforeMethod
     public void prepareTestTeam() {
+        t1 = new Team();
+        t1.setCity("asdasd");
+        t1.setCountry("asd");
+        t1.setName("asdadadsad");
+        teamDao.create(t1);
+        
         player = new Player();
         player.setName("Ronaldo");
         player.setPosition(Position.FORWARD);
         player.setDateOfBirth(new Date(System.currentTimeMillis()));
         player.setDressNumber(7);
         player.setCountry("Portugal");
+        player.setTeam(t1);
         playerDao.create(player);
 
         game = new Game();
@@ -152,7 +166,7 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
         Goal goal2 = new Goal();
         goal2.setId(6L);
         goal2.setPlayer(player2);
-        goal2.setGame(game);
+        //goal2.setGame(game);
         
         
         Set<Goal> goals = new HashSet<>();

@@ -47,18 +47,36 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
     @Autowired
     private IPlayerDao playerDao;
     
-    //uncomment after gameDao implementation
     @Autowired
     private IGameDao gameDao;
+    
+    @Autowired
+    private ITeamDao teamDao;
      
     private Goal g1;
     private Goal g2;
+    private Player p1;
+    private Team t1;
     
     @BeforeMethod
     public void initialization() {
             g1 = new Goal();
             g2 = new Goal();
+            p1 = new Player();
+            t1 = new Team();
+            
+            t1.setCity("asdasd");
+            t1.setCountry("asd");
+            t1.setName("asdadadsad");
+            teamDao.create(t1);
 
+            p1.setCountry("asd");
+            p1.setDateOfBirth(new Date());
+            p1.setDressNumber(1);
+            p1.setName("sadasd");
+            p1.setPosition(Position.FORWARD);
+            p1.setTeam(t1);
+            playerDao.create(p1);
           
             g1.setGoalTime(8);
             g1.setDescription("fantastic goal");
@@ -96,7 +114,8 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
         Game game = new Game();
         game.setDateOfGame(new Date());
         game.setGuestScore(1);
-        game.setHomeScore(2);                
+        game.setHomeScore(2);
+        g2.setPlayer(p1);
         g2.setGame(game);
         
         Assert.assertEquals(goalDao.findById(g2.getId()).getGame(),g2.getGame());
@@ -155,19 +174,20 @@ public class GoalDaoImplTest extends AbstractTestNGSpringContextTests{
     //Uncomment after GameDao implementation will be in 
     @Test
     public void findByGame(){
+        g1.setPlayer(p1);
+        goalDao.create(g1);
+        g2.setPlayer(p1);
+        goalDao.update(g2);
         Game g = new Game();
         g.setDateOfGame(new Date());
         g.setGuestScore(1);
-        g.setHomeScore(2);
-        
-        g1.setGame(g);
-        
-        g2.setGame(g);
-        
+        g.setHomeScore(2);        
         gameDao.create(g);
+        g.addGoal(g1);
+        g.addGoal(g2);
         
-        goalDao.update(g2);
-        goalDao.create(g1);
+        
+        
         
         Set<Goal> games = goalDao.findByGame(g);
         Assert.assertEquals( games.size() ,2);

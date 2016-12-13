@@ -118,7 +118,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         Game game = new Game();
         game.setDateOfGame(date);
-        game.setGameResult(homeScore, guestScore);
+        //game.setGameResult(homeScore, guestScore);
         game.setHomeTeam(homeTeam);
         game.setGuestTeam(guestTeam);
         

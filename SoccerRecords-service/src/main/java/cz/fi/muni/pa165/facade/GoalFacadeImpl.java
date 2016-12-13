@@ -65,8 +65,9 @@ public class GoalFacadeImpl implements IGoalFacade{
 
     @Override
     public void deleteGoal(GoalDTO goal) {
-        GoalDTO temp = findById(goal.getId());
-        goalService.deleteGoal(beanMappingService.mapTo(temp, Goal.class));
+        //GoalDTO temp = findById(goal.getId());
+        //beanMappingService.mapTo(temp, Goal.class)
+        goalService.deleteGoal(goalService.findById(goal.getId()));
     }
 
     @Override

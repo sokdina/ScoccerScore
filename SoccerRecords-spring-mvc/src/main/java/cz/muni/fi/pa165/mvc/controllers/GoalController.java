@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.facade.IGameFacade;
 import cz.fi.muni.pa165.facade.IGoalFacade;
 import cz.fi.muni.pa165.facade.IPlayerFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -62,7 +63,6 @@ public class GoalController {
         return "goal/list";
     }
     
-    @Transactional
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         GoalDTO goal = goalFacade.findById(id);
@@ -108,7 +108,21 @@ public class GoalController {
             }
             return "goal/new";
             
-        }        
+        }
+        
+        List<PlayerDTO> players = new ArrayList<>();
+        
+        GameDTO game = gameFacade.findById(formBean.getGameId());
+        
+        players.addAll(playerFacade.findPlayersByTeam(game.getGuestTeam().getId()));
+        players.addAll(playerFacade.findPlayersByTeam(game.getHomeTeam().getId()));
+        PlayerDTO player = playerFacade.findById(formBean.getPlayerId());
+        
+        if(!players.contains(player)){
+            redirectAttributes.addFlashAttribute("alert_warning", "Goal creation failed - player is not part of playing teams");
+            return "redirect:" + uriBuilder.path("/goal/list").build().encode().toUriString();
+        }
+        
         
         Long id = goalFacade.createGoal(formBean);
 

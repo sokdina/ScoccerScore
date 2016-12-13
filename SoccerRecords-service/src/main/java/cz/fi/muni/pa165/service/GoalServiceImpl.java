@@ -70,13 +70,14 @@ public class GoalServiceImpl implements IGoalService{
     @Override
     public void deleteGoal(Goal goal) {
         try{
+            Game g = goal.getGame();
+            g.deleteGoal(goal);
+            gameDao.update(g);
+            
             Player p = goal.getPlayer();
             p.removeGoal(goal);
             playerDao.update(p);
-            
-            Game g = goal.getGame();
-            //g.removeGoal(goal);
-            gameDao.update(g);
+
             
             goalDao.delete(goal);
         }
