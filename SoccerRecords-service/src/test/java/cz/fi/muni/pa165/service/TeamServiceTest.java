@@ -1,12 +1,9 @@
 package cz.fi.muni.pa165.service;
 
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import cz.fi.muni.pa165.dao.IGameDao;
-import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
-import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
@@ -18,22 +15,20 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.*;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -58,6 +53,12 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
+    }
+    
+    @AfterClass
+    public void cleanupMocks(){
+        Mockito.reset(gameDao);
+        Mockito.reset(teamDao);
     }
     
     private Team testTeam;

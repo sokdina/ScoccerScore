@@ -9,10 +9,12 @@ import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.dto.PlayerDTO;
+import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.Position;
+import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.PersistenceSampleApplicationContext;
 import java.util.Date;
 import java.util.List;
@@ -22,10 +24,10 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  *
@@ -40,11 +42,14 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
     @Autowired
     private IPlayerFacade playerFacade;
     @Autowired
-    private IGoalDao goalFacade;
+    private IGoalDao goalDao;
     @Autowired 
-    private ITeamDao teamFacade;
+    private ITeamDao teamDao;
     @Autowired
     private IPlayerDao playerDao;
+    
+    @Autowired
+    private ITeamFacade teamFacade;
     
     private PlayerDTO p1;
     
@@ -66,18 +71,18 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         t1.setCity("whateverville");
         t1.setCountry("whateverstan");
         t1.setName("asdasd");
-        teamFacade.create(t1);
+        teamDao.create(t1);
         
         t2 = new Team();
         t2.setCity("whateverville");
         t2.setCountry("whateverstan");
         t2.setName("asdasd");
-        teamFacade.create(t2);
+        teamDao.create(t2);
         
         g1 = new Goal();
         g1.setDescription("asdasd");
         g1.setGoalTime(10);
-        goalFacade.create(g1);
+        goalDao.create(g1);
         
         p9 = new Player();
         p9.setName("p123");
@@ -104,7 +109,7 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         System.out.println("findAll");
         IPlayerFacade instance = playerFacade;
         List result = instance.findAll();
-        //assertEquals(result.size(), 2);
+        assertEquals(result.size(), 2);
     }
 
     @Test(enabled = true)
@@ -114,25 +119,26 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         assertNotNull(result);
     }
 
-    /*@Test(enabled = true)
+    @Test(enabled = true)
     public void testChangeTeam() {
         IPlayerFacade instance = playerFacade;
-        p1.setTeam(t1);
+        TeamDTO t1DTO = teamFacade.getTeamById(t1.getId());
+        p1.setTeam(t1DTO);
         Long playerId = instance.createPlayer(p1);
         Long teamId = t2.getId();
         instance.changeTeam(playerId, teamId);
-    }*/
+    }
 
     @Test(enabled = true)
     public void testDeletePlayer() {
         IPlayerFacade instance = playerFacade;
         Long playerId = p9.getId();
-        //assertEquals(instance.findAll().size(),2);
+        assertEquals(instance.findAll().size(),2);
         instance.deletePlayer(playerId);
-        //assertEquals(instance.findAll().size(),1);
+        assertEquals(instance.findAll().size(),1);
     }
 
-    /*@Test(enabled = true)
+    @Test(enabled = true)
     public void testFindPlayersByTeam() {
         Long teamId = t1.getId();
         IPlayerFacade instance = playerFacade;
@@ -141,24 +147,20 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         List result = instance.findPlayersByTeam(teamId);
         assertEquals(result.size(), 1);
     }
-/*
+
     @Test(enabled = true)
     public void testAddGoal() {
         IPlayerFacade instance = playerFacade;
         Long playerId = instance.createPlayer(p1);
-        g1.setPlayer(p1);
-        goalFacade.createGoal(g1);
         Long goalId = g1.getId();
         instance.addGoal(playerId, goalId);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true,expectedExceptions = SoccerRecordsDataAccessException.class)
     public void testRemoveGoal() {
         IPlayerFacade instance = playerFacade;
         Long playerId = instance.createPlayer(p1);
-        g1.setPlayer(p1);
-        goalFacade.createGoal(g1);
         Long goalId = g1.getId();
         instance.removeGoal(playerId, goalId);
-    }*/
+    }
 }

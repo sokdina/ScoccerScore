@@ -27,6 +27,7 @@ import org.testng.annotations.Test;
 import java.util.Set;
 import java.util.HashSet;
 import org.mockito.Mockito;
+import org.testng.annotations.AfterClass;
 
 /**
  * 
@@ -52,6 +53,13 @@ public class PlayerServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
+    }
+    
+    @AfterClass
+    public void cleanupMocks(){
+        Mockito.reset(goalDao);
+        Mockito.reset(teamDao);
+        Mockito.reset(playerDao);
     }
     
     private Player p1,p2;

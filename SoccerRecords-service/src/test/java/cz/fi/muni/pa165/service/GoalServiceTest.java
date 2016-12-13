@@ -15,10 +15,8 @@ import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -26,7 +24,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,6 +35,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import org.testng.annotations.AfterClass;
 
 /**
  *
@@ -50,10 +48,10 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     private IGoalDao goalDao;
 
     @Mock
-    private IPlayerDao playerDao;
-
-    @Mock
     private IGameDao gameDao;
+    
+    @Mock
+    private IPlayerDao playerDao;
 
     @Autowired
     @InjectMocks
@@ -67,6 +65,12 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
+    
+    @AfterClass
+    public void cleanupMocks(){
+        Mockito.reset(gameDao);
+        Mockito.reset(goalDao);
+    }
 
     @BeforeMethod
     public void prepareTestTeam() {
@@ -76,12 +80,14 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
         player.setDateOfBirth(new Date(System.currentTimeMillis()));
         player.setDressNumber(7);
         player.setCountry("Portugal");
+        playerDao.create(player);
 
         game = new Game();
         game.setDateOfGame(new Date());
         game.setMatchResult(MatchResult.DRAW);
         game.setHomeScore(0);
         game.setGuestScore(0);
+        gameDao.create(game);
         
         goal = new Goal();
         goal.setId(5L);
