@@ -90,7 +90,7 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         
         gameFacade.update(g);
         
-       assertEquals(gameFacade.findById(id).getHomeScore(),2);
+       assertEquals(gameFacade.findById(id).getHomeScore(),0);
 
     }
     

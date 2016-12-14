@@ -132,6 +132,11 @@ public class GameController {
         }
        
         //create game
+        
+        if(formBean.getGuestTeam().equals(formBean.getHomeTeam())){
+            redirectAttributes.addFlashAttribute("alert_warning", "Game creation failed - two same teams were selected!");
+            return "redirect:" + uriBuilder.path("/game/list").build().encode().toUriString();
+        }
 
         Long id = gameFacade.create(formBean);
 
