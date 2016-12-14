@@ -40,6 +40,7 @@ public class TeamServiceImpl implements ITeamService {
         
         @Autowired
         private IGameDao gameDao;
+        
     
 	@Override
 	public Team create(Team t) {
@@ -117,6 +118,14 @@ public class TeamServiceImpl implements ITeamService {
 	}
         
         @Override
+        public int getTeamPoints(Team t){
+            int score = 0;
+            score += getGamesWon(t).size()*3;
+            score += getGamesDraw(t).size();
+            return  score;
+        }
+        
+        @Override
         public List<Game> createTurnamentBrackets(Set<Team> teams){
             List<TournamentTeamDto> sortedTeams = new ArrayList<>();
             List<Game> games = new ArrayList<>();
@@ -181,6 +190,41 @@ public class TeamServiceImpl implements ITeamService {
             
             return games;
         }
+
+    @Override
+    public int[] getTeamScore(Team t) {
+        int goalsScored = 0;
+        int goalsConsidered = 0;
+        
+        List<Team> teams =  teamDao.findByAll();
+        
+        for(Team team : teams){
+            if(team.getId() != t.getId()){
+                List<Game> g = new ArrayList<>();
+                try{
+                    g.addAll(gameDao.findGamesBetweenTeams(t.getId(), team.getId()));
+                }catch(SoccerRecordsDataAccessException e){
+                    
+                }
+                
+                for(Game game : g){
+                    if (game.getGuestTeam().getId() != t.getId()){
+                        goalsScored += game.getHomeScore();
+                        goalsConsidered+= game.getGuestScore();
+                    }else{
+                         goalsScored += game.getGuestScore();
+                        goalsConsidered+=game.getHomeScore();
+                    }
+                    
+                }
+            }
+        }
+     int score[] = new int[2];
+     score[0] = goalsScored;
+     score[1] = goalsConsidered;
+     return score;
+        
+    }
 }
 
 

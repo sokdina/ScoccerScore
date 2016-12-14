@@ -52,6 +52,25 @@ public class StatisticController {
         return "statistics/list";
     }
     
+    @RequestMapping(value = "/standings", method = RequestMethod.GET)
+    public String standings(Model model) {
+        List<TeamDTO> teams = teamFacade.getAllTeams();
+        for(int i = 0; i < teams.size(); i++){
+            log.info(teams.get(i).toString());
+        }        
+        model.addAttribute("teams", teams);
+        int points[] = new int[teams.size()];
+        int[][] score = new int[teams.size()][2];
+        for( int i =0; i<teams.size();i++){
+            points[i] = teamFacade.getTeamPoints(teams.get(i));
+            score[i] = teamFacade.getTeamScore(teams.get(i));
+        }
+        
+        model.addAttribute("score",score);
+        model.addAttribute("points",points);
+        return "statistics/standings";
+    }
+    
     @RequestMapping(value = "/viewPlayerDetail/{id}" , method = RequestMethod.GET)
     public String viewPlayerDetail(@PathVariable long id, Model model) {
         log.debug("viewPlayerDetail({})", id);

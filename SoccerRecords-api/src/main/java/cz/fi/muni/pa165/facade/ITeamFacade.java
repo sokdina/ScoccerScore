@@ -81,4 +81,8 @@ public interface ITeamFacade {
 	public void removePlayer(Long teamId, Long playerId);
 
         public List<GameDTO> createTurnamentBrackets(Set<TeamDTO> teams);
+        
+        public int getTeamPoints(TeamDTO t);
+        
+        public int[] getTeamScore(TeamDTO t); 
 }
