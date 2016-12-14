@@ -60,21 +60,34 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Game g4 = game(new Date(System.currentTimeMillis()),0,3,t3,t1);
         Game g5 = game(new Date(System.currentTimeMillis()),1,1,t2,t4);
         
-        Player p1 = player("John Terry",23,new Date(),"England",Position.DEFENDER,t1);
-        Player p2 = player("Lionel Messi",23,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        
+        Player p1t1 = player("Ronaldo",23,new Date(),"England",Position.DEFENDER,t1);
+        Player p2t1 = player("Cristian Bale",24,new Date(),"England",Position.DEFENDER,t1);
+        Player p3t1 = player("Larim Brnzema",25,new Date(),"England",Position.DEFENDER,t1);
+        Player p4t1 = player("Pepe",26,new Date(),"England",Position.DEFENDER,t1);
+        
+        Player p1t2 = player("Lionel Messi",23,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        Player p2t2 = player("Pique",24,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        Player p3t2 = player("Neymar",25,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        Player p4t2 = player("Suarez",26,new Date(),"Argentina",Position.MIDFIELDER,t2);
+        
         Player p3 = player("Alexis Sanchez",23,new Date(),"Spain",Position.GOAL_KEEPER,t3);
         Player p4 = player("Fili Sebo",23,new Date(),"Slovakia",Position.FORWARD,t4);
 
-        Goal goal1 = goal("Nice goal",g1,p1, 15);
-        Goal goal2 = goal("Good goal",g1,p2, 20);
-        Goal goal3 = goal("Epic goal",g1,p2, 56);
+        Goal goal1 = goal("Nice goal",g1,p1t1, 15);
+        Goal goal2 = goal("Good goal",g1,p1t2, 20);
+        Goal goal3 = goal("Epic goal",g1,p2t2, 56);
         
-        p1.addGoal(goal1);
-        p2.addGoal(goal2);
-        p2.addGoal(goal3);
+        g1.addGoal(goal1);
+        g1.addGoal(goal2);
+        g1.addGoal(goal3);
         
-        playerService.updatePlayer(p1);
-        playerService.updatePlayer(p2);
+        p1t1.addGoal(goal1);
+        p2t2.addGoal(goal2);
+        p2t2.addGoal(goal3);
+        
+        playerService.updatePlayer(p1t1);
+        playerService.updatePlayer(p2t2);
         
         User admin = user("admin", "Dina", "Sok (464103)", "sokdina999@gmail.com", "123456789", toDate(2016, 12, 12), "Slakova, Brno");
 
@@ -105,7 +118,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         Game game = new Game();
         game.setDateOfGame(date);
-        game.setGameResult(homeScore, guestScore);
+        //game.setGameResult(homeScore, guestScore);
         game.setHomeTeam(homeTeam);
         game.setGuestTeam(guestTeam);
         

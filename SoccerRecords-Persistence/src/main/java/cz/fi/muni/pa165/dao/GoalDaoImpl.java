@@ -3,9 +3,10 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -33,10 +34,10 @@ public class GoalDaoImpl implements IGoalDao{
     }
 
     @Override
-    public Set<Goal> findAll() {
-        Set<Goal> goals = new HashSet<>();
+    public Collection<Goal> findAll() {
+        List<Goal> goals = new ArrayList<>();
         goals.addAll(entityManager.createQuery("from Goal",Goal.class).getResultList());
-        return Collections.unmodifiableSet(goals);
+        return Collections.unmodifiableCollection(goals);
     }
 
     @Override
@@ -54,19 +55,19 @@ public class GoalDaoImpl implements IGoalDao{
     }    
 
     @Override
-    public Set<Goal> findByPlayer(Player player) {
+    public Collection<Goal> findByPlayer(Player player) {
         this.validateNotNull(player);
-        Set<Goal> goals = new HashSet<>();
+        List<Goal> goals = new ArrayList<>();
         goals.addAll(entityManager.createQuery("from Goal g where g.player = :player",Goal.class).setParameter("player", player).getResultList());
-        return Collections.unmodifiableSet(goals);
+        return Collections.unmodifiableCollection(goals);
     }
 
     @Override
-    public Set<Goal> findByGame(Game game) {
+    public Collection<Goal> findByGame(Game game) {
         this.validateNotNull(game);
-        Set<Goal> goals = new HashSet<>();
+        List<Goal> goals = new ArrayList<>();
         goals.addAll(entityManager.createQuery("from Goal g where g.game = :game",Goal.class).setParameter("game", game).getResultList());
-        return Collections.unmodifiableSet(goals);
+        return Collections.unmodifiableCollection(goals);
     }
     
     public void validateNotNull(Object o){

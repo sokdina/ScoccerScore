@@ -110,11 +110,11 @@ public class GameDaoImplTest extends AbstractTestNGSpringContextTests {
             Game g1 = new Game();
             g1.setHomeTeam(t1);
             g1.setGuestTeam(t2);
-            g1.setGameResult(0, 0);
+            //g1.setGameResult(0, 0);
             Game g2 = new Game();
             g2.setHomeTeam(t2);
             g2.setGuestTeam(t1);
-            g2.setGameResult(4, 0);
+            //g2.setGameResult(4, 0);
             gameDao.create(g1);
             gameDao.create(g2);
             Assert.assertEquals(gameDao.findGamesBetweenTeams(t1.getId(), t2.getId()).size(), 2);

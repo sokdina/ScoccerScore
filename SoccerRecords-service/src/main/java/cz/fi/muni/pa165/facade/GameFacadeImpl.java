@@ -5,10 +5,12 @@
  */
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IGameService;
+import cz.fi.muni.pa165.service.ITeamService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,13 +31,22 @@ public class GameFacadeImpl implements IGameFacade{
     @Inject
     private IGameService gameService;
 
+    @Inject
+    private ITeamService teamService;
+    
     @Autowired
     private BeanMappingService beanMappingService;
     
     @Override
-    public void create(GameDTO g) {
-        Game game = beanMappingService.mapTo(g, Game.class);
-	gameService.create(game);
+    public Long create(GameCreateDTO g) {
+        GameDTO gdto = new GameDTO();
+        gdto.setDateOfGame(g.getDateOfGame());
+        gdto.setHomeTeam(teamService.findById(g.getHomeTeam()));
+        gdto.setGuestTeam(teamService.findById(g.getGuestTeam()));
+        
+        Game game = beanMappingService.mapTo(gdto, Game.class);
+	Long newId = gameService.create(game).getId();
+        return newId;
     }
 
     @Override

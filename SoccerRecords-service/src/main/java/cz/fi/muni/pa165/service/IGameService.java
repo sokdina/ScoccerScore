@@ -19,7 +19,7 @@ public interface IGameService {
      * inserts game record into database
      * @param g game to be inserted
      */
-    public void create(Game g);
+    public Game create(Game g);
 
     /**
      * updates game record in database

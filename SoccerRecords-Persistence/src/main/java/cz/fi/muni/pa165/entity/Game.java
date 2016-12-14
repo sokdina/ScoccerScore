@@ -52,7 +52,7 @@ public class Game
     @Column
     private int guestScore;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "game")
     private Set<Goal> goals = new HashSet<>();
 
     public Game(){
@@ -126,10 +126,14 @@ public class Game
         }
         else if(!goal.getGame().equals(this))           
             goal.setGame(this);
+        
+        recalculateScore();
     }
     
     public void deleteGoal(Goal goal){
         goals.remove(goal);
+        
+        recalculateScore();
     }
     
 
@@ -198,6 +202,25 @@ public class Game
             setMatchResult(MatchResult.GUEST_TEAM_WIN);
         else
             setMatchResult(MatchResult.DRAW);
+    }
+    
+    private void recalculateScore(){
+        int homeGoals = 0;
+        int guestGoals = 0;
+        
+        for(Goal g: goals){
+            Player p = g.getPlayer();
+            if(p != null){
+                Team t = p.getTeam();
+                if (t.equals(homeTeam)){
+                    homeGoals++;
+                }else{
+                    guestGoals++;
+                }
+            }
+        }
+        
+        setGameResult(homeGoals, guestGoals);
     }
     
         

@@ -8,7 +8,7 @@
 <my:pagetemplate title="Match result">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/product/delete/${game.id}">
+    <form method="post" action="${pageContext.request.contextPath}/game/delete/${game.id}">
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>
 

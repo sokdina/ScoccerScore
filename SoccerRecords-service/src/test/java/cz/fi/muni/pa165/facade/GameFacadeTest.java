@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
@@ -40,7 +41,7 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
     private IGameFacade gameFacade;
        
     private Team teamDTOOne, teamDTOTwo;
-    private GameDTO gameDTO;
+    private GameCreateDTO gameDTO;
         
     @BeforeMethod
     public void setUpMethod(){
@@ -56,27 +57,28 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         teamDTOTwo.setCity("Barcelona");
         teamDTOTwo.setCountry("Spain");
         
-        gameDTO = new GameDTO();
+        gameDTO = new GameCreateDTO();
         // please help to check
-        //gameDTO.setId(1L);	
-	gameDTO.setHomeTeam(teamDTOOne);
-        gameDTO.setGuestTeam(teamDTOTwo);
-        gameDTO.setMatchResult(MatchResult.DRAW);
-        gameDTO.setDateOfGame(new Date());
-        gameDTO.setHomeScore(1);
-        gameDTO.setGuestScore(1);
+	gameDTO.setHomeTeam(teamDTOOne.getId());
+        gameDTO.setGuestTeam(teamDTOTwo.getId());
+        gameDTO.setDateOfGame(new Date());        
+    }
+    
+    @AfterMethod
+    public void cleanUpMethod(){
         
     }
     
-//    @Test
-//    public void testCreateGame() {
-//        System.out.println("create a game");   
-//               
-//        gameFacade.create(gameDTO);
-//        GameDTO g = gameFacade.findById(1L);
-//        assertEquals(g, gameDTO);
-//    }
-    /*
+    @Test
+    public void testCreateGame() {
+        System.out.println("create a game");   
+               
+        Long id = gameFacade.create(gameDTO);
+        
+        GameDTO g = gameFacade.findById(id);
+        assertNotNull(g);
+    }
+    
     @Test
     public void testUpdateGame() {
         System.out.println("update Team");
@@ -88,12 +90,12 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         
         gameFacade.update(g);
         
-      // assertEquals(teamFacade.getTeamById(id).getCity(), teamDTO.getCity());
+       assertEquals(gameFacade.findById(id).getHomeScore(),2);
 
     }
     
     
-    */
+    
     
     
    

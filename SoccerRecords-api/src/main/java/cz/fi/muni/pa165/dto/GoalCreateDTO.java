@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
  */
 public class GoalCreateDTO{
 
+    private Long id;
+    
     @Min(0)
     @Max(120)
     private int goalTime;
@@ -25,10 +27,20 @@ public class GoalCreateDTO{
     //@NotNull
     private PlayerDTO player;
     
+    @NotNull
     private Long gameId;
     
+    @NotNull
     private Long playerId;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Long getGameId() {
         return gameId;
     }

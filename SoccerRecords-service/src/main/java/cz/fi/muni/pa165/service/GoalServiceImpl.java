@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class GoalServiceImpl implements IGoalService{
     }
 
     @Override
-    public Set<Goal> findAll() {
+    public Collection<Goal> findAll() {
         try{
             return goalDao.findAll();
         }
@@ -70,13 +71,14 @@ public class GoalServiceImpl implements IGoalService{
     @Override
     public void deleteGoal(Goal goal) {
         try{
+            Game g = goal.getGame();
+            g.deleteGoal(goal);
+            gameDao.update(g);
+            
             Player p = goal.getPlayer();
             p.removeGoal(goal);
             playerDao.update(p);
-            
-            Game g = goal.getGame();
-            //g.removeGoal(goal);
-            gameDao.update(g);
+
             
             goalDao.delete(goal);
         }
@@ -105,7 +107,7 @@ public class GoalServiceImpl implements IGoalService{
     }
 
     @Override
-    public Set<Goal> findByGame(Game game) {
+    public Collection<Goal> findByGame(Game game) {
         try{
             return goalDao.findByGame(game);
         }catch(Exception e){
@@ -123,7 +125,7 @@ public class GoalServiceImpl implements IGoalService{
     }
 
     @Override
-    public Set<Goal> findByplayer(Player player) {
+    public Collection<Goal> findByplayer(Player player) {
         try{
             return goalDao.findByPlayer(player);
         }catch(Exception e){

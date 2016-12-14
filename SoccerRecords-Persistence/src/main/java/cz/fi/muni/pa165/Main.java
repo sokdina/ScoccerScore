@@ -115,7 +115,7 @@ public class Main {
             
             System.out.println("goal created");
             
-            Set<Goal> goals = goalDao.findAll();
+            Set<Goal> goals = new HashSet<>(goalDao.findAll());
             System.out.println("goals found : "+goals.size());
             for(Goal temp:goals){
                 System.out.println("goal id: "+temp.getId()+" desc: "+temp.getDescription());

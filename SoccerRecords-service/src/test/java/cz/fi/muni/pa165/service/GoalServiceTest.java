@@ -8,17 +8,17 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.IGameDao;
 import cz.fi.muni.pa165.dao.IGoalDao;
 import cz.fi.muni.pa165.dao.IPlayerDao;
+import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Player;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
 import cz.fi.muni.pa165.enums.Position;
 import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -26,7 +26,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,6 +37,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import org.testng.annotations.AfterClass;
 
 /**
  *
@@ -50,10 +50,13 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     private IGoalDao goalDao;
 
     @Mock
-    private IPlayerDao playerDao;
-
-    @Mock
     private IGameDao gameDao;
+    
+    @Mock
+    private IPlayerDao playerDao;
+    
+    @Mock
+    private ITeamDao teamDao;
 
     @Autowired
     @InjectMocks
@@ -62,26 +65,43 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
     private Player player;
     private Game game;
     private Goal goal;
+    private Team t1;
 
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
+    
+    @AfterClass
+    public void cleanupMocks(){
+        Mockito.reset(gameDao);
+        Mockito.reset(goalDao);
+        Mockito.reset(teamDao);
+    }
 
     @BeforeMethod
     public void prepareTestTeam() {
+        t1 = new Team();
+        t1.setCity("asdasd");
+        t1.setCountry("asd");
+        t1.setName("asdadadsad");
+        teamDao.create(t1);
+        
         player = new Player();
         player.setName("Ronaldo");
         player.setPosition(Position.FORWARD);
         player.setDateOfBirth(new Date(System.currentTimeMillis()));
         player.setDressNumber(7);
         player.setCountry("Portugal");
+        player.setTeam(t1);
+        playerDao.create(player);
 
         game = new Game();
         game.setDateOfGame(new Date());
         game.setMatchResult(MatchResult.DRAW);
         game.setHomeScore(0);
         game.setGuestScore(0);
+        gameDao.create(game);
         
         goal = new Goal();
         goal.setId(5L);
@@ -146,7 +166,7 @@ public class GoalServiceTest extends AbstractTestNGSpringContextTests {
         Goal goal2 = new Goal();
         goal2.setId(6L);
         goal2.setPlayer(player2);
-        goal2.setGame(game);
+        //goal2.setGame(game);
         
         
         Set<Goal> goals = new HashSet<>();
