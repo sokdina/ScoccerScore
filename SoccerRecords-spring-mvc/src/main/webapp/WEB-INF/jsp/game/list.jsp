@@ -49,12 +49,11 @@
                         </c:forEach>
                     </ul>
                 </td>
-                <td align="center">
-                    <my:a href="/game/view/${game.id}" class="btn btn-primary">View</my:a>
-                </td>
-                <td align="center">
-                    <form method="post" action="${pageContext.request.contextPath}/game/delete/${game.id}">
-                        <button type="submit" class="btn btn-primary">Delete</button>
+                <td>
+                    <my:a href="/game/view/${game.id}" class="btn btn-info">View</my:a>               
+                    <my:a href="/game/edit/${game.id}" class="btn btn-warning">Edit</my:a>                
+                    <form method="post" action="${pageContext.request.contextPath}/game/delete/${game.id}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>

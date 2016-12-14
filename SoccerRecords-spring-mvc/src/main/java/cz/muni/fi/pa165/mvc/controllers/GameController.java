@@ -152,6 +152,57 @@ public class GameController {
         return "game/new";
     }
     
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editGame(@PathVariable long id, Model model) {
+        log.debug("edit()");
+        GameDTO g = gameFacade.findById(id);
+        GameCreateDTO gcdto = new GameCreateDTO();
+        gcdto.setDateOfGame(g.getDateOfGame());
+        gcdto.setGuestTeam(g.getGuestTeam().getId());
+        gcdto.setHomeTeam(g.getHomeTeam().getId());
+        gcdto.setId(id);
+        model.addAttribute("gameEdit", gcdto);
+        return "game/edit";
+    }
     
     
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("gameEdit") GameCreateDTO formBean, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("edit(gameEdit={})", formBean);
+        //in case of validation error forward back to the the form
+        if (bindingResult.hasErrors()) {
+            log.debug("some errror");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+                
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "game/edit";
+            
+        }
+        
+        if(formBean.getGuestTeam().equals(formBean.getHomeTeam())){
+            redirectAttributes.addFlashAttribute("alert_warning", "Game editing failed - two same teams were selected!");
+            return "redirect:" + uriBuilder.path("/game/list").build().encode().toUriString();
+        }
+        
+        GameDTO g = gameFacade.findById(formBean.getId());
+        g.setDateOfGame(formBean.getDateOfGame());
+        g.setGuestTeam(teamFacade.getTeamById(formBean.getGuestTeam()));
+        g.setHomeTeam(teamFacade.getTeamById(formBean.getHomeTeam()));
+        
+        
+        
+        gameFacade.update(g);
+        
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Player was edited");
+        return "redirect:" + uriBuilder.path("/game/list").toUriString();
+        
+    }
 }

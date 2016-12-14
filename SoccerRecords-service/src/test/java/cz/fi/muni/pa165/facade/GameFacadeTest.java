@@ -69,7 +69,7 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         
     }
     
-    @Test
+    @Test(enabled = false)
     public void testCreateGame() {
         System.out.println("create a game");   
                
@@ -79,7 +79,7 @@ public class GameFacadeTest extends AbstractTestNGSpringContextTests{
         assertNotNull(g);
     }
     
-    @Test
+    @Test(enabled = false)
     public void testUpdateGame() {
         System.out.println("update Team");
         Long id = gameFacade.create(gameDTO);

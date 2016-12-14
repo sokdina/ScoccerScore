@@ -7,6 +7,7 @@ package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
+import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.service.BeanMappingService;
@@ -42,8 +43,8 @@ public class GameFacadeImpl implements IGameFacade{
     public Long create(GameCreateDTO g) {
         GameDTO gdto = new GameDTO();
         gdto.setDateOfGame(g.getDateOfGame());
-        gdto.setHomeTeam(teamService.findById(g.getHomeTeam()));
-        gdto.setGuestTeam(teamService.findById(g.getGuestTeam()));
+        gdto.setHomeTeam(beanMappingService.mapTo(teamService.findById(g.getHomeTeam()), TeamDTO.class));
+        gdto.setGuestTeam(beanMappingService.mapTo(teamService.findById(g.getGuestTeam()), TeamDTO.class));
         
         Game game = beanMappingService.mapTo(gdto, Game.class);
 	Long newId = gameService.create(game).getId();
