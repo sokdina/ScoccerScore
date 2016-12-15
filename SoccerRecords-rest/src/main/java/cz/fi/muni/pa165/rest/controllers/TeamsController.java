@@ -67,7 +67,7 @@ public class TeamsController {
         return teamDTO;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/create", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     public final TeamDTO createTeam(@RequestBody TeamDTO team) throws Exception {
 
@@ -91,5 +91,19 @@ public class TeamsController {
         }
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final TeamDTO UpdateTeam(@PathVariable("id") long id, @RequestBody TeamDTO t) throws Exception {
+
+        logger.debug("rest UpdateTeam({})", id);
+
+        try {
+            teamFacade.updateTeam(t);
+            return teamFacade.getTeamById(id);
+        } catch (Exception esse) {
+            throw new ResourceNotFoundException();
+        }
+
+    }
 
 }
