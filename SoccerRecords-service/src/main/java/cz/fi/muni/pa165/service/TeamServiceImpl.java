@@ -13,6 +13,7 @@ import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
 
 import cz.fi.muni.pa165.dao.ITeamDao;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.enums.MatchResult;
@@ -215,24 +216,24 @@ public class TeamServiceImpl implements ITeamService {
                     g.addAll(gameDao.findGamesBetweenTeams(t.getId(), team.getId()));
                 }catch(SoccerRecordsDataAccessException e){
                     
-                }
-                
+                }               
                 for(Game game : g){
-                    if (game.getGuestTeam().getId() != t.getId()){
-                        goalsScored += game.getHomeScore();
-                        goalsConsidered+= game.getGuestScore();
-                    }else{
-                         goalsScored += game.getGuestScore();
-                        goalsConsidered+=game.getHomeScore();
-                    }
-                    
-                }
+                    List<Goal> goals = new ArrayList(game.getGoals());
+        
+                    for(Goal goal : goals){
+                        if(goal.getPlayer().getTeam().equals(t)){
+                            goalsScored++;
+                        }else{
+                            goalsConsidered++;
+                        }
+                    }                   
+                }                              
             }
         }
-     int score[] = new int[2];
-     score[0] = goalsScored;
-     score[1] = goalsConsidered;
-     return score;
+        int score[] = new int[2];
+        score[0] = goalsScored;
+        score[1] = goalsConsidered;
+        return score;
         
     }
 }
