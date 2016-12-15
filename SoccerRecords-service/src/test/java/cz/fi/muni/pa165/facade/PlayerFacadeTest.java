@@ -70,13 +70,13 @@ public class PlayerFacadeTest extends AbstractTestNGSpringContextTests{
         t1 = new Team();
         t1.setCity("whateverville");
         t1.setCountry("whateverstan");
-        t1.setName("asdasd");
+        t1.setName("team one");
         teamDao.create(t1);
         
         t2 = new Team();
         t2.setCity("whateverville");
         t2.setCountry("whateverstan");
-        t2.setName("asdasd");
+        t2.setName("Team two");
         teamDao.create(t2);
         
         g1 = new Goal();

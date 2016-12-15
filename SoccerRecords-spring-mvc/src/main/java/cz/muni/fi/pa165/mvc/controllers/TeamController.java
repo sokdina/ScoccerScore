@@ -90,6 +90,7 @@ public class TeamController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("teamCreate") TeamDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        Long id = null;
         log.debug("create(teamCreate={})", formBean);
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -101,9 +102,14 @@ public class TeamController {
             }
             return "team/new";
         }
-        Long id = teamFacade.createTeam(formBean);
-        redirectAttributes.addFlashAttribute("alert_success", "Team: " + teamFacade.getTeamById(id) + " was created");
-        return "redirect:" + uriBuilder.path("/team/list").buildAndExpand(id).encode().toUriString();
+        try {
+		id = teamFacade.createTeam(formBean);
+        	redirectAttributes.addFlashAttribute("alert_success", "Team: " + teamFacade.getTeamById(id) + " was created");
+ 	} catch(Exception ex){
+          	log.warn("cannot Create a team {}");
+            	redirectAttributes.addFlashAttribute("alert_danger", "This team cannot be created because it has already exited in La Liga now.");
+        }
+       	return "redirect:" + uriBuilder.path("/team/list").buildAndExpand(id).encode().toUriString();
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

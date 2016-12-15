@@ -33,7 +33,7 @@ public class TeamsController {
     private ITeamFacade teamFacade;
 
     /**
-     * Get list of Teams curl -i -X GET
+     * Get list of Teams: curl -i -X GET
      * http://localhost:8080/SoccerRecords-rest/teams
      *
      * @return TeamDTO
@@ -48,8 +48,9 @@ public class TeamsController {
 
     /**
      * 
-     * Get one team specified by id
+     * Get one team specified by id:
      * 
+     * curl -i -X GET http://localhost:8080/pa165/rest/teams/9
      * @param id identifier for the team
      * @return TeamDTO
      * @throws Exception ResourceNotFoundException
@@ -67,7 +68,16 @@ public class TeamsController {
         return teamDTO;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+    /**
+     * 
+     * Create a team :
+     * 
+     * curl -X POST -i -H "Content-Type: application/json" --data '{"name":"Valencia CF","city":"Valencia","country":"Spain"}' http://localhost:8080/pa165/rest/teams/create
+     * @param TeamDTO is teamDTO
+     * @return TeamDTO
+     * @throws Exception ResourceNotFoundException
+     */
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     public final TeamDTO createTeam(@RequestBody TeamDTO team) throws Exception {
 
@@ -81,6 +91,16 @@ public class TeamsController {
         }
     }
 
+
+    /**
+     * 
+     * delete a team specified by id
+     * 
+     * curl -i -X DELETE http://localhost:8080/pa165/rest/teams/9
+     *
+     * @param id identifier for the team
+     * @throws Exception ResourceNotFoundException
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void deleteTeam(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteTeam({})", id);
@@ -90,6 +110,17 @@ public class TeamsController {
             throw new ResourceNotFoundException();
         }
     }
+
+    /**
+     * 
+     * update a team specified by id
+     * 
+     * curl -X PUT -i -H "Content-Type: application/json" --data '{"id":9,"name":"Manchester City","city":"Manchester","country":"Enland"}' http://localhost:8080/pa165/rest/teams/9
+     *
+     * @param id identifier for the team
+     * @return TeamDTO
+     * @throws Exception ResourceNotFoundException
+     */
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
