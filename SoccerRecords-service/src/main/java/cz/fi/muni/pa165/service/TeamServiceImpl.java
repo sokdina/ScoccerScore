@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.math.IntMath;
+import cz.fi.muni.pa165.comparator.SortByPoints;
 import cz.fi.muni.pa165.dao.IGameDao;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,14 @@ public class TeamServiceImpl implements ITeamService {
         }
         
         @Override
+        public List<Team> getTeamsSortedByPoints() {
+            List<Team> teams=  new ArrayList<>();
+            teams.addAll(teamDao.findByAll());          
+            Collections.sort(teams, new SortByPoints(gameDao.findAll()));
+            return teams;
+        }
+        
+        @Override
         public List<Game> createTurnamentBrackets(Set<Team> teams){
             List<TournamentTeamDto> sortedTeams = new ArrayList<>();
             List<Game> games = new ArrayList<>();
@@ -158,6 +167,7 @@ public class TeamServiceImpl implements ITeamService {
             return games;
             
         }
+        
         
         private Set<Game> getGamesWon(Team t){
             Set<Game> games = new HashSet<>();

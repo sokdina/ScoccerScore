@@ -54,7 +54,7 @@ public class StatisticController {
     
     @RequestMapping(value = "/standings", method = RequestMethod.GET)
     public String standings(Model model) {
-        List<TeamDTO> teams = teamFacade.getAllTeams();
+        List<TeamDTO> teams = teamFacade.getTeamsSortedByPoints();
         for(int i = 0; i < teams.size(); i++){
             log.info(teams.get(i).toString());
         }        
@@ -89,8 +89,13 @@ public class StatisticController {
     @RequestMapping(value = "/generated" , method = RequestMethod.POST)
     public String generated(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         String[] checkboxValues = request.getParameterValues("teamIds");
-        if(checkboxValues.length % 2 ==1 || checkboxValues.length == 0){
-            redirectAttributes.addFlashAttribute("alert_warning", "You must select even count of temas");
+        if(checkboxValues == null){
+            redirectAttributes.addFlashAttribute("alert_warning", "You must select count wchich is power of two like 2, 4 , 8 ..., except zero");
+            return "redirect:" + uriBuilder.path("/statistics/brackets").toUriString() ;
+        }
+        
+        if((checkboxValues.length & checkboxValues.length-1) != 0 || checkboxValues.length == 1 ){
+            redirectAttributes.addFlashAttribute("alert_warning", "You must select count wchich is power of two like 2, 4 , 8 ...");
             return "redirect:" + uriBuilder.path("/statistics/brackets").toUriString() ;
         }
         

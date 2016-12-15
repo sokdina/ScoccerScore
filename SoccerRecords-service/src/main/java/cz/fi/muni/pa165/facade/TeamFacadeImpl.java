@@ -102,6 +102,12 @@ public class TeamFacadeImpl implements ITeamFacade {
         Team  team = teamService.findById(t.getId());
         return teamService.getTeamScore(team);
     }
+    
+    @Override
+    public List<TeamDTO> getTeamsSortedByPoints(){
+        return  beanMappingService.mapTo(teamService.getTeamsSortedByPoints(), TeamDTO.class);
+    }
+
 
 }
 

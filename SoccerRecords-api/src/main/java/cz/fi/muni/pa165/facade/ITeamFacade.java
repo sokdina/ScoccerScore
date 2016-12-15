@@ -85,4 +85,6 @@ public interface ITeamFacade {
         public int getTeamPoints(TeamDTO t);
         
         public int[] getTeamScore(TeamDTO t); 
+        
+        public List<TeamDTO> getTeamsSortedByPoints();
 }
