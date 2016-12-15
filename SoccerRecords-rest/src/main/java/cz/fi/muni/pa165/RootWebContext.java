@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
+import cz.fi.muni.pa165.dto.TeamDTO;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -20,6 +21,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import cz.fi.muni.pa165.rest.mixin.TeamDTOMixin;
 
 @EnableWebMvc
 @Configuration
@@ -46,6 +49,8 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+        
+         objectMapper.addMixIn(TeamDTO.class, TeamDTOMixin.class);
         
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
         

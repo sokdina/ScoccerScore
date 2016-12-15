@@ -3,7 +3,10 @@ package cz.fi.muni.pa165.rest;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+/**
+ *
+ * @author sokdina999@gmail.com
+ */
 @XmlRootElement
 public class ApiError {
     

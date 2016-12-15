@@ -18,7 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+/**
+ * REST Controller for Orders
+ * 
+ * @author sokdina999@gmail.com
+ */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_TEAMS)
 public class TeamsController {
@@ -81,8 +85,7 @@ public class TeamsController {
     public final void deleteTeam(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteTeam({})", id);
         try {
-            TeamDTO teamDTO = teamFacade.getTeamById(id);
-            teamFacade.createTeam(teamDTO);
+            teamFacade.deleteTeam(id);
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
         }
