@@ -53,7 +53,7 @@ public class Player
     @Column 
     private String country;
 
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name="team_id")
     private Team team;
 

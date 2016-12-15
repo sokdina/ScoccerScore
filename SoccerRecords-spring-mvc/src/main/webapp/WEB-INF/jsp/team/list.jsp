@@ -32,10 +32,10 @@
                 <td><c:out value="${team.city}"/></td>
                 <td><c:out value="${team.country}"/></td>
                 <td>
-                    <my:a href="/team/view/${team.id}" class="btn btn-primary">View</my:a>               
-                    <my:a href="/team/edit/${team.id}" class="btn btn-primary">Edit</my:a>                
+                    <my:a href="/team/view/${team.id}" class="btn btn-info">View</my:a>               
+                    <my:a href="/team/edit/${team.id}" class="btn btn-warning">Edit</my:a>                
       		    <form method="post" action="${pageContext.request.contextPath}/team/delete/${team.id}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-primary">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>

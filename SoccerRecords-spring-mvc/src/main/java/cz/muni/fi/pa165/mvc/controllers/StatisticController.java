@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.dto.PlayerDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.entity.Team;
+import cz.fi.muni.pa165.facade.IGameFacade;
 import cz.fi.muni.pa165.facade.IPlayerFacade;
 import cz.fi.muni.pa165.facade.ITeamFacade;
 import static cz.muni.fi.pa165.mvc.controllers.PlayerController.log;
@@ -41,6 +42,9 @@ public class StatisticController {
     @Autowired
     private ITeamFacade teamFacade;
     
+    @Autowired
+    private IGameFacade gameFacade;
+    
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -52,6 +56,7 @@ public class StatisticController {
         return "statistics/list";
     }
     
+
     @RequestMapping(value = "/standings", method = RequestMethod.GET)
     public String standings(Model model) {
         List<TeamDTO> teams = teamFacade.getTeamsSortedByPoints();
@@ -69,6 +74,24 @@ public class StatisticController {
         model.addAttribute("score",score);
         model.addAttribute("points",points);
         return "statistics/standings";
+    }
+    
+    @RequestMapping(value = "/listGames", method = RequestMethod.GET)
+    public String listGames(Model model) {
+        List<GameDTO> games = gameFacade.findAll();
+        for(int i = 0; i < games.size(); i++){
+            log.info(games.get(i).toString());
+        }
+        
+        List<PlayerDTO> players = playerFacade.findAll();
+        for(int i = 0; i < players.size(); i++){
+            log.info(players.get(i).toString());
+        }
+        
+        model.addAttribute("players", players);
+        model.addAttribute("games", games);
+        return "statistics/listGames";
+
     }
     
     @RequestMapping(value = "/viewPlayerDetail/{id}" , method = RequestMethod.GET)

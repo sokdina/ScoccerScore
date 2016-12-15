@@ -35,8 +35,7 @@ public class Team {
     @Column(name="country")
     private String country;
     
-    @OneToMany
-    @JoinColumn(name="team_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "team")
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {

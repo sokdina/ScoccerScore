@@ -18,7 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+/**
+ * REST Controller for Orders
+ * 
+ * @author sokdina999@gmail.com
+ */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_TEAMS)
 public class TeamsController {
@@ -63,7 +67,7 @@ public class TeamsController {
         return teamDTO;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/create", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     public final TeamDTO createTeam(@RequestBody TeamDTO team) throws Exception {
 
@@ -81,12 +85,25 @@ public class TeamsController {
     public final void deleteTeam(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteTeam({})", id);
         try {
-            TeamDTO teamDTO = teamFacade.getTeamById(id);
-            teamFacade.createTeam(teamDTO);
+            teamFacade.deleteTeam(id);
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
         }
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final TeamDTO UpdateTeam(@PathVariable("id") long id, @RequestBody TeamDTO t) throws Exception {
+
+        logger.debug("rest UpdateTeam({})", id);
+
+        try {
+            teamFacade.updateTeam(t);
+            return teamFacade.getTeamById(id);
+        } catch (Exception esse) {
+            throw new ResourceNotFoundException();
+        }
+
+    }
 
 }

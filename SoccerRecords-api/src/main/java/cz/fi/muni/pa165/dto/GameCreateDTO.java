@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull;
  */
 public class GameCreateDTO {
     
+    private Long id;
+    
     @NotNull
     private Long homeTeam;
 
@@ -27,6 +29,14 @@ public class GameCreateDTO {
     @NotNull
     private Date dateOfGame;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Long getHomeTeam() {
         return homeTeam;
     }

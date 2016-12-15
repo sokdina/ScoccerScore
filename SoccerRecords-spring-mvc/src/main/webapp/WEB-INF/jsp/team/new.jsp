@@ -32,7 +32,7 @@
             </div>
         </div>
          <center>
-         <button style="float: right;" class="btn btn-primary" type="submit">Create New Team</button>
+         <button style="float: right;" class="btn btn-success" type="submit">Create New Team</button>
         </center>
 	</br>
 	</br>

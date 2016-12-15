@@ -9,11 +9,6 @@
     
 <jsp:attribute name="body">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/game.css" type="text/css">
-    <my:a href="/game/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New match
-    </my:a>
-
     <table class="table" align="center">
         <thead><tr><th/></tr></thead>
         <tbody>
@@ -48,13 +43,6 @@
                             </c:forEach>
                         </c:forEach>
                     </ul>
-                </td>
-                <td>
-                    <my:a href="/game/view/${game.id}" class="btn btn-info">View</my:a>               
-                    <my:a href="/game/edit/${game.id}" class="btn btn-warning">Edit</my:a>                
-                    <form method="post" action="${pageContext.request.contextPath}/game/delete/${game.id}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
                 </td>
             </tr>
         </c:forEach>

@@ -17,9 +17,9 @@ public class GameDTO {
     
     private Long id;
 
-    private Team homeTeam;
+    private TeamDTO homeTeam;
 
-    private Team guestTeam;
+    private TeamDTO guestTeam;
 
     private Date dateOfGame;
 
@@ -39,19 +39,19 @@ public class GameDTO {
         this.id = id;
     }
 
-    public Team getHomeTeam() {
+    public TeamDTO getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(Team homeTeam) {
+    public void setHomeTeam(TeamDTO homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public Team getGuestTeam() {
+    public TeamDTO getGuestTeam() {
         return guestTeam;
     }
 
-    public void setGuestTeam(Team guestTeam) {
+    public void setGuestTeam(TeamDTO guestTeam) {
         this.guestTeam = guestTeam;
     }
 

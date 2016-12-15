@@ -7,7 +7,9 @@ package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
+import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
+import cz.fi.muni.pa165.entity.Goal;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IGameService;
 import cz.fi.muni.pa165.service.ITeamService;
@@ -41,8 +43,8 @@ public class GameFacadeImpl implements IGameFacade{
     public Long create(GameCreateDTO g) {
         GameDTO gdto = new GameDTO();
         gdto.setDateOfGame(g.getDateOfGame());
-        gdto.setHomeTeam(teamService.findById(g.getHomeTeam()));
-        gdto.setGuestTeam(teamService.findById(g.getGuestTeam()));
+        gdto.setHomeTeam(beanMappingService.mapTo(teamService.findById(g.getHomeTeam()), TeamDTO.class));
+        gdto.setGuestTeam(beanMappingService.mapTo(teamService.findById(g.getGuestTeam()), TeamDTO.class));
         
         Game game = beanMappingService.mapTo(gdto, Game.class);
 	Long newId = gameService.create(game).getId();
@@ -65,23 +67,43 @@ public class GameFacadeImpl implements IGameFacade{
     public List<GameDTO> findGamesBetweenTeams(long teamId1, long teamId2) {
         List<GameDTO> games = new ArrayList<>();
         gameService.findGamesBetweenTeams(teamId1, teamId2).stream().forEach((g) ->{
-            games.add(beanMappingService.mapTo(g, GameDTO.class));
+            games.add(beanMappingService.mapTo(calculateScore(g), GameDTO.class));
         });
         return Collections.unmodifiableList(games);
     }
 
     @Override
     public GameDTO findById(long id) {
-        return beanMappingService.mapTo(gameService.findById(id), GameDTO.class);
+        return beanMappingService.mapTo(calculateScore(gameService.findById(id)), GameDTO.class);
     }
 
     @Override
     public List<GameDTO> findAll() {
         List<GameDTO> games = new ArrayList<>();
         gameService.findAll().stream().forEach((g) ->{
-            games.add(beanMappingService.mapTo(g, GameDTO.class));
+            games.add(beanMappingService.mapTo(calculateScore(g), GameDTO.class));
         });
         return Collections.unmodifiableList(games);
+    }
+    
+    private Game calculateScore(Game game){
+        int homeScore = 0;
+        int guestScore = 0;
+        
+        List<Goal> goals = new ArrayList(game.getGoals());
+        
+        for(Goal goal : goals){
+            if(goal.getPlayer().getTeam().equals(game.getHomeTeam())){
+                homeScore++;
+            }else{
+                guestScore++;
+            }
+        }
+        
+        game.setHomeScore(homeScore);
+        game.setGuestScore(guestScore);
+        
+        return game;
     }
     
 }

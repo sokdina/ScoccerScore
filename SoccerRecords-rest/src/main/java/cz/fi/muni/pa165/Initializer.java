@@ -6,6 +6,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ *
+ * @author sokdina999@gmail.com
+ */
+
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -25,14 +30,10 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
-        encodingFilter.setEncoding("utf-8");
-        encodingFilter.setForceEncoding(true);
-       
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("utf-8",true);
         ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
-
+        
         return new Filter[]{encodingFilter, shallowEtagHeaderFilter};
-       
     }
 
     @Override
