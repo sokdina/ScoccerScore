@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.facade.ITeamFacade;
+import cz.fi.muni.pa165.rest.exceptions.InvalidParameterException;
+import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * REST Controller for Orders
+ * REST Controller for Teams
  * 
  * @author sokdina999@gmail.com
  */
@@ -87,7 +89,7 @@ public class TeamsController {
             Long id = teamFacade.createTeam(team);
             return teamFacade.getTeamById(id);
         } catch (Exception ex) {
-            throw new Exception();
+            throw new ResourceAlreadyExistingException();
         }
     }
 
@@ -132,7 +134,7 @@ public class TeamsController {
             teamFacade.updateTeam(t);
             return teamFacade.getTeamById(id);
         } catch (Exception esse) {
-            throw new ResourceNotFoundException();
+            throw new InvalidParameterException();
         }
 
     }
