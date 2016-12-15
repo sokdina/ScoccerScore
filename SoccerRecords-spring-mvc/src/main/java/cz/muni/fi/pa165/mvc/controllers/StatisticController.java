@@ -106,4 +106,18 @@ public class StatisticController {
         return "statistics/generated";
     }
     
+    
+    @RequestMapping(value = "/generateSeason", method = RequestMethod.GET)
+    public String generateSeason(Model model) {
+        List<List<GameDTO>> seasonMatches = gameFacade.generateSeasonMatches();
+        for(int i = 0; i < seasonMatches.size(); i++){
+            for(int j = 0; j < seasonMatches.get(i).size(); j++){
+                log.info(seasonMatches.get(i).get(j).toString());
+            }
+        }
+        
+        model.addAttribute("seasonMatches", seasonMatches);
+        return "statistics/generatedSeason";
+    }
+    
 }

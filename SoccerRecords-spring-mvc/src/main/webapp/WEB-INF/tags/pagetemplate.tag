@@ -40,6 +40,7 @@
                         <li><my:a href="/statistics/list">Top Scorers</my:a></li>
                         <li><my:a href="/statistics/listGames">All matches</my:a></li>
                         <li><my:a href="/statistics/brackets">Generate Brackets</my:a></li>
+                        <li><my:a href="/statistics/generateSeason">Generate season matches</my:a></li>
                     </ul>
                 <c:if test="${not empty pageContext.request.getSession(false).getAttribute('authenticatedUser')}">
                 <li class="dropdown">
