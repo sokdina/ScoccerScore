@@ -137,10 +137,13 @@ public class TeamController {
             return "team/edit";
             
         }
-        teamFacade.updateTeam(formBean);
-        
-        //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Team was edited");
+ 	try {
+        	teamFacade.updateTeam(formBean);
+        	redirectAttributes.addFlashAttribute("alert_success", "Team was edited");
+	} catch(Exception ex){
+          	log.warn("cannot edit this team {}");
+            	redirectAttributes.addFlashAttribute("alert_danger", "Team's name has already exited or any errors happen, please check again!");
+        }
         return "redirect:" + uriBuilder.path("/team/list").toUriString();
         
     }
