@@ -90,6 +90,24 @@ public class TeamFacadeImpl implements ITeamFacade {
         brackets.addAll(beanMappingService.mapTo(teamService.createTurnamentBrackets(teams), GameDTO.class));
         return brackets;
     }
+    
+    @Override
+    public int getTeamPoints(TeamDTO t){
+        Team  team = teamService.findById(t.getId());
+        return teamService.getTeamPoints(team);
+    }
+
+    @Override
+    public int[] getTeamScore(TeamDTO t) {
+        Team  team = teamService.findById(t.getId());
+        return teamService.getTeamScore(team);
+    }
+    
+    @Override
+    public List<TeamDTO> getTeamsSortedByPoints(){
+        return  beanMappingService.mapTo(teamService.getTeamsSortedByPoints(), TeamDTO.class);
+    }
+
 
 }
 

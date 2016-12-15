@@ -44,7 +44,7 @@ public class Game
 
     @Enumerated(EnumType.STRING) 
     @Column
-    private MatchResult matchResult;
+    private MatchResult matchResult = MatchResult.DRAW;
 
     @Column
     private int homeScore;
@@ -218,6 +218,14 @@ public class Game
                     guestGoals++;
                 }
             }
+        }
+        
+        if(homeGoals > guestGoals){
+            setMatchResult(MatchResult.HOME_TEAM_WIN);
+        }else if(homeGoals == guestGoals){
+            setMatchResult(MatchResult.DRAW);
+        }else{
+            setMatchResult(MatchResult.GUEST_TEAM_WIN);
         }
         
         setGameResult(homeGoals, guestGoals);

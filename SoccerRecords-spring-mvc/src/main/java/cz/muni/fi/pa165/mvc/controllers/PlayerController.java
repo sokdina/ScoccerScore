@@ -197,8 +197,7 @@ public class PlayerController {
         p.setDressNumber(player.getDressNumber());
         p.setName(player.getName());
         p.setPosition(player.getPosition());
-        p.setTeam(teamFacade.getTeamById(player.getTeamId()));
-        
+        p.setTeam(teamFacade.getTeamById(player.getTeamId()));      
         p.setId(player.getId());
         return p;
     }

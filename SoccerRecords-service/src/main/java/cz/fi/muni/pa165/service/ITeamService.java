@@ -27,6 +27,9 @@ public interface ITeamService {
         public void addPlayer(Team t, Player p);
 	public void deletePlayer(Team t, Player p);
         public List<Game> createTurnamentBrackets(Set<Team> teams);
+        public int getTeamPoints(Team t);
+        public int[] getTeamScore(Team t);
+        public List<Team> getTeamsSortedByPoints();
 }
 
 
