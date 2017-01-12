@@ -132,7 +132,7 @@ public class PlayerDTO {
     
     @Override
     public String toString() {
-        return "PlayerDTO " + name;
+        return  name;
         //return "PlayerDTO{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + ", team=" + team + ", goal=" + goals + '}';
     }
 }

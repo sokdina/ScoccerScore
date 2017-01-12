@@ -118,7 +118,7 @@ public class PlayerCreateDTO {
 
     @Override
     public String toString() {
-        return "PlayerCreateDTO{" + "name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + '}';
+        return "Player{" + "name=" + name + ", dateOfBirth=" + dateOfBirth + ", dressNumber=" + dressNumber + ", position=" + position + ", country=" + country + '}';
     }
     
 }

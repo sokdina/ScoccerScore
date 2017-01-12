@@ -102,7 +102,7 @@ public class PlayerController {
         PlayerDTO player = playerFacade.findById(id);
         playerFacade.deletePlayer(id);
         log.debug("delete({})", id);
-        redirectAttributes.addFlashAttribute("alert_success", "Game \"" + player.toString() + "\" was deleted.");
+        redirectAttributes.addFlashAttribute("alert_success", "Player \"" + player.toString() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/player/list").toUriString();
     }
     
@@ -144,11 +144,20 @@ public class PlayerController {
         }
        
         //create player
+        if(formBean.getName().equals("")){
+            redirectAttributes.addFlashAttribute("alert_warning", "Player creation failed - Player name cannot be emty string!");
+            return "redirect:" + uriBuilder.path("/player/new").build().encode().toUriString();
+        }
+        
+        if(formBean.getDateOfBirth().compareTo(new Date())>0){
+            redirectAttributes.addFlashAttribute("alert_warning", "Player creation failed - Player date cannot be bigger than actuall date!");
+            return "redirect:" + uriBuilder.path("/player/new").build().encode().toUriString();
+        }
 
         Long id = playerFacade.createPlayer(convertPlayerCreateDTO(formBean));
 
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Player " + id + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Player " + playerFacade.findById(id).toString() + " was created");
         return "redirect:" + uriBuilder.path("/player/list").buildAndExpand(id).encode().toUriString();
     }
     
@@ -169,6 +178,16 @@ public class PlayerController {
             }
             return "player/edit";
             
+        }
+        
+        if(formBean.getName().equals("")){
+            redirectAttributes.addFlashAttribute("alert_warning", "Player updating failed - Player name cannot be emty string!");
+            return "redirect:" + uriBuilder.path("/player/edit").build().encode().toUriString();
+        }
+        
+        if(formBean.getDateOfBirth().compareTo( new Date())>0){
+            redirectAttributes.addFlashAttribute("alert_warning", "Player updaeting failed - Player datee cannot be bigger than actuall date!");
+            return "redirect:" + uriBuilder.path("/player/edit").build().encode().toUriString();
         }
         playerFacade.updatePlayer(convertPlayerCreateDTO(formBean));
         
