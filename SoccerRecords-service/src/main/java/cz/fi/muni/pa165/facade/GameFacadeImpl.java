@@ -10,12 +10,14 @@ import cz.fi.muni.pa165.dto.GameDTO;
 import cz.fi.muni.pa165.dto.TeamDTO;
 import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Goal;
+import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.IGameService;
 import cz.fi.muni.pa165.service.ITeamService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javafx.util.Pair;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,5 +107,27 @@ public class GameFacadeImpl implements IGameFacade{
         
         return game;
     }
+
+    @Override
+    public List<List<GameDTO>> generateSeasonMatches() {
+        List<List<Pair>> seasonMatches = gameService.generateSeasonMatches();
+        List<List<GameDTO>> seasonMatchesDTO = new ArrayList<>();
+        
+        for(List<Pair> rounds : seasonMatches){
+            List<GameDTO> roundsDTO = new ArrayList<>();
+            for(Pair match : rounds){
+                GameDTO game = new GameDTO();
+                game.setHomeTeam(beanMappingService.mapTo((Team)match.getKey(),TeamDTO.class));
+                game.setGuestTeam(beanMappingService.mapTo((Team)match.getValue(),TeamDTO.class));
+                roundsDTO.add(game);
+            }
+            seasonMatchesDTO.add(roundsDTO);
+        }
+        
+        return seasonMatchesDTO;
+    }
+    
+    
+    
     
 }

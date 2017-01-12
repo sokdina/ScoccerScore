@@ -50,7 +50,7 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
         
-         objectMapper.addMixIn(TeamDTO.class, TeamDTOMixin.class);
+        objectMapper.addMixIn(TeamDTO.class, TeamDTOMixin.class);
         
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
         

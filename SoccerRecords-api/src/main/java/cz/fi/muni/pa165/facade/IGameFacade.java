@@ -8,6 +8,7 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.GameCreateDTO;
 import cz.fi.muni.pa165.dto.GameDTO;
 import java.util.List;
+import javafx.util.Pair;
 
 /**
  *
@@ -27,4 +28,6 @@ public interface IGameFacade {
     public GameDTO findById(long id);
 
     public List<GameDTO> findAll();
+    
+    public List<List<GameDTO>> generateSeasonMatches();
 }
