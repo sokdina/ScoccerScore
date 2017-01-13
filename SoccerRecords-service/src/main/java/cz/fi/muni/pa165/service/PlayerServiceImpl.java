@@ -91,10 +91,6 @@ public class PlayerServiceImpl implements IPlayerService{
     public void deletePlayer(Player player) {
         
         try{
-            for(Iterator<Goal> i = player.getGoals().iterator(); i.hasNext();){
-                Goal g = i.next();
-                goalService.deleteGoal(g);
-            }
             
             player.unsetTeam();
                 

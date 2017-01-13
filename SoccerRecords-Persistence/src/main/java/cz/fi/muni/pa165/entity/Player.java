@@ -53,11 +53,11 @@ public class Player
     @Column 
     private String country;
 
-    @ManyToOne(fetch= FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="team_id")
     private Team team;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "player")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "player")
     private Set<Goal> goals = new HashSet<>();
 
     public Player(){
