@@ -92,6 +92,7 @@ public class Game
     }
 
     public MatchResult getMatchResult() {
+        recalculateScore();
         return matchResult;
     }
 
@@ -100,14 +101,16 @@ public class Game
     }
 
     public int getHomeScore() {
+        recalculateScore();
         return homeScore;
     }
 
-    public void setHomeScore(int homeScore) {
+    public void setHomeScore(int homeScore) {       
         this.homeScore = homeScore;
     }
 
     public int getGuestScore() {
+        recalculateScore();
         return guestScore;
     }
 
@@ -227,6 +230,8 @@ public class Game
         }else{
             setMatchResult(MatchResult.GUEST_TEAM_WIN);
         }
+        this.guestScore = guestGoals;
+        this.homeScore = homeGoals;
         
         setGameResult(homeGoals, guestGoals);
     }

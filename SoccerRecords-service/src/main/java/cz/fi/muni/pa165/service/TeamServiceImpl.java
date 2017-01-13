@@ -121,10 +121,8 @@ public class TeamServiceImpl implements ITeamService {
         
         @Override
         public int getTeamPoints(Team t){
-            int score = 0;
-            score += getGamesWon(t).size()*3;
-            score += getGamesDraw(t).size();
-            return  score;
+            int points = getPoints(t);
+            return  points;
         }
         
         @Override
@@ -234,6 +232,42 @@ public class TeamServiceImpl implements ITeamService {
         score[0] = goalsScored;
         score[1] = goalsConsidered;
         return score;
+        
+    }
+    
+    
+    public int getPoints(Team t) {
+        int points = 0;
+        
+        List<Team> teams =  teamDao.findByAll();
+        
+        for(Team team : teams){
+            if(team.getId() != t.getId()){
+                List<Game> g = new ArrayList<>();
+                try{
+                    g.addAll(gameDao.findGamesBetweenTeams(t.getId(), team.getId()));
+                }catch(SoccerRecordsDataAccessException e){
+                    
+                }               
+                for(Game game : g){ 
+                    
+                    if(game.getHomeTeam().equals(t)){
+                        if(game.getHomeScore()> game.getGuestScore()){
+                            points+=3;
+                        }else if(game.getHomeScore() == game.getGuestScore()){
+                            points+=1;
+                        }
+                    }else if(game.getGuestTeam().equals(t)){
+                        if(game.getHomeScore()< game.getGuestScore()){
+                            points+=3;
+                        }else if(game.getHomeScore() == game.getGuestScore()){
+                            points+=1;
+                        }
+                    }               
+                }                              
+            }
+        }
+        return points;
         
     }
 }

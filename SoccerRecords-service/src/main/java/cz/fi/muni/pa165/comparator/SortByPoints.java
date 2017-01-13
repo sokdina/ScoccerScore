@@ -10,6 +10,8 @@ import cz.fi.muni.pa165.entity.Game;
 import cz.fi.muni.pa165.entity.Player;
 import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.enums.MatchResult;
+import cz.fi.muni.pa165.exception.SoccerRecordsDataAccessException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -75,5 +77,5 @@ public class SortByPoints implements Comparator<Team> {
                     collect(Collectors.toSet()));
             
             return gamesD;
-        }
+        }           
 }
