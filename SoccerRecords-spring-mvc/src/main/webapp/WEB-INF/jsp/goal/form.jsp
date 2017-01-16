@@ -18,7 +18,7 @@
             <div class="col-sm-10">
                 <form:select path="playerId" cssClass="form-control">
                     <c:forEach items="${players}" var="p">
-                        <form:option value="${p.id}">${p.name}</form:option>
+                        <form:option value="${p.id}">${p.team.name}      ${p.name}</form:option>
                     </c:forEach>
                 </form:select>
                 <p class="help-block"><form:errors path="playerId" cssClass="error"/></p>
